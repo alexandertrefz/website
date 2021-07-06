@@ -159,9 +159,6 @@
 				--color-highlight-intense: hsl(222deg 55% 45%);
 				--color-highlight-medium: hsl(222deg 65% 35%);
 
-				--color-logo-name: var(--color-highlight-medium);
-				--color-logo-slogan: var(--color-foreground);
-
 				--font-text: var(--font-meta-correspondence);
 				--font-headline: var(--font-futura);
 				--font-description: var(--font-meta-serif);
@@ -175,6 +172,53 @@
 				--page-padding: 30px;
 			}
 
+			.dark-theme {
+				--color-page-background: hsl(222deg 10% 15%);
+
+				--color-background: hsl(222deg 10% 20%);
+				--color-background-offset: hsl(222deg 10% 15%);
+
+				--color-boxshadow: 0deg 0% 0%;
+
+				--color-foreground: hsl(222deg 10% 90%);
+				--color-foreground-medium: hsl(222deg 5% 60%);
+
+				--color-highlight-intense: hsl(333deg 100% 60%);
+				--color-highlight-medium: hsl(333deg 90% 50%);
+			}
+
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--color-page-background: hsl(222deg 10% 15%);
+
+					--color-background: hsl(222deg 10% 20%);
+					--color-background-offset: hsl(222deg 10% 15%);
+
+					--color-boxshadow: 0deg 0% 0%;
+
+					--color-foreground: hsl(222deg 10% 90%);
+					--color-foreground-medium: hsl(222deg 5% 60%);
+
+					--color-highlight-intense: hsl(333deg 100% 60%);
+					--color-highlight-medium: hsl(333deg 90% 50%);
+				}
+
+				.light-theme {
+					--color-page-background: hsl(222deg 10% 80%);
+
+					--color-background: hsl(222deg 15% 90%);
+					--color-background-offset: hsl(222deg 15% 85%);
+
+					--color-boxshadow: 0deg 0% 0%;
+
+					--color-foreground: hsl(222deg 15% 10%);
+					--color-foreground-medium: hsl(222deg 15% 40%);
+
+					--color-highlight-intense: hsl(222deg 55% 45%);
+					--color-highlight-medium: hsl(222deg 65% 35%);
+				}
+			}
+
 			html {
 				box-sizing: border-box;
 			}
@@ -186,29 +230,12 @@
 			}
 
 			body {
-				background-color: var(--color-page-background);
-
-				padding-top: calc(var(--page-padding) + env(safe-area-inset-top, 0px));
-				padding-right: calc(var(--page-padding) + env(safe-area-inset-right, 0px));
-				padding-bottom: calc(var(--page-padding) + env(safe-area-inset-bottom, 0px));
-				padding-left: calc(var(--page-padding) + env(safe-area-inset-left, 0px));
-
 				min-height: 100%;
 				display: grid;
 			}
 
 			#svelte {
-				border-radius: 15px;
-				background-color: var(--color-background);
-				box-shadow: 0 0px 1.8px hsl(var(--color-boxshadow) / 20%),
-					0 0px 5px hsl(var(--color-boxshadow) / 13%),
-					0 0px 12.1px hsl(var(--color-boxshadow) / 10%),
-					0 0px 40px hsl(var(--color-boxshadow) / 7%);
-
-				position: relative;
 				display: grid;
-
-				grid-template-rows: max-content 1fr max-content;
 			}
 		</style>
 		%svelte.head%

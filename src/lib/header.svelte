@@ -52,12 +52,12 @@
 			gap: 8px;
 
 			#name path {
-				fill: var(--color-logo-name);
+				fill: var(--color-highlight-medium);
 			}
 
 			#slogan path {
 				opacity: 0.5;
-				fill: var(--color-logo-slogan);
+				fill: var(--color-foreground-medium);
 			}
 		}
 
