@@ -1,0 +1,24 @@
+---
+slug: 'how-performance-sets-truly-great-apps-apart'
+title: 'How Performance sets truly great Apps apart'
+readingTime: 16
+publishedAt: '2021-07-11'
+layout: article
+---
+
+Performance is a topic that is often talked about at conferences and in articles about
+best practices – but the reality of day-to-day development often looks quite different:
+
+
+There is that bug that breaks production, that branding change that somebody announced
+publicly before talking to the development team, or simply the next feature that management
+demands to be implemented. In short: Aspirations are nice, but if management does not agree 
+about the priorities they will fall by the wayside.
+
+
+In the case of Performance this is a particular tragedy in my opinion because I think that
+_**a focus on performance turns decent apps into great ones.**_
+
+
+So in this article I want to explain why I hold this opinion and hopefully provide some
+material to convince you and your boss to care about performance as much as <span class="subtle">(I think)</span> you should.

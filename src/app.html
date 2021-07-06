@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://use.typekit.net/obe2zix.css" />
+		<style>
+			html,
+			body,
+			div,
+			span,
+			applet,
+			object,
+			iframe,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p,
+			blockquote,
+			pre,
+			a,
+			abbr,
+			acronym,
+			address,
+			big,
+			cite,
+			code,
+			del,
+			dfn,
+			em,
+			img,
+			ins,
+			kbd,
+			q,
+			s,
+			samp,
+			small,
+			strike,
+			strong,
+			sub,
+			sup,
+			tt,
+			var,
+			b,
+			u,
+			i,
+			center,
+			dl,
+			dt,
+			dd,
+			ol,
+			ul,
+			li,
+			fieldset,
+			form,
+			label,
+			legend,
+			table,
+			caption,
+			tbody,
+			tfoot,
+			thead,
+			tr,
+			th,
+			td,
+			article,
+			aside,
+			canvas,
+			details,
+			embed,
+			figure,
+			figcaption,
+			footer,
+			header,
+			hgroup,
+			menu,
+			nav,
+			output,
+			ruby,
+			section,
+			summary,
+			time,
+			mark,
+			audio,
+			video {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				font-size: 100%;
+				font: inherit;
+				vertical-align: baseline;
+			}
+			/* HTML5 display-role reset for older browsers */
+			article,
+			aside,
+			details,
+			figcaption,
+			figure,
+			footer,
+			header,
+			hgroup,
+			menu,
+			nav,
+			section {
+				display: block;
+			}
+			body {
+				line-height: 1;
+			}
+			ol,
+			ul {
+				list-style: none;
+			}
+			blockquote,
+			q {
+				quotes: none;
+			}
+			blockquote:before,
+			blockquote:after,
+			q:before,
+			q:after {
+				content: '';
+				content: none;
+			}
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+			}
+		</style>
+		<style>
+			:root {
+				--font-meta-serif: ff-meta-serif-web-pro, serif;
+				--font-futura: futura-pt, sans-serif;
+				--font-meta-correspondence: ff-meta-correspondence-web-p, sans-serif;
+
+				--color-page-background: hsl(222deg 10% 80%);
+
+				--color-background: hsl(222deg 15% 90%);
+				--color-background-offset: hsl(222deg 15% 85%);
+
+				--color-boxshadow: 0deg 0% 0%;
+
+				--color-foreground: hsl(222deg 15% 10%);
+				--color-foreground-medium: hsl(222deg 15% 40%);
+
+				--color-highlight-intense: hsl(222deg 55% 45%);
+				--color-highlight-medium: hsl(222deg 65% 35%);
+
+				--color-logo-name: var(--color-highlight-medium);
+				--color-logo-slogan: var(--color-foreground);
+
+				--font-text: var(--font-meta-correspondence);
+				--font-headline: var(--font-futura);
+				--font-description: var(--font-meta-serif);
+				--font-navigation: var(--font-futura);
+				--font-ui-label: var(--font-futura);
+
+				--font-article-title: var(--font-meta-serif);
+				--font-article-metadata: var(--font-futura);
+				--font-article-text: var(--font-meta-correspondence);
+
+				--page-padding: 30px;
+			}
+
+			html {
+				box-sizing: border-box;
+			}
+
+			*,
+			*:before,
+			*:after {
+				box-sizing: inherit;
+			}
+
+			body {
+				background-color: var(--color-page-background);
+				padding-top: calc(var(--page-padding) + env(safe-area-inset-top, 0px));
+				padding-right: calc(var(--page-padding) + env(safe-area-inset-right, 0px));
+				padding-bottom: calc(var(--page-padding) + env(safe-area-inset-bottom, 0px));
+				padding-left: calc(var(--page-padding) + env(safe-area-inset-left, 0px));
+
+				min-height: 100%;
+				display: grid;
+			}
+
+			#svelte {
+				border-radius: 15px;
+				background-color: var(--color-background);
+				box-shadow: 0 0px 1.8px hsl(var(--color-boxshadow) / 20%),
+					0 0px 5px hsl(var(--color-boxshadow) / 13%),
+					0 0px 12.1px hsl(var(--color-boxshadow) / 10%),
+					0 0px 40px hsl(var(--color-boxshadow) / 7%);
+
+				position: relative;
+				display: grid;
+
+				grid-template-rows: max-content 1fr max-content;
+			}
+		</style>
+		%svelte.head%
+	</head>
+	<body>
+		<div id="svelte">%svelte.body%</div>
+		<script>
+			document.body.style.height = window.innerHeight + 'px'
+
+			window.addEventListener('resize', () => {
+				document.body.style.height = window.innerHeight + 'px'
+			})
+		</script>
+	</body>
+</html>
