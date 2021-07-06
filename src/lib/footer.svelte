@@ -27,7 +27,6 @@
 			font-size: 12px;
 			font-weight: 500;
 			color: var(--color-foreground-medium);
-			opacity: 0.5;
 		}
 
 		#legal {
@@ -39,12 +38,11 @@
 			text-decoration: none;
 
 			color: var(--color-foreground-medium);
-			opacity: 0.5;
 
 			transition: all linear 200ms;
 
 			&:hover {
-				opacity: 1;
+				color: var(--color-foreground);
 			}
 		}
 	}
