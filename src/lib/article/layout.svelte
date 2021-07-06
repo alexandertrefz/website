@@ -3,12 +3,14 @@
 
 	export let slug
 	export let title
+	export let description
 	export let readingTime
 	export let publishedAt
 </script>
 
 <svelte:head>
 	<title>{title} – alexander.trefz.me</title>
+	<meta name="description" content={description} />
 </svelte:head>
 
 <article>

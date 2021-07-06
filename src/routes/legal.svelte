@@ -4,6 +4,7 @@
 
 <svelte:head>
 	<title>Legal – alexander.trefz.me</title>
+	<meta name="description" content="Boring legal details." />
 </svelte:head>
 
 <div class="legal">
