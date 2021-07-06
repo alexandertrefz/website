@@ -77,7 +77,7 @@
 				text-align: center;
 
 				&:hover article h2 {
-					color: var(--color-highlight-medium);
+					text-decoration-color: var(--color-highlight-medium);
 				}
 
 				article {
@@ -89,7 +89,8 @@
 						font-family: var(--font-article-title);
 						font-size: 24px;
 
-						transition: all linear 200ms;
+						text-decoration: underline transparent;
+						transition: text-decoration-color linear 200ms;
 					}
 				}
 			}
