@@ -2,6 +2,10 @@
 	import Headline from '$lib/headline.svelte'
 </script>
 
+<svelte:head>
+	<title>Legal – alexander.trefz.me</title>
+</svelte:head>
+
 <div class="legal">
 	<Headline>Legal Disclaimers</Headline>
 	<article>

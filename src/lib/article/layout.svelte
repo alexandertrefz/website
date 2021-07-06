@@ -7,6 +7,10 @@
 	export let publishedAt
 </script>
 
+<svelte:head>
+	<title>{title} – alexander.trefz.me</title>
+</svelte:head>
+
 <article>
 	<div class="title">
 		<h1>{title}</h1>

@@ -31,6 +31,10 @@
 	}>
 </script>
 
+<svelte:head>
+	<title>Thoughts & Insights – alexander.trefz.me</title>
+</svelte:head>
+
 <article class="blog">
 	<div class="title">
 		<Headline>Thoughts & Insights</Headline>
