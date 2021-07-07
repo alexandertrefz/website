@@ -52,8 +52,29 @@
 	}
 
 	section :global(p) {
-		margin-bottom: 25px;
+		padding-bottom: 25px;
 		line-height: 1.35;
+		text-align: justify;
+	}
+
+	section :global(h2) {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		font-family: var(--font-article-title);
+		font-size: 20px;
+		text-align: center;
+		font-style: italic;
+	}
+
+	section :global(a) {
+		color: var(--color-highlight-intense);
+		text-decoration: transparent underline;
+		text-underline-offset: 1px;
+		transition: text-decoration-color 200ms linear;
+
+		&:hover {
+			text-decoration-color: var(--color-highlight-intense);
+		}
 	}
 
 	section :global(em) {
@@ -65,6 +86,6 @@
 	}
 
 	section :global(.subtle) {
-		opacity: 0.5;
+		color: var(--color-foreground-medium);
 	}
 </style>
