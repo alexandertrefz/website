@@ -24,7 +24,7 @@
 	</section>
 </article>
 
-<style lang="scss">
+<style>
 	article {
 		display: grid;
 		justify-items: center;
@@ -57,6 +57,10 @@
 		text-align: justify;
 	}
 
+	section :global(p):last-child {
+		padding-bottom: 0px;
+	}
+
 	section :global(h2) {
 		padding-top: 15px;
 		padding-bottom: 15px;
@@ -64,17 +68,19 @@
 		font-size: 20px;
 		text-align: center;
 		font-style: italic;
+		line-height: 1.4;
 	}
 
 	section :global(a) {
 		color: var(--color-highlight-intense);
-		text-decoration: transparent underline;
-		text-underline-offset: 1px;
-		transition: text-decoration-color 200ms linear;
+		text-decoration-style: underline;
+		text-decoration-color: transparent;
 
-		&:hover {
-			text-decoration-color: var(--color-highlight-intense);
-		}
+		transition: text-decoration-color 200ms linear;
+	}
+
+	section :global(a):hover {
+		text-decoration-color: var(--color-highlight-intense);
 	}
 
 	section :global(em) {

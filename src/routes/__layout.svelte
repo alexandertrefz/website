@@ -20,9 +20,32 @@
 	#container {
 		visibility: unset !important;
 	}
+
 	main {
-		padding-top: 40px;
-		padding-left: 30px;
-		padding-right: 40px;
+		overflow-y: auto;
+	}
+
+	@media screen and (max-width: 649px) {
+		main {
+			padding: 20px;
+		}
+	}
+
+	@media screen and (min-width: 650px) and (max-width: 749px) {
+		main {
+			padding-top: 20px;
+			padding-left: 30px;
+			padding-right: 40px;
+			padding-bottom: 20px;
+		}
+	}
+
+	@media screen and (min-width: 750px) {
+		main {
+			padding-top: 30px;
+			padding-left: 30px;
+			padding-right: 40px;
+			padding-bottom: 30px;
+		}
 	}
 </style>

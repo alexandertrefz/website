@@ -22,6 +22,8 @@
 		grid-auto-flow: column;
 		justify-content: space-between;
 
+		border-top: 1px solid var(--color-background-offset);
+
 		#copyright {
 			font-family: var(--font-text);
 			font-size: 12px;
