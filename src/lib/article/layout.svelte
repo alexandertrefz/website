@@ -84,10 +84,12 @@
 	}
 
 	section :global(em) {
+		color: var(--color-foreground-emphasis);
 		font-style: italic;
 	}
 
 	section :global(strong) {
+		color: var(--color-foreground-emphasis);
 		font-weight: 700;
 	}
 

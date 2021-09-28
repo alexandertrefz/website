@@ -175,6 +175,7 @@
 				--color-boxshadow: 0deg 0% 0%;
 
 				--color-foreground: hsl(222deg 15% 10%);
+				--color-foreground-emphasis: hsl(0deg 0% 0%);
 				--color-foreground-medium: hsl(222deg 15% 40%);
 
 				--color-highlight-intense: hsl(222deg 55% 45%);
@@ -202,6 +203,7 @@
 				--color-boxshadow: 0deg 0% 0%;
 
 				--color-foreground: hsl(222deg 10% 90%);
+				--color-foreground-emphasis: hsl(0deg 0% 100%);
 				--color-foreground-medium: hsl(222deg 5% 65%);
 
 				--color-highlight-intense: hsl(333deg 100% 60%);
@@ -218,6 +220,7 @@
 					--color-boxshadow: 0deg 0% 0%;
 
 					--color-foreground: hsl(222deg 10% 90%);
+					--color-foreground-emphasis: hsl(0deg 0% 100%);
 					--color-foreground-medium: hsl(222deg 5% 65%);
 
 					--color-highlight-intense: hsl(333deg 100% 60%);
@@ -233,6 +236,7 @@
 					--color-boxshadow: 0deg 0% 0%;
 
 					--color-foreground: hsl(222deg 15% 10%);
+					--color-foreground-emphasis: hsl(0deg 0% 0%);
 					--color-foreground-medium: hsl(222deg 15% 40%);
 
 					--color-highlight-intense: hsl(222deg 55% 45%);
@@ -289,8 +293,7 @@
 				border-radius: 15px;
 				background-color: var(--color-background);
 				box-shadow: 0 0px 1.8px hsl(var(--color-boxshadow) / 20%),
-					0 0px 5px hsl(var(--color-boxshadow) / 13%),
-					0 0px 12.1px hsl(var(--color-boxshadow) / 10%),
+					0 0px 5px hsl(var(--color-boxshadow) / 13%), 0 0px 12px hsl(var(--color-boxshadow) / 10%),
 					0 0px 40px hsl(var(--color-boxshadow) / 7%);
 
 				position: relative;
@@ -304,7 +307,7 @@
 				width: 100%;
 			}
 
-			@media screen and (max-width: 649px), screen and (max-height: 649px) {
+			@media screen and (max-width: 749px), screen and (max-height: 749px) {
 				:root {
 					--page-padding: 0px;
 				}
