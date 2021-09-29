@@ -27,7 +27,8 @@
 <style>
 	article {
 		display: grid;
-		justify-items: center;
+		justify-self: center;
+		max-width: 600px;
 		gap: 30px;
 	}
 
@@ -45,8 +46,6 @@
 	}
 
 	section {
-		max-width: 600px;
-
 		font-family: var(--font-text);
 		font-size: 16px;
 	}
@@ -95,5 +94,11 @@
 
 	section :global(.subtle) {
 		color: var(--color-foreground-medium);
+	}
+
+	section :global(code) {
+		font-family: fira-mono, monospace;
+		font-weight: 400;
+		font-style: normal;
 	}
 </style>
