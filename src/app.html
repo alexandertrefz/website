@@ -339,5 +339,27 @@
 	</head>
 	<body>
 		<div id="svelte">%svelte.body%</div>
+
+		<script>
+			let ua = window.navigator.userAgent
+			let iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i)
+			let webkit = !!ua.match(/WebKit/i)
+			let iOSSafari = iOS && webkit && !ua.match(/CriOS/i)
+
+			if (iOSSafari) {
+				// Ensure 100vh works properly on iOS
+				document.body.style.height = window.innerHeight + 'px'
+
+				window.addEventListener('orientationchange', function (event) {
+					setTimeout(() => {
+						document.body.style.height = 'auto'
+
+						requestAnimationFrame(() => {
+							document.body.style.height = window.innerHeight + 'px'
+						})
+					}, 100)
+				})
+			}
+		</script>
 	</body>
 </html>
