@@ -31,8 +31,20 @@ Whenever I use linear, I am happier at the end of it, because the App gets compl
 
 Linear is just one example of the joy that fast apps bring to the table, but a particularly poignant one for me, because of the technology it uses: it is build on [Electron](https://www.electronjs.org/). Now that might not mean anything to you, but at least in the Mac community, Electron has a bad name. Most of the popular apps that use Electron have not focused themselves on performance like Linear has. They are sluggish and slow, like for example Slack or Atom. The community has been blaming Electron for this, thinking that if those apps were native, they would be faster. Of course, native apps tend to be faster than non-native apps, but what really makes these app slow is the mindset that was taken when designing and building them.
 
-Linear proves very clearly that the underlying technology is not always to blame. Focus on performance and you can make almost anything run really fast and more importantly **your users will love you for it.** I have seen more people be ecstatic about Linear's performance in _the last year_, than I have ever heard say anything positive about Jira in _the last decade_, simply because the app gets out of the way. **That is the power of performance.**
+Linear proves very clearly that the underlying technology is not always to blame. Focus on performance and you can make almost anything run really fast! More importantly: **your users will love you for it.** I have seen more people be ecstatic about Linear's performance in _the last year_, than I have ever heard say anything positive about Jira in _the last decade_, simply because the app gets out of the way. **That is the power of performance.**
 
 ## What it takes to achieve a performant App
 
 Achieving great performance requires _continuous effort across all teams_: Design, Frontend, Backend, Product. They all need to have performance in mind for every major decision to achieve a really fast app. This is impossible if performance is treated as an afterthought. It also makes it much harder to restore performance, once it has been ignored for a while -- undoing product decisions that harm performance is much harder than taking performance into account before they are made in the first place.
+
+Once performance plays a role in decisions, it is very important to not let performance-slack come into play too much – it is all to easy to ignore a small performance decrease when your app is fast (and it is ok to so, sometimes) but you must avoid that becoming a regular occurence, otherwise all the hard work up front get lost over time.
+
+## How to (maybe) convince your Manager
+
+First and foremost: **Performance sells**. Faster and more responsive website see higher conversions as well as higher retention. That makes a lot of sense of course, faster websites are more fun to interact with, they let you do what you want without getting in the way.
+
+**Performance saves money**. It saves money a variety of ways in fact: A better optimized database structure and backend saves money in server costs. Smaller frontend artifacts can also save in CDN costs, faster builds save in tooling and deployment times, not to mention salaries, by enabling faster workflows and happier developers.
+
+You also same _money and time_ by _not having to rebuild_. This is probably the biggest savings. I have been hired at various companies to rebuild products from the ground up, because they were a completely hopeless mess, that had gotten so out of hand that you couldnt refactor it anymore, and all of these projects were horrendously slow – they all were less than 3 years old.
+
+Spending the resources to rebuild an entire app is no joke. It is _at least_ twice as expensive as the salaried time spent on the rebuild. No new features are being built while it is going on and you pay a high opportunity cost as well because you are stuck rebuilding: No adjustment to the market or new circumstances.
