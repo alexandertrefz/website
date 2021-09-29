@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
 	const postImports = import.meta.glob('./*.svx')
 
-	let postsMetadata = []
+	let postsMetadataPromises = []
 
 	for (const path in postImports) {
-		postsMetadata.push(postImports[path]().then(({ metadata }) => metadata))
+		postsMetadataPromises.push(postImports[path]().then(({ metadata }) => metadata))
 	}
 
 	/**
@@ -13,7 +13,7 @@
 	export async function load({ page, fetch }) {
 		return {
 			props: {
-				postsMetadata: await Promise.all(postsMetadata),
+				postsMetadata: await Promise.all(postsMetadataPromises),
 			},
 		}
 	}
