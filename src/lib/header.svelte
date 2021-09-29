@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Settings from './settings.svelte'
 	import { page } from '$app/stores'
 
 	let navigationItems = [
@@ -36,6 +37,9 @@
 			<a sveltekit:prefetch class:active={$page.path === item.url} href={item.url}>{item.name}</a>
 		{/each}
 	</nav>
+	<div class="settings">
+		<Settings />
+	</div>
 </header>
 
 <style lang="scss">
@@ -43,11 +47,17 @@
 		display: grid;
 		border-bottom: 1px solid var(--color-background-offset);
 		background-color: var(--color-background);
-		transition: all 100ms linear;
+		transition: background-color linear 200ms, border-color linear 200ms;
+
+		gap: 20px;
+
 		#logo {
-			height: 38px;
+			grid-area: logo;
+
 			display: grid;
 			gap: 8px;
+
+			height: 38px;
 
 			#name path {
 				fill: var(--color-highlight-medium);
@@ -60,6 +70,12 @@
 		}
 
 		nav {
+			grid-area: navigation;
+			align-items: center;
+
+			-webkit-user-select: none;
+			user-select: none;
+
 			a {
 				font-family: var(--font-navigation);
 				font-weight: 500;
@@ -81,6 +97,10 @@
 				}
 			}
 		}
+
+		.settings {
+			grid-area: settings;
+		}
 	}
 
 	@media screen and (min-width: 650px) {
@@ -88,6 +108,9 @@
 			grid-auto-flow: column;
 			justify-content: space-between;
 			padding: 30px 30px 25px;
+
+			grid-template-areas: 'logo navigation settings';
+			grid-template-columns: 1fr max-content max-content;
 
 			nav {
 				display: grid;
@@ -122,13 +145,34 @@
 		}
 	}
 
-	@media screen and (min-width: 650px) and (max-width: 749px) {
+	@media screen and (min-width: 970px) {
+		header {
+			grid-template-areas: 'logo navigation';
+			grid-template-columns: 1fr max-content;
+
+			.settings {
+				position: absolute;
+				right: 30px;
+				top: 120px;
+			}
+		}
+	}
+
+	@media screen and (min-width: 749px) and (max-width: 759px) {
+		header {
+			gap: 15px;
+		}
+	}
+
+	@media screen and (min-width: 680px) and (max-width: 749px) {
 		header {
 			gap: 20px;
+
 			nav {
 				gap: 20px;
 				padding: 0px;
 				align-items: center;
+
 				a {
 					font-size: 16px;
 				}
@@ -136,22 +180,36 @@
 		}
 	}
 
-	@media screen and (max-width: 649px) {
+	@media screen and (max-width: 679px) {
 		header {
-			justify-content: space-between;
 			padding: 20px;
+
+			grid-template-areas:
+				'logo       settings'
+				'navigation settings';
+			grid-template-columns: 1fr max-content;
+			grid-template-rows: max-content max-content;
 			gap: 20px;
 
 			nav {
 				display: grid;
 				grid-auto-flow: column;
 				gap: 20px;
+				padding: 0px;
+				justify-content: start;
 			}
 		}
 	}
 
 	@media screen and (max-width: 499px) {
 		header {
+			grid-template-areas:
+				'logo       settings'
+				'navigation navigation';
+			grid-template-columns: 1fr max-content;
+			grid-template-rows: max-content max-content;
+			gap: 20px;
+
 			nav {
 				a {
 					font-size: 14px;

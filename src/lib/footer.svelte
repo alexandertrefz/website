@@ -14,6 +14,13 @@
 
 <style lang="scss">
 	footer {
+		display: grid;
+		grid-auto-flow: column;
+		justify-content: space-between;
+
+		-webkit-user-select: none;
+		user-select: none;
+
 		width: 100%;
 
 		padding-left: 25px;
@@ -21,7 +28,7 @@
 		padding-bottom: 20px;
 		padding-top: 20px;
 
-		transition: padding linear 200ms;
+		transition: padding linear 200ms, border-color linear 200ms;
 
 		@media screen and (max-width: 399px) {
 			padding-left: 15px;
@@ -36,10 +43,6 @@
 			padding-bottom: 15px;
 			padding-top: 15px;
 		}
-
-		display: grid;
-		grid-auto-flow: column;
-		justify-content: space-between;
 
 		@media screen and (max-width: 1099px) {
 			border-top: 1px solid var(--color-background-offset);
@@ -57,6 +60,8 @@
 			font-size: 12px;
 			font-weight: 500;
 			color: var(--color-foreground-medium);
+
+			transition: all linear 200ms;
 
 			@media (max-width: 1099px) {
 				span::after {

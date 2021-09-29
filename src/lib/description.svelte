@@ -6,7 +6,7 @@
 	p {
 		font-family: var(--font-description);
 		font-weight: 400;
-		font-size: 16px;
+		font-size: var(--base-font-size);
 		text-align: center;
 	}
 </style>

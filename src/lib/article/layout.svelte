@@ -40,20 +40,20 @@
 
 	h1 {
 		font-family: var(--font-article-title);
-		font-size: 24px;
+		font-size: calc(var(--base-font-size) * 1.5);
 		text-align: center;
 		line-height: 1.3;
 	}
 
 	section {
 		font-family: var(--font-text);
-		font-size: 16px;
+		font-size: var(--base-font-size);
 	}
 
 	section :global(p) {
 		padding-bottom: 25px;
 		line-height: 1.35;
-		text-align: justify;
+		text-align: var(--alignment);
 	}
 
 	section :global(p):last-child {
@@ -64,7 +64,7 @@
 		padding-top: 15px;
 		padding-bottom: 15px;
 		font-family: var(--font-article-title);
-		font-size: 20px;
+		font-size: calc(var(--base-font-size) * 1.25);
 		text-align: center;
 		font-style: italic;
 		line-height: 1.4;

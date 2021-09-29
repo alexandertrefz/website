@@ -120,15 +120,15 @@
 
 	h2 {
 		font-family: var(--font-article-title);
-		font-size: 20px;
+		font-size: calc(var(--base-font-size) * 1.25);
 	}
 
 	p {
 		font-family: var(--font-article-text);
 		max-width: 600px;
-		font-size: 14px;
+		font-size: calc(var(--base-font-size) * 0.875);
 		line-height: 1.3;
-		text-align: justify;
+		text-align: var(--alignment);
 
 		&.responsibleForContent {
 			text-align: center;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { resolvedTheme } from '$lib/themeStores'
+	import { resolvedTheme } from '$lib/stores/theme'
 	import Header from '$lib/header.svelte'
 	import Footer from '$lib/footer.svelte'
 </script>
@@ -35,7 +35,7 @@
 
 	@media screen and (min-width: 750px) and (max-width: 849px) {
 		main {
-			padding-top: 20px;
+			padding-top: 30px;
 			padding-left: 30px;
 			padding-right: 40px;
 			padding-bottom: 20px;

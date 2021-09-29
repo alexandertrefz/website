@@ -18,7 +18,7 @@
 <style lang="scss">
 	.metadata {
 		font-family: var(--font-article-metadata);
-		font-size: 12px;
+		font-size: calc(var(--base-font-size) * 0.75);
 		font-weight: 500;
 
 		font-feature-settings: 'cpsp';
