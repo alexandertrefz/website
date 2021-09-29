@@ -23,15 +23,17 @@
 
 	main {
 		overflow-y: auto;
+		display: grid;
+		grid-auto-rows: max-content;
 	}
 
-	@media screen and (max-width: 649px) {
+	@media screen and (max-width: 749px) {
 		main {
 			padding: 20px;
 		}
 	}
 
-	@media screen and (min-width: 650px) and (max-width: 749px) {
+	@media screen and (min-width: 750px) and (max-width: 849px) {
 		main {
 			padding-top: 20px;
 			padding-left: 30px;
@@ -40,7 +42,7 @@
 		}
 	}
 
-	@media screen and (min-width: 750px) {
+	@media screen and (min-width: 850px) {
 		main {
 			padding-top: 30px;
 			padding-left: 30px;

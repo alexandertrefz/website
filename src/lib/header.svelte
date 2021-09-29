@@ -83,11 +83,11 @@
 		}
 	}
 
-	@media screen and (min-width: 550px) {
+	@media screen and (min-width: 650px) {
 		header {
 			grid-auto-flow: column;
 			justify-content: space-between;
-			padding: 30px;
+			padding: 30px 30px 25px;
 
 			nav {
 				display: grid;
@@ -102,7 +102,7 @@
 		}
 	}
 
-	@media screen and (min-width: 700px) {
+	@media screen and (min-width: 800px) {
 		header {
 			nav {
 				a {
@@ -112,7 +112,7 @@
 		}
 	}
 
-	@media screen and (min-width: 750px) {
+	@media screen and (min-width: 850px) {
 		header {
 			nav {
 				a {
@@ -122,10 +122,9 @@
 		}
 	}
 
-	@media screen and (min-width: 550px) and (max-width: 649px) {
+	@media screen and (min-width: 650px) and (max-width: 749px) {
 		header {
 			gap: 20px;
-			padding: 20px;
 			nav {
 				gap: 20px;
 				padding: 0px;
@@ -137,7 +136,7 @@
 		}
 	}
 
-	@media screen and (max-width: 549px) {
+	@media screen and (max-width: 649px) {
 		header {
 			justify-content: space-between;
 			padding: 20px;
@@ -151,7 +150,7 @@
 		}
 	}
 
-	@media screen and (max-width: 399px) {
+	@media screen and (max-width: 499px) {
 		header {
 			nav {
 				a {
