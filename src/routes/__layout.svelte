@@ -38,7 +38,7 @@
 			padding-top: 30px;
 			padding-left: 30px;
 			padding-right: 40px;
-			padding-bottom: 20px;
+			padding-bottom: 30px;
 		}
 	}
 
@@ -48,6 +48,15 @@
 			padding-left: 30px;
 			padding-right: 40px;
 			padding-bottom: 30px;
+		}
+	}
+
+	@media screen and (min-width: 1100px) {
+		main {
+			padding-top: 30px;
+			padding-left: 30px;
+			padding-right: 40px;
+			padding-bottom: 83px;
 		}
 	}
 </style>

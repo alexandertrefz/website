@@ -28,7 +28,7 @@
 		padding-bottom: 20px;
 		padding-top: 20px;
 
-		transition: padding linear 200ms, border-color linear 200ms;
+		transition: padding linear 200ms;
 
 		@media screen and (max-width: 399px) {
 			padding-left: 15px;

@@ -52,7 +52,7 @@
 
 	section :global(p) {
 		padding-bottom: 25px;
-		line-height: 1.35;
+		line-height: 1.4;
 		text-align: var(--alignment);
 	}
 

@@ -59,7 +59,7 @@
 <style lang="scss">
 	.blog {
 		display: grid;
-		gap: 40px;
+		gap: 50px;
 
 		.title {
 			display: grid;
@@ -68,6 +68,9 @@
 	}
 
 	ul {
+		display: grid;
+		gap: 60px;
+
 		li {
 			a {
 				cursor: pointer;
