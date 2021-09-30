@@ -28,7 +28,7 @@
 	article {
 		display: grid;
 		justify-self: center;
-		max-width: 600px;
+		max-width: var(--content-width);
 		gap: 30px;
 	}
 

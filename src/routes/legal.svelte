@@ -125,7 +125,7 @@
 
 	p {
 		font-family: var(--font-article-text);
-		max-width: 600px;
+		max-width: var(--content-width);
 		font-size: calc(var(--base-font-size) * 0.875);
 		line-height: 1.3;
 		text-align: var(--alignment);
