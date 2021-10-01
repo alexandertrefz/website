@@ -92,7 +92,8 @@
 						font-family: var(--font-article-title);
 						font-size: 24px;
 
-						text-decoration: underline transparent;
+						text-decoration: underline;
+						text-decoration-color: transparent;
 						transition: text-decoration-color linear 200ms;
 					}
 				}
