@@ -21,7 +21,7 @@ Let me explain.
 
 Every time you interact with an app you notice its performance. Not always consciously, but you notice it. If an app is always or even worse _sometimes_ slow, resentment towards it starts to build over time, to the point where even thinking of having to use [Jira](https://www.atlassian.com/software/jira) to do anything has me looking for ways to avoid opening Jira at all.
 
-The inverse is true as well, though at first glance to a lesser effect. You may have heard of [Linear](https://linear.app) -- if you havent, you should check it out. It is everything that Jira isn't, in the best possible way.
+The inverse is true as well, though at first glance to a lesser effect. You may have heard of [Linear](https://linear.app) -- if you haven't, you should check it out. It is everything that Jira isn't, in the best possible way.
 
 Linear has gotten very popular in the last 2 years for more reasons than one, but a singular theme is permeating almost every feature they implement: **Speed**
 
@@ -45,7 +45,7 @@ First and foremost: **Performance sells**. Faster and more responsive website se
 
 **Performance saves money**. It saves money a variety of ways in fact: A better optimized database structure and backend saves money in server costs. Smaller frontend artifacts can also save in CDN costs, faster builds save in tooling and deployment times, not to mention salaries, by enabling faster workflows and happier developers.
 
-You also same _money and time_ by _not having to rebuild_. This is probably the biggest savings. I have been hired at various companies to rebuild products from the ground up, because they were a completely hopeless mess, that had gotten so out of hand that you couldnt refactor it anymore, and all of these projects were horrendously slow – they all were less than 3 years old.
+You also save _money and time_ by _not having to rebuild_. This is probably the biggest savings. I have been hired at various companies to rebuild products from the ground up, because they were a completely hopeless mess, that had gotten so out of hand that you couldn't refactor it anymore, and all of these projects were horrendously slow – they all were less than 3 years old.
 
 Spending the resources to rebuild an entire app is no joke. It is _at least_ twice as expensive as the salaried time spent on the rebuild. No new features are being built while it is going on and you pay a high opportunity cost as well because you are stuck rebuilding: No adjustment to the market or new circumstances.
 
