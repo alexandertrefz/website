@@ -9,19 +9,23 @@
 
 <div class="legal">
 	<Headline>Legal Disclaimers</Headline>
+
 	<article>
 		<section>
 			<h2>Impressum (Germany)</h2>
+
 			<p>Angaben gemäß § 5 TMG.</p>
 		</section>
 
 		<section>
 			<h2>Kontakt</h2>
+
 			<p>E-Mail: alexander . trefz (a) gmail . com</p>
 		</section>
 
 		<section>
 			<h2>Verantwortlich für den Inhalt</h2>
+
 			<p class="responsibleForContent">
 				Nach § 55 Abs. 2 RStV: <br />
 				Alexander Trefz <br />
@@ -32,6 +36,7 @@
 
 		<section>
 			<h2>Haftung für Inhalte</h2>
+
 			<p>
 				Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
 				Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als
@@ -48,6 +53,7 @@
 
 		<section>
 			<h2>Haftung für Links</h2>
+
 			<p>
 				Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen
 				Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
@@ -62,6 +68,7 @@
 
 		<section>
 			<h2>Urheberrecht</h2>
+
 			<p>
 				Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem
 				deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
@@ -74,8 +81,10 @@
 				Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
 			</p>
 		</section>
+
 		<section>
 			<h2>Datenschutz</h2>
+
 			<p>
 				Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich.
 				Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder
