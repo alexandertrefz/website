@@ -34,7 +34,9 @@
 	</a>
 	<nav>
 		{#each navigationItems as item}
-			<a sveltekit:prefetch class:active={$page.path === item.url} href={item.url}>{item.name}</a>
+			<a sveltekit:prefetch class:active={$page.url.pathname === item.url} href={item.url}
+				>{item.name}</a
+			>
 		{/each}
 	</nav>
 	<div class="settings">

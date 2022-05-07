@@ -10,7 +10,7 @@
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
-	export async function load({ page, fetch }) {
+	export async function load({ url, params, fetch }) {
 		return {
 			props: {
 				postsMetadata: await Promise.all(postsMetadataPromises),

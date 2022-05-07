@@ -7,7 +7,7 @@
 		<span>&copy; 2021 Alexander Trefz</span>
 		<span>All rights reserved</span>
 	</div>
-	{#if $page.path !== '/legal'}
+	{#if $page.url.pathname !== '/legal'}
 		<a id="legal" href="/legal">Legal</a>
 	{/if}
 </footer>

@@ -12,17 +12,18 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-netlify": "1.0.0-next.31",
-		"@sveltejs/kit": "1.0.0-next.176",
-		"mdsvex": "0.9.8",
-		"prettier": "2.4.1",
-		"prettier-plugin-svelte": "2.4.0",
-		"sass": "1.42.1",
-		"svelte": "3.43.0",
-		"svelte-check": "2.2.6",
-		"svelte-preprocess": "4.9.5",
-		"tslib": "2.3.1",
-		"typescript": "4.4.3"
+		"@sveltejs/adapter-netlify": "1.0.0-next.56",
+		"@sveltejs/kit": "1.0.0-next.326",
+		"mdsvex": "0.10.5",
+		"prettier": "2.6.2",
+		"prettier-plugin-svelte": "2.7.0",
+		"sass": "1.51.0",
+		"svelte": "3.48.0",
+		"svelte-check": "2.7.0",
+		"svelte-preprocess": "4.10.6",
+		"tslib": "2.4.0",
+		"typescript": "4.6.4"
 	},
-	"type": "module"
+	"type": "module",
+	"packageManager": "yarn@3.2.0"
 }
