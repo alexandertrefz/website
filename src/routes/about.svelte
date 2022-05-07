@@ -11,8 +11,8 @@
 	<Headline>About Me</Headline>
 	<p>Hi! I am Alexander Trefz, a Software Engineer specialising in Interface Development.</p>
 	<p>
-		I have been working in software engineering since 2010, and since then have worked on Apps &
-		Websites used by millions of people.
+		I have been working in software engineering since 2010, and have worked on Apps & Websites used
+		by millions of people since then.
 	</p>
 	<p>
 		For a few years I have been using my free time to work on my programming language project,
