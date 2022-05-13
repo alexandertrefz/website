@@ -29,8 +29,8 @@
 			<p class="responsibleForContent">
 				Nach § 55 Abs. 2 RStV: <br />
 				Alexander Trefz <br />
-				Weinholdweg 17 <br />
-				14089 Berlin
+				Türkenstraße 5 <br />
+				13349 Berlin
 			</p>
 		</section>
 
