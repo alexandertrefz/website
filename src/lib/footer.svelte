@@ -4,7 +4,7 @@
 
 <footer>
 	<div id="copyright">
-		<span>&copy; 2021 Alexander Trefz</span>
+		<span>&copy; 2021 - 2022 Alexander Trefz</span>
 		<span>All rights reserved</span>
 	</div>
 	{#if $page.url.pathname !== '/legal'}
@@ -72,6 +72,10 @@
 			@media screen and (min-width: 1100px) {
 				display: grid;
 				gap: 6px;
+			}
+
+			@media (max-width: 350px) {
+				font-size: 11px;
 			}
 		}
 
