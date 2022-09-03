@@ -1,34 +1,10 @@
-<script context="module" lang="ts">
-	const postImports = import.meta.glob('./*.svx')
-
-	let postsMetadataPromises = []
-
-	for (const path in postImports) {
-		postsMetadataPromises.push(postImports[path]().then(({ metadata }) => metadata))
-	}
-
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
-	export async function load({ url, params, fetch }) {
-		return {
-			props: {
-				postsMetadata: await Promise.all(postsMetadataPromises),
-			},
-		}
-	}
-</script>
-
 <script lang="ts">
+	/** @type {import('./$types').PageData} */
+	export let data
+
 	import Metadata from '$lib/article/metadata.svelte'
 	import Headline from '$lib/headline.svelte'
 	import Description from '$lib/description.svelte'
-	export let postsMetadata: Array<{
-		title: string
-		slug: string
-		readingTime: number
-		publishedAt: string
-	}>
 </script>
 
 <svelte:head>
@@ -43,7 +19,7 @@
 	</div>
 
 	<ul>
-		{#each postsMetadata as metadata}
+		{#each data.postsMetadata as metadata}
 			<li>
 				<a href="/blog/{metadata.slug}">
 					<article>

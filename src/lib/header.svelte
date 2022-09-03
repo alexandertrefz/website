@@ -15,7 +15,7 @@
 </script>
 
 <header>
-	<a sveltekit:prefetch id="logo" href="/">
+	<a data-sveltekit:prefetch id="logo" href="/">
 		<svg id="name" width="195" height="16" xmlns="http://www.w3.org/2000/svg">
 			<title>Alexander Trefz</title>
 			<path
@@ -34,7 +34,7 @@
 	</a>
 	<nav>
 		{#each navigationItems as item}
-			<a sveltekit:prefetch class:active={$page.url.pathname === item.url} href={item.url}
+			<a data-sveltekit:prefetch class:active={$page.url.pathname === item.url} href={item.url}
 				>{item.name}</a
 			>
 		{/each}

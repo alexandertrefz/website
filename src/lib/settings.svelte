@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env'
+	import { browser } from '$app/environment'
 	import { selectedTheme } from './stores/theme'
 	import { alignment } from './stores/alignment'
 	import { fontSize } from './stores/fontSize'
