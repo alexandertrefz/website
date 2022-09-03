@@ -48,12 +48,14 @@
 		gap: 60px;
 
 		li {
+			text-align: center;
+
 			a {
+				display: inline-block;
 				cursor: pointer;
 				color: var(--color-foreground);
 
 				text-decoration: none;
-				text-align: center;
 
 				&:hover article h2 {
 					text-decoration-color: var(--color-highlight-medium);
