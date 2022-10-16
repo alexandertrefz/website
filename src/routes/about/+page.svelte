@@ -23,8 +23,10 @@
 	<p>
 		For a few years I have been using my free time to work on my programming
 		language project, called
-		<a target="_blank" href="https://alexandertrefz.github.io/essence/"
-			>Essence</a
+		<a
+			target="_blank"
+			rel="noreferrer"
+			href="https://alexandertrefz.github.io/essence/">Essence</a
 		>.
 	</p>
 	<p>
