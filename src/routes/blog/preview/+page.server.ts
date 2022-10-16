@@ -1,10 +1,7 @@
-/**
- * @type {import('@sveltejs/kit').PageServerLoad}
- */
-export async function load() {
-	const postImports = import.meta.glob('./**/*.svx')
+import type { PageServerLoad } from './$types'
 
-	console.log(postImports)
+export const load: PageServerLoad = async function load() {
+	const postImports = import.meta.glob('./**/*.svx')
 
 	let postsMetadataPromises = []
 

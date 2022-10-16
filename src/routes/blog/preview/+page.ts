@@ -1,6 +1,5 @@
-/**
- * @type {import('@sveltejs/kit').PageLoad}
- */
-export async function load({ data }) {
+import type { PageLoad } from './$types'
+
+export const load: PageLoad = async function load({ data }) {
 	return data
 }

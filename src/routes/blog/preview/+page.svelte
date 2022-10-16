@@ -1,8 +1,7 @@
 <script lang="ts">
-	/** @type {import('./$types').PageData} */
-	export let data
+	import type { PageData } from './$types'
 
-	console.log(data)
+	export let data: PageData
 
 	import Metadata from '$lib/article/metadata.svelte'
 	import Headline from '$lib/headline.svelte'
