@@ -1,27 +1,35 @@
 <script lang="ts">
-	import Headline from '$lib/headline.svelte'
+	import Headline from "$lib/headline.svelte"
 </script>
 
 <svelte:head>
 	<title>About Me – alexander.trefz.me</title>
-	<meta name="description" content="Everything you need to know about Alexander Trefz." />
+	<meta
+		name="description"
+		content="Everything you need to know about Alexander Trefz."
+	/>
 </svelte:head>
 
 <article class="about">
 	<Headline>About Me</Headline>
-	<p>Hi! I am Alexander Trefz, a Software Engineer specialising in Interface Development.</p>
 	<p>
-		I have been working in software engineering since 2010, and have worked on Apps & Websites used
-		by millions of people since then.
+		Hi! I am Alexander Trefz, a Software Engineer specialising in Interface
+		Development.
 	</p>
 	<p>
-		For a few years I have been using my free time to work on my programming language project,
-		called
-		<a target="_blank" href="https://alexandertrefz.github.io/essence/">Essence</a>.
+		I have been working in software engineering since 2010, and have worked on
+		Apps & Websites used by millions of people since then.
 	</p>
 	<p>
-		On this blog I write, ramble, and rant about Software Development, Interface Design, and some
-		other things.
+		For a few years I have been using my free time to work on my programming
+		language project, called
+		<a target="_blank" href="https://alexandertrefz.github.io/essence/"
+			>Essence</a
+		>.
+	</p>
+	<p>
+		On this blog I write, ramble, and rant about Software Development, Interface
+		Design, and some other things.
 	</p>
 </article>
 

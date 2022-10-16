@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { page } from "$app/stores"
 </script>
 
 <footer>
@@ -7,7 +7,7 @@
 		<span>&copy; 2021 - 2022 Alexander Trefz</span>
 		<span>All rights reserved</span>
 	</div>
-	{#if $page.url.pathname !== '/legal'}
+	{#if $page.url.pathname !== "/legal"}
 		<a id="legal" href="/legal">Legal</a>
 	{/if}
 </footer>
@@ -65,7 +65,7 @@
 
 			@media (max-width: 1099px) {
 				span::after {
-					content: '.';
+					content: ".";
 				}
 			}
 

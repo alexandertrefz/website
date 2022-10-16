@@ -1,12 +1,14 @@
-import type { PageLoad } from './$types'
+import type { PageLoad } from "./$types"
 
 export const load: PageLoad = async function load() {
-	const postImports = import.meta.glob('./**/*.svx')
+	const postImports = import.meta.glob("./**/*.svx")
 
 	let postsMetadataPromises = []
 
 	for (const path in postImports) {
-		postsMetadataPromises.push(postImports[path]().then(({ metadata }) => metadata))
+		postsMetadataPromises.push(
+			postImports[path]().then(({ metadata }) => metadata),
+		)
 	}
 
 	let postsMetadata: Array<{

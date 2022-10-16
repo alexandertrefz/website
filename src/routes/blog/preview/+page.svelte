@@ -1,16 +1,19 @@
 <script lang="ts">
-	import type { PageData } from './$types'
+	import type { PageData } from "./$types"
 
 	export let data: PageData
 
-	import Metadata from '$lib/article/metadata.svelte'
-	import Headline from '$lib/headline.svelte'
-	import Description from '$lib/description.svelte'
+	import Metadata from "$lib/article/metadata.svelte"
+	import Headline from "$lib/headline.svelte"
+	import Description from "$lib/description.svelte"
 </script>
 
 <svelte:head>
 	<title>Thoughts & Insights – alexander.trefz.me</title>
-	<meta name="description" content="A blog full of opinions on all things software." />
+	<meta
+		name="description"
+		content="A blog full of opinions on all things software."
+	/>
 </svelte:head>
 
 <article class="blog">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Metadata from './metadata.svelte'
+	import Metadata from "./metadata.svelte"
 
 	export let slug
 	export let title

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-	import { selectedTheme } from './stores/theme'
-	import { alignment } from './stores/alignment'
-	import { fontSize } from './stores/fontSize'
-	import { writable } from 'svelte/store'
+	import { browser } from "$app/environment"
+	import { selectedTheme } from "./stores/theme"
+	import { alignment } from "./stores/alignment"
+	import { fontSize } from "./stores/fontSize"
+	import { writable } from "svelte/store"
 
 	if (browser) {
-		document.documentElement.addEventListener('click', (event) => {
+		document.documentElement.addEventListener("click", (event) => {
 			$settingsOpen = false
 		})
 	}
@@ -77,35 +77,41 @@
 				<div class="controlGroup buttonsOnly">
 					<div
 						class="button"
-						class:active={$alignment === 'left'}
+						class:active={$alignment === "left"}
 						on:click={() => {
-							$alignment = 'left'
+							$alignment = "left"
 						}}
 					>
 						<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0 0h18v2H0V0Zm0 15h14v2H0v-2Zm0-5h18v2H0v-2Zm0-5h14v2H0V5Z" />
+							<path
+								d="M0 0h18v2H0V0Zm0 15h14v2H0v-2Zm0-5h18v2H0v-2Zm0-5h14v2H0V5Z"
+							/>
 						</svg>
 					</div>
 					<div
 						class="button"
-						class:active={$alignment === 'justify'}
+						class:active={$alignment === "justify"}
 						on:click={() => {
-							$alignment = 'justify'
+							$alignment = "justify"
 						}}
 					>
 						<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0 0h18v2H0V0Zm0 15h18v2H0v-2Zm0-5h18v2H0v-2Zm0-5h18v2H0V5Z" />
+							<path
+								d="M0 0h18v2H0V0Zm0 15h18v2H0v-2Zm0-5h18v2H0v-2Zm0-5h18v2H0V5Z"
+							/>
 						</svg>
 					</div>
 					<div
 						class="button"
-						class:active={$alignment === 'right'}
+						class:active={$alignment === "right"}
 						on:click={() => {
-							$alignment = 'right'
+							$alignment = "right"
 						}}
 					>
 						<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg">
-							<path d="M0 0h18v2H0V0Zm4 15h14v2H4v-2Zm-4-5h18v2H0v-2Zm4-5h14v2H4V5Z" />
+							<path
+								d="M0 0h18v2H0V0Zm4 15h14v2H4v-2Zm-4-5h18v2H0v-2Zm4-5h14v2H4V5Z"
+							/>
 						</svg>
 					</div>
 				</div>
@@ -115,9 +121,9 @@
 				<div class="controlGroup buttonsOnly">
 					<div
 						class="button"
-						class:active={$selectedTheme === 'light'}
+						class:active={$selectedTheme === "light"}
 						on:click={() => {
-							$selectedTheme = 'light'
+							$selectedTheme = "light"
 						}}
 					>
 						<svg width="22" height="22" xmlns="http://www.w3.org/2000/svg">
@@ -128,23 +134,29 @@
 					</div>
 					<div
 						class="button"
-						class:active={$selectedTheme === 'automatic'}
+						class:active={$selectedTheme === "automatic"}
 						on:click={() => {
-							$selectedTheme = 'automatic'
+							$selectedTheme = "automatic"
 						}}
 					>
 						<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
 							<g transform="translate(1 1)" fill="none">
-								<circle stroke-width="2" stroke-linejoin="round" cx="9" cy="9" r="9" />
+								<circle
+									stroke-width="2"
+									stroke-linejoin="round"
+									cx="9"
+									cy="9"
+									r="9"
+								/>
 								<path d="M9 18a9 9 0 0 1-9-9 9 9 0 0 1 9-9v18Z" />
 							</g>
 						</svg>
 					</div>
 					<div
 						class="button"
-						class:active={$selectedTheme === 'dark'}
+						class:active={$selectedTheme === "dark"}
 						on:click={() => {
-							$selectedTheme = 'dark'
+							$selectedTheme = "dark"
 						}}
 					>
 						<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
@@ -188,7 +200,7 @@
 
 			@media screen and (min-width: 360px) {
 				&::before {
-					content: 'Settings';
+					content: "Settings";
 				}
 			}
 
@@ -224,7 +236,8 @@
 				0px 0px 33.4px hsl(var(--color-boxshadow) / 14%),
 				0px 0px 80px hsl(var(--color-boxshadow) / 20%);
 
-			transition: opacity linear 200ms, background-color linear 200ms, box-shadow linear 200ms;
+			transition: opacity linear 200ms, background-color linear 200ms,
+				box-shadow linear 200ms;
 
 			.header {
 				display: grid;

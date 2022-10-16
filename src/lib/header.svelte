@@ -1,15 +1,15 @@
 <script lang="ts">
-	import Settings from './settings.svelte'
-	import { page } from '$app/stores'
+	import Settings from "./settings.svelte"
+	import { page } from "$app/stores"
 
 	let navigationItems = [
 		{
-			name: 'Thoughts & Insights',
-			url: '/blog',
+			name: "Thoughts & Insights",
+			url: "/blog",
 		},
 		{
-			name: 'About Me',
-			url: '/about',
+			name: "About Me",
+			url: "/about",
 		},
 	]
 </script>
@@ -34,8 +34,10 @@
 	</a>
 	<nav>
 		{#each navigationItems as item}
-			<a data-sveltekit:prefetch class:active={$page.url.pathname === item.url} href={item.url}
-				>{item.name}</a
+			<a
+				data-sveltekit:prefetch
+				class:active={$page.url.pathname === item.url}
+				href={item.url}>{item.name}</a
 			>
 		{/each}
 	</nav>
@@ -81,7 +83,7 @@
 			a {
 				font-family: var(--font-navigation);
 				font-weight: 500;
-				font-feature-settings: 'cpsp';
+				font-feature-settings: "cpsp";
 
 				text-decoration: none;
 				text-transform: uppercase;
@@ -111,7 +113,7 @@
 			justify-content: space-between;
 			padding: 30px 30px 25px;
 
-			grid-template-areas: 'logo navigation settings';
+			grid-template-areas: "logo navigation settings";
 			grid-template-columns: 1fr max-content max-content;
 
 			nav {
@@ -149,7 +151,7 @@
 
 	@media screen and (min-width: 970px) {
 		header {
-			grid-template-areas: 'logo navigation';
+			grid-template-areas: "logo navigation";
 			grid-template-columns: 1fr max-content;
 
 			.settings {
@@ -187,8 +189,8 @@
 			padding: 20px;
 
 			grid-template-areas:
-				'logo       settings'
-				'navigation settings';
+				"logo       settings"
+				"navigation settings";
 			grid-template-columns: 1fr max-content;
 			grid-template-rows: max-content max-content;
 			gap: 20px;
@@ -206,8 +208,8 @@
 	@media screen and (max-width: 499px) {
 		header {
 			grid-template-areas:
-				'logo       settings'
-				'navigation navigation';
+				"logo       settings"
+				"navigation navigation";
 			grid-template-columns: 1fr max-content;
 			grid-template-rows: max-content max-content;
 			gap: 20px;

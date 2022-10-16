@@ -10,8 +10,14 @@
 		Minute Read
 	</span>
 	<time datetime={metadata.publishedAt}>
-		{new Intl.DateTimeFormat('en-GB', { month: 'long' }).format(readingTimeDate)}
-		<strong>{new Intl.DateTimeFormat('en-GB', { year: 'numeric' }).format(readingTimeDate)}</strong>
+		{new Intl.DateTimeFormat("en-GB", { month: "long" }).format(
+			readingTimeDate,
+		)}
+		<strong
+			>{new Intl.DateTimeFormat("en-GB", { year: "numeric" }).format(
+				readingTimeDate,
+			)}</strong
+		>
 	</time>
 </div>
 
@@ -21,7 +27,7 @@
 		font-size: calc(var(--base-font-size) * 0.75);
 		font-weight: 500;
 
-		font-feature-settings: 'cpsp';
+		font-feature-settings: "cpsp";
 		text-transform: uppercase;
 
 		display: inline-grid;

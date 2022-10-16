@@ -1,9 +1,9 @@
 ---
-slug: 'how-performance-sets-truly-great-apps-apart'
-title: 'How Performance sets truly great Apps apart'
-description: 'Why you should focus on performance in your apps, and how to convince your manager to let you.'
+slug: "how-performance-sets-truly-great-apps-apart"
+title: "How Performance sets truly great Apps apart"
+description: "Why you should focus on performance in your apps, and how to convince your manager to let you."
 readingTime: 5
-publishedAt: '2021-10-01'
+publishedAt: "2021-10-01"
 layout: article
 ---
 

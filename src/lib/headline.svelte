@@ -21,7 +21,7 @@
 
 		text-transform: uppercase;
 
-		font-feature-settings: 'cpsp';
+		font-feature-settings: "cpsp";
 
 		text-align: center;
 	}

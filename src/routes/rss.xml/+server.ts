@@ -1,11 +1,13 @@
-import type { RequestHandler } from './$types'
+import type { RequestHandler } from "./$types"
 
-const postImports = import.meta.glob('./blog/*.svx')
+const postImports = import.meta.glob("./blog/*.svx")
 
 let postsMetadataPromises = []
 
 for (const path in postImports) {
-	postsMetadataPromises.push(postImports[path]().then(({ metadata }) => metadata))
+	postsMetadataPromises.push(
+		postImports[path]().then(({ metadata }) => metadata),
+	)
 }
 
 export const GET: RequestHandler = async function GET() {
@@ -14,8 +16,8 @@ export const GET: RequestHandler = async function GET() {
 
 	return new Response(body, {
 		headers: {
-			'Cache-Control': 'max-age=0, s-maxage=3600',
-			'Content-Type': 'application/xml',
+			"Cache-Control": "max-age=0, s-maxage=3600",
+			"Content-Type": "application/xml",
 		},
 	})
 }
@@ -38,7 +40,7 @@ const xml = (posts) => {
 									<pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
 								</item>`,
 						)
-						.join('')}
+						.join("")}
 				</channel>
 			</rss>`
 }

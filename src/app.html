@@ -33,7 +33,10 @@
 		/>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="google-site-verification" content="c-0_GIsBdbjMxa6c8zqKnVYWN9oOBo743cJEGG6fgp8" />
+		<meta
+			name="google-site-verification"
+			content="c-0_GIsBdbjMxa6c8zqKnVYWN9oOBo743cJEGG6fgp8"
+		/>
 
 		<style>
 			html,
@@ -153,7 +156,7 @@
 			blockquote:after,
 			q:before,
 			q:after {
-				content: '';
+				content: "";
 				content: none;
 			}
 			table {
@@ -300,7 +303,8 @@
 				border-radius: 15px;
 				background-color: var(--color-background);
 				box-shadow: 0 0px 1.8px hsl(var(--color-boxshadow) / 20%),
-					0 0px 5px hsl(var(--color-boxshadow) / 13%), 0 0px 12px hsl(var(--color-boxshadow) / 10%),
+					0 0px 5px hsl(var(--color-boxshadow) / 13%),
+					0 0px 12px hsl(var(--color-boxshadow) / 10%),
 					0 0px 40px hsl(var(--color-boxshadow) / 7%);
 
 				position: relative;
@@ -348,14 +352,14 @@
 
 			if (iOSSafari) {
 				// Ensure 100vh works properly on iOS
-				document.body.style.height = window.innerHeight + 'px'
+				document.body.style.height = window.innerHeight + "px"
 
-				window.addEventListener('orientationchange', function (event) {
+				window.addEventListener("orientationchange", function (event) {
 					setTimeout(() => {
-						document.body.style.height = 'auto'
+						document.body.style.height = "auto"
 
 						requestAnimationFrame(() => {
-							document.body.style.height = window.innerHeight + 'px'
+							document.body.style.height = window.innerHeight + "px"
 						})
 					}, 100)
 				})
