@@ -44,6 +44,7 @@
 		max-width: var(--content-width);
 
 		p {
+			font-variant-numeric: lining-nums;
 			font-family: var(--font-article-text);
 			font-size: calc(var(--base-font-size) * 1.125);
 			line-height: 1.3;
@@ -51,6 +52,7 @@
 		}
 
 		a {
+			font-weight: 500;
 			color: var(--color-highlight-intense);
 			text-decoration-style: underline;
 			text-decoration-color: transparent;

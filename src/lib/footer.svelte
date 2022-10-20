@@ -56,6 +56,7 @@
 		}
 
 		#copyright {
+			font-variant-numeric: lining-nums;
 			font-family: var(--font-text);
 			font-size: 12px;
 			font-weight: 500;

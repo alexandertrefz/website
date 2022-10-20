@@ -46,6 +46,7 @@
 	}
 
 	section {
+		font-variant-numeric: lining-nums;
 		font-family: var(--font-text);
 		font-size: var(--base-font-size);
 	}
@@ -71,6 +72,7 @@
 	}
 
 	section :global(a) {
+		font-weight: 500;
 		color: var(--color-highlight-intense);
 		text-decoration-style: underline;
 		text-decoration-color: transparent;
@@ -89,7 +91,7 @@
 
 	section :global(strong) {
 		color: var(--color-foreground-emphasis);
-		font-weight: 700;
+		font-weight: 600;
 	}
 
 	section :global(.subtle) {

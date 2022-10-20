@@ -146,6 +146,7 @@
 	}
 
 	p {
+		font-variant-numeric: lining-nums;
 		font-family: var(--font-article-text);
 		max-width: var(--content-width);
 		font-size: calc(var(--base-font-size) * 0.875);

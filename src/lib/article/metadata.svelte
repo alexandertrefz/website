@@ -35,7 +35,7 @@
 		gap: 10px;
 
 		strong {
-			font-weight: 700;
+			font-weight: 600;
 		}
 	}
 </style>
