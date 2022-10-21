@@ -1,0 +1,138 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro"
+import Metadata from "@components/Metadata.astro"
+
+export interface Props {
+	content: {
+		slug: string
+		title: string
+		description: string
+		readingTime: number
+		pubDate: string
+	}
+}
+
+const {
+	content: { title, description, readingTime, pubDate },
+} = Astro.props
+---
+
+<BaseLayout title={title} description={description}>
+	<article>
+		<div class="title">
+			<h1>{title}</h1>
+			<Metadata readingTime={readingTime} pubDate={pubDate} />
+		</div>
+
+		<section>
+			<slot />
+		</section>
+	</article>
+</BaseLayout>
+
+<style lang="scss">
+	article {
+		display: grid;
+		justify-self: center;
+		max-width: var(--content-width);
+		gap: 30px;
+	}
+
+	.title {
+		display: grid;
+		justify-items: center;
+		gap: 10px;
+	}
+
+	h1 {
+		font-family: var(--font-article-title);
+		font-size: calc(var(--base-font-size) * 1.75);
+		font-weight: 400;
+		text-align: center;
+		line-height: 1.3;
+	}
+
+	section {
+		font-variant-numeric: lining-nums;
+		font-family: var(--font-text);
+		font-size: var(--base-font-size);
+	}
+
+	section :global(p) {
+		padding-bottom: 25px;
+		line-height: 1.4;
+		text-align: var(--alignment);
+	}
+
+	section :global(p):last-child {
+		padding-bottom: 0px;
+	}
+
+	section :global(h2) {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		font-family: var(--font-article-title);
+		font-size: calc(var(--base-font-size) * 1.25);
+		font-weight: 400;
+		text-align: center;
+		font-style: italic;
+		line-height: 1.4;
+	}
+
+	section :global(a) {
+		position: relative;
+		display: inline-block;
+		font-weight: 500;
+		color: var(--color-highlight-intense);
+		text-decoration-style: underline;
+		text-decoration-color: transparent;
+
+		transition: text-decoration-color 200ms linear;
+	}
+
+	section :global(a):hover {
+		text-decoration-color: var(--color-highlight-intense);
+	}
+
+	section :global(a)::before {
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+		position: absolute;
+		inset: -3px -6px;
+		border-radius: 3px;
+		border: 1px solid var(--color-highlight-intense);
+		background: var(--color-highlight-focus);
+		transition: opacity linear 200ms;
+	}
+
+	section :global(a):focus-visible {
+		position: relative;
+		outline: none;
+		box-shadow: none;
+	}
+
+	section :global(a):focus-visible::before {
+		opacity: 1;
+	}
+
+	section :global(em) {
+		color: var(--color-foreground-emphasis);
+		font-style: italic;
+	}
+
+	section :global(strong) {
+		color: var(--color-foreground-emphasis);
+		font-weight: 600;
+	}
+
+	section :global(.subtle) {
+		color: var(--color-foreground-medium);
+	}
+
+	section :global(code) {
+		font-family: fira-mono, monospace;
+		font-weight: 400;
+		font-style: normal;
+	}
+</style>

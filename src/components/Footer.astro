@@ -1,0 +1,148 @@
+---
+const today = new Date()
+const isntLegalPage = Astro.url.pathname !== "/legal/"
+---
+
+<footer>
+	<div id="copyright">
+		<span>&copy; 2021 - {today.getFullYear()} Alexander Trefz</span>
+		<span>All rights reserved</span>
+	</div>
+	{
+		isntLegalPage ? (
+			<a id="legal" href="/legal/">
+				Legal
+			</a>
+		) : null
+	}
+</footer>
+
+<style lang="scss">
+	footer {
+		position: sticky;
+		
+		pointer-events: none;
+
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+
+		background-color: var(--color-background-offset-close);
+		display: grid;
+		grid-auto-flow: column;
+		justify-content: space-between;
+
+		-webkit-user-select: none;
+		user-select: none;
+
+		width: 100%;
+
+		padding-left: 25px;
+		padding-right: 25px;
+		padding-bottom: 20px;
+		padding-top: 20px;
+
+		transition: padding linear 200ms, background-color 200ms linear,
+			border-color 200ms linear;
+
+		@media screen and (max-width: 399px) {
+			padding-left: 15px;
+			padding-right: 15px;
+			padding-bottom: 10px;
+			padding-top: 10px;
+		}
+
+		@media screen and (min-width: 400px) and (max-width: 649px) {
+			padding-left: 20px;
+			padding-right: 20px;
+			padding-bottom: 15px;
+			padding-top: 15px;
+		}
+
+		@media screen and (max-width: 1049px) {
+			border-top: 1px solid var(--color-background-offset);
+		}
+
+		@media screen and (min-width: 1050px) {
+			background-color: transparent;
+			position: fixed;
+		}
+
+		#copyright {
+			font-variant-numeric: lining-nums;
+			font-family: var(--font-text);
+			font-size: 12px;
+			font-weight: 500;
+			color: var(--color-foreground-light);
+
+			transition: all linear 200ms;
+
+			@media (max-width: 1099px) {
+				span::after {
+					content: ".";
+				}
+			}
+
+			@media screen and (min-width: 1050px) {
+				display: grid;
+				gap: 6px;
+			}
+
+			@media (max-width: 350px) {
+				font-size: 11px;
+			}
+		}
+
+		#legal {
+			position: relative;
+			
+			pointer-events: all;
+
+			font-family: var(--font-navigation);
+			font-size: 12px;
+			font-weight: 500;
+
+			text-transform: uppercase;
+			text-decoration: none;
+
+			color: var(--color-foreground-light);
+
+			transition: all linear 200ms;
+
+			&:hover {
+				color: var(--color-foreground);
+			}
+
+			&::before {
+				content: "";
+				opacity: 0;
+
+				pointer-events: none;
+
+				position: absolute;
+
+				inset: -3px -6px;
+
+				border-radius: 3px;
+
+				border: 1px solid var(--color-highlight-intense);
+				background: var(--color-highlight-focus);
+				transition: opacity linear 200ms;
+			}
+
+			&:focus-visible {
+				color: var(--color-foreground);
+				outline: none;
+				box-shadow: none;
+
+				&::before {
+					opacity: 1;
+				}
+			}
+
+			@media screen and (min-width: 1050px) {
+				align-self: end;
+			}
+		}
+	}
+</style>

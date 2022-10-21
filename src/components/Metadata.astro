@@ -1,0 +1,50 @@
+---
+export interface Props {
+	readingTime: number
+	pubDate: string
+}
+
+const { readingTime, pubDate } = Astro.props
+
+const readingTimeDate = new Date(pubDate)
+---
+
+<div class="metadata">
+	<span class="readingTime">
+		<strong>{readingTime}</strong>
+		Minute Read
+	</span>
+	<time datetime={pubDate}>
+		{
+			new Intl.DateTimeFormat("en-GB", { month: "long" }).format(
+				readingTimeDate,
+			)
+		}
+		<strong
+			>{
+				new Intl.DateTimeFormat("en-GB", { year: "numeric" }).format(
+					readingTimeDate,
+				)
+			}</strong
+		>
+	</time>
+</div>
+
+<style lang="scss">
+	.metadata {
+		font-family: var(--font-article-metadata);
+		font-size: calc(var(--base-font-size) - 1px);
+		font-weight: 500;
+
+		font-feature-settings: "cpsp";
+		text-transform: uppercase;
+
+		display: inline-grid;
+		grid-auto-flow: column;
+		gap: 20px;
+
+		strong {
+			font-weight: 600;
+		}
+	}
+</style>

@@ -1,0 +1,167 @@
+---
+import BaseHead from "@components/BaseHead.astro"
+import Header from "@components/Header.astro"
+import Footer from "@components/Footer.astro"
+
+export interface Props {
+	title: string
+	description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+
+	<body>
+		<div id="page-container">
+			<div id="container">
+				<Header />
+
+				<main>
+					<slot />
+				</main>
+
+				<Footer />
+			</div>
+		</div>
+
+		<style is:inline is:global>
+			body:not(.loaded) * {
+				transition-duration: 0ms !important;
+			}
+		</style>
+
+		<style lang="scss">
+			#page-container {
+				display: grid;
+
+				justify-items: center;
+
+				background-color: var(--color-background-offset);
+
+				transition: background-color 200ms linear;
+			}
+
+			#container {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				min-height: 100svw;
+
+				margin-top: env(safe-area-inset-top, 0px);
+				margin-right: env(safe-area-inset-right, 0px);
+				margin-bottom: env(safe-area-inset-bottom, 0px);
+				margin-left: env(safe-area-inset-left, 0px);
+
+				background-color: var(--color-background-offset);
+
+				position: relative;
+
+				color: var(--color-foreground);
+				min-width: 320px;
+				width: 100%;
+
+				transition: background-color 200ms linear, box-shadow 200ms linear;
+			}
+
+			main {
+				flex-grow: 1;
+				display: grid;
+				grid-auto-rows: max-content;
+				background-color: var(--color-background);
+
+				transition: padding 100ms linear, background-color 200ms linear;
+			}
+
+			main :global(a) {
+				position: relative;
+				display: inline-block;
+				font-weight: 500;
+				color: var(--color-highlight-intense);
+				text-decoration-style: underline;
+				text-decoration-color: transparent;
+
+				transition: text-decoration-color 200ms linear;
+			}
+
+			main :global(a):hover {
+				text-decoration-color: var(--color-highlight-intense);
+			}
+
+			main :global(a)::before {
+				content: "";
+				opacity: 0;
+				pointer-events: none;
+				position: absolute;
+				inset: -3px -6px;
+				border-radius: 3px;
+				border: 1px solid var(--color-highlight-intense);
+				background: var(--color-highlight-focus);
+				transition: opacity linear 200ms;
+			}
+
+			main :global(a):focus-visible {
+				position: relative;
+				outline: none;
+				box-shadow: none;
+			}
+
+			main :global(a):focus-visible::before {
+				opacity: 1;
+			}
+
+			@media screen and (max-width: 399px) {
+				main {
+					padding: 20px;
+				}
+			}
+
+			@media screen and (min-width: 400px) and (max-width: 649px) {
+				main {
+					padding: 20px;
+				}
+			}
+
+			@media screen and (min-width: 650px) and (max-width: 849px) {
+				main {
+					padding-top: 30px;
+					padding-left: 30px;
+					padding-right: 30px;
+					padding-bottom: 30px;
+				}
+			}
+
+			@media screen and (min-width: 850px) {
+				main {
+					padding-top: 30px;
+					padding-left: 30px;
+					padding-right: 30px;
+					padding-bottom: 30px;
+				}
+			}
+
+			@media screen and (min-width: 1100px) {
+				main {
+					padding-top: 30px;
+					padding-left: 30px;
+					padding-right: 30px;
+					padding-bottom: 30px;
+				}
+			}
+		</style>
+
+		<script is:inline>
+			window.addEventListener("DOMContentLoaded", () => {
+				document.body.classList.add("loaded")
+			})
+
+			document.querySelector("#container").style.minHeight =
+				window.innerHeight + "px"
+		</script>
+	</body>
+</html>
