@@ -172,21 +172,21 @@
 			settingsContent.querySelector(".setting.alignment")!
 		const leftButton = alignmentSettings.querySelector("button.left")!
 		const justifyButton = alignmentSettings.querySelector("button.justify")!
-		const rightbutton = alignmentSettings.querySelector("button.right")!
+		const rightButton = alignmentSettings.querySelector("button.right")!
 
 		alignment.subscribe(($alignment) => {
 			if ($alignment === "left") {
 				leftButton.classList.add("active")
 				justifyButton.classList.remove("active")
-				rightbutton.classList.remove("active")
+				rightButton.classList.remove("active")
 			} else if ($alignment === "justify") {
 				leftButton.classList.remove("active")
 				justifyButton.classList.add("active")
-				rightbutton.classList.remove("active")
+				rightButton.classList.remove("active")
 			} else {
 				leftButton.classList.remove("active")
 				justifyButton.classList.remove("active")
-				rightbutton.classList.add("active")
+				rightButton.classList.add("active")
 			}
 		})
 
@@ -198,7 +198,7 @@
 			alignment.set("justify")
 		})
 
-		rightbutton.addEventListener("click", () => {
+		rightButton.addEventListener("click", () => {
 			alignment.set("right")
 		})
 	}
