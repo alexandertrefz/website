@@ -11,17 +11,17 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/mdx": "0.15.0",
-    "@astrojs/netlify": "2.0.0",
-    "@astrojs/rss": "2.1.0",
-    "@astrojs/sitemap": "1.0.0",
-    "astro": "2.0.0",
-    "astrojs-service-worker": "0.0.8",
-    "rollup": "3.10.1",
-    "sass": "1.57.1"
+    "@astrojs/mdx": "0.19.7",
+    "@astrojs/netlify": "2.5.2",
+    "@astrojs/rss": "2.4.3",
+    "@astrojs/sitemap": "2.0.1",
+    "astro": "2.10.1",
+    "astrojs-service-worker": "1.0.0",
+    "rollup": "3.27.2",
+    "sass": "1.64.2"
   },
   "dependencies": {
-    "@nanostores/persistent": "0.7.0",
-    "nanostores": "0.7.1"
+    "@nanostores/persistent": "0.9.1",
+    "nanostores": "0.9.3"
   }
 }
