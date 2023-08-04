@@ -50,8 +50,7 @@ const { title, description } = Astro.props
 			#container {
 				display: flex;
 				flex-direction: column;
-				min-height: 100vh;
-				min-height: 100svw;
+				min-height: 100dvh;
 
 				margin-top: env(safe-area-inset-top, 0px);
 				margin-right: env(safe-area-inset-right, 0px);
@@ -159,9 +158,6 @@ const { title, description } = Astro.props
 			window.addEventListener("DOMContentLoaded", () => {
 				document.body.classList.add("loaded")
 			})
-
-			document.querySelector("#container").style.minHeight =
-				window.innerHeight + "px"
 		</script>
 	</body>
 </html>
