@@ -33,7 +33,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}"))
 						<li>
 							<a href={`/blog/${post.slug}/`}>
 								<article>
-									<h2>{post.title}</h2>
+									<h2 transition:name="article-name">{post.title}</h2>
 									<Metadata
 										pubDate={post.pubDate}
 										readingTime={post.readingTime}

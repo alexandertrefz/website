@@ -154,8 +154,8 @@ const { title, description } = Astro.props
 			}
 		</style>
 
-		<script is:inline>
-			window.addEventListener("DOMContentLoaded", () => {
+		<script>
+			document.addEventListener("astro:load", () => {
 				document.body.classList.add("loaded")
 			})
 		</script>

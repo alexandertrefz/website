@@ -9,7 +9,7 @@ const { readingTime, pubDate } = Astro.props
 const readingTimeDate = new Date(pubDate)
 ---
 
-<div class="metadata">
+<div class="metadata" transition:name="metadata">
 	<span class="readingTime">
 		<strong>{readingTime}</strong>
 		Minute Read

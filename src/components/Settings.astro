@@ -5,29 +5,19 @@
 	type Theme = "dark" | "light"
 	type ThemeOptions = Theme | "automatic"
 
+	type AlignmentOptions = "left" | "justify" | "right"
+
+	export const alignment = persistentAtom<AlignmentOptions>(
+		"alignment",
+		"justify",
+	)
+
 	export const selectedTheme = persistentAtom<ThemeOptions>(
 		"selectedTheme",
 		"automatic",
 	)
 
 	export const detectedTheme = atom<Theme | undefined>(undefined)
-
-	// Update Detected Theme
-	{
-		const query = window.matchMedia("(prefers-color-scheme: light)")
-
-		const update = () => {
-			if (query.matches) {
-				detectedTheme.set("light")
-			} else {
-				detectedTheme.set("dark")
-			}
-		}
-
-		update()
-
-		query.addEventListener("change", update)
-	}
 
 	export const resolvedTheme = computed(
 		[selectedTheme, detectedTheme],
@@ -44,216 +34,228 @@
 		},
 	)
 
-	type AlignmentOptions = "left" | "justify" | "right"
-
-	export const alignment = persistentAtom<AlignmentOptions>(
-		"alignment",
-		"justify",
-	)
-
-	alignment.subscribe(($selectedAlignment) => {
-		document.documentElement.style.setProperty(
-			"--alignment",
-			$selectedAlignment,
-		)
-	})
-
 	export const fontSize = persistentAtom<string>("fontSize", "16px")
 
-	fontSize.subscribe(($selectedFontSize) => {
-		document.documentElement.style.setProperty(
-			"--base-font-size",
-			$selectedFontSize,
-		)
-	})
+	document.addEventListener("astro:load", () => {
+		// Update Detected Theme
+		{
+			const query = window.matchMedia("(prefers-color-scheme: light)")
 
-	document.documentElement.addEventListener("click", (_event) => {
-		settingsOpen.set(false)
-	})
+			const update = () => {
+				if (query.matches) {
+					detectedTheme.set("light")
+				} else {
+					detectedTheme.set("dark")
+				}
+			}
 
-	const settingsOpen = atom(false)
+			update()
 
-	const settingsContainer = document.querySelector("#settingsContainer")!
-	const settingsTrigger = settingsContainer.querySelector(
-		".trigger",
-	) as HTMLButtonElement
-	const settingsFlyout = settingsContainer.querySelector(
-		".settings",
-	) as HTMLButtonElement
-	const closeButton = settingsContainer.querySelector(
-		".header .close",
-	) as HTMLButtonElement
-	const settingsContent = settingsContainer.querySelector(".content")!
-
-	settingsOpen.subscribe(($settingsOpen) => {
-		if ($settingsOpen) {
-			settingsFlyout.removeAttribute("hidden")
-			requestAnimationFrame(() => {
-				settingsContainer.classList.add("open")
-				settingsFlyout.classList.add("open")
-			})
-		} else {
-			settingsContainer.classList.remove("open")
-			settingsFlyout.classList.remove("open")
-			setTimeout(() => {
-				settingsFlyout.setAttribute("hidden", "")
-			}, 200)
+			query.addEventListener("change", update)
 		}
-	})
 
-	settingsContainer.addEventListener("click", (event) => {
-		event.stopPropagation()
-	})
-
-	settingsContainer.addEventListener("focusout", (event) => {
-		let relatedTarget = (event as FocusEvent).relatedTarget
-
-		if (relatedTarget) {
-			if (
-				!settingsContainer.contains(relatedTarget as Node) ||
-				relatedTarget === settingsTrigger
-			) {
-				settingsOpen.set(false)
-			}
-		}
-	})
-
-	settingsTrigger.addEventListener("click", () => {
-		settingsOpen.set(true)
-		closeButton.focus()
-	})
-
-	closeButton.addEventListener("click", () => {
-		settingsOpen.set(false)
-		settingsTrigger.focus()
-	})
-
-	// Font Size
-	{
-		const fontSettings = settingsContent.querySelector(".setting.fontSize")!
-		const reduceButton = fontSettings.querySelector(
-			"button.reduce",
-		) as HTMLButtonElement
-		const label = fontSettings.querySelector(".label")!
-		const increaseButton = fontSettings.querySelector(
-			"button.increase",
-		) as HTMLButtonElement
-
-		fontSize.subscribe(($fontSize) => {
-			const $fontSizeInteger = parseInt($fontSize)
-
-			label.innerHTML = $fontSize
-
-			if ($fontSizeInteger <= 14) {
-				reduceButton.disabled = true
-			} else {
-				reduceButton.disabled = false
-			}
-
-			if ($fontSizeInteger >= 20) {
-				increaseButton.disabled = true
-			} else {
-				increaseButton.disabled = false
-			}
-		})
-
-		reduceButton.addEventListener("click", () => {
-			fontSize.set(`${parseInt(fontSize.get()) - 1}px`)
-		})
-
-		increaseButton.addEventListener("click", () => {
-			fontSize.set(`${parseInt(fontSize.get()) + 1}px`)
-		})
-	}
-
-	// Alignment
-	{
-		const alignmentSettings =
-			settingsContent.querySelector(".setting.alignment")!
-		const leftButton = alignmentSettings.querySelector("button.left")!
-		const justifyButton = alignmentSettings.querySelector("button.justify")!
-		const rightButton = alignmentSettings.querySelector("button.right")!
-
-		alignment.subscribe(($alignment) => {
-			if ($alignment === "left") {
-				leftButton.classList.add("active")
-				justifyButton.classList.remove("active")
-				rightButton.classList.remove("active")
-			} else if ($alignment === "justify") {
-				leftButton.classList.remove("active")
-				justifyButton.classList.add("active")
-				rightButton.classList.remove("active")
-			} else {
-				leftButton.classList.remove("active")
-				justifyButton.classList.remove("active")
-				rightButton.classList.add("active")
-			}
-		})
-
-		leftButton.addEventListener("click", () => {
-			alignment.set("left")
-		})
-
-		justifyButton.addEventListener("click", () => {
-			alignment.set("justify")
-		})
-
-		rightButton.addEventListener("click", () => {
-			alignment.set("right")
-		})
-	}
-
-	// Theme
-	{
-		const themeSettings = settingsContent.querySelector(".setting.theme")!
-		const lightButton = themeSettings.querySelector("button.light")!
-		const automaticButton = themeSettings.querySelector("button.automatic")!
-		const darkButton = themeSettings.querySelector("button.dark")!
-
-		selectedTheme.subscribe(($theme) => {
-			if ($theme === "light") {
-				lightButton.classList.add("active")
-				automaticButton.classList.remove("active")
-				darkButton.classList.remove("active")
-			} else if ($theme === "automatic") {
-				lightButton.classList.remove("active")
-				automaticButton.classList.add("active")
-				darkButton.classList.remove("active")
-			} else {
-				lightButton.classList.remove("active")
-				automaticButton.classList.remove("active")
-				darkButton.classList.add("active")
-			}
-		})
-
-		lightButton.addEventListener("click", () => {
-			selectedTheme.set("light")
-		})
-
-		automaticButton.addEventListener("click", () => {
-			selectedTheme.set("automatic")
-		})
-
-		darkButton.addEventListener("click", () => {
-			selectedTheme.set("dark")
-		})
-	}
-
-	resolvedTheme.subscribe(($resolvedTheme) => {
-		const pageContainer = document.documentElement
-
-		pageContainer.classList.remove("light-theme")
-		pageContainer.classList.remove("dark-theme")
-		pageContainer.classList.add(`${$resolvedTheme}-theme`)
-
-		document
-			.querySelector("meta[name=theme-color]")!
-			.setAttribute(
-				"content",
-				getComputedStyle(pageContainer)
-					.getPropertyValue("--color-background-offset-close")
-					.trim(),
+		alignment.subscribe(($selectedAlignment) => {
+			document.documentElement.style.setProperty(
+				"--alignment",
+				$selectedAlignment,
 			)
+		})
+
+		fontSize.subscribe(($selectedFontSize) => {
+			document.documentElement.style.setProperty(
+				"--base-font-size",
+				$selectedFontSize,
+			)
+		})
+
+		document.documentElement.addEventListener("click", (_event) => {
+			settingsOpen.set(false)
+		})
+
+		const settingsOpen = atom(false)
+
+		const settingsContainer = document.querySelector("#settingsContainer")!
+		const settingsTrigger = settingsContainer.querySelector(
+			".trigger",
+		) as HTMLButtonElement
+		const settingsFlyout = settingsContainer.querySelector(
+			".settings",
+		) as HTMLButtonElement
+		const closeButton = settingsContainer.querySelector(
+			".header .close",
+		) as HTMLButtonElement
+		const settingsContent = settingsContainer.querySelector(".content")!
+
+		settingsOpen.subscribe(($settingsOpen) => {
+			if ($settingsOpen) {
+				settingsFlyout.removeAttribute("hidden")
+				requestAnimationFrame(() => {
+					settingsContainer.classList.add("open")
+					settingsFlyout.classList.add("open")
+				})
+			} else {
+				settingsContainer.classList.remove("open")
+				settingsFlyout.classList.remove("open")
+				setTimeout(() => {
+					settingsFlyout.setAttribute("hidden", "")
+				}, 200)
+			}
+		})
+
+		settingsContainer.addEventListener("click", (event) => {
+			event.stopPropagation()
+		})
+
+		settingsContainer.addEventListener("focusout", (event) => {
+			let relatedTarget = (event as FocusEvent).relatedTarget
+
+			if (relatedTarget) {
+				if (
+					!settingsContainer.contains(relatedTarget as Node) ||
+					relatedTarget === settingsTrigger
+				) {
+					settingsOpen.set(false)
+				}
+			}
+		})
+
+		settingsTrigger.addEventListener("click", () => {
+			settingsOpen.set(true)
+			closeButton.focus()
+		})
+
+		closeButton.addEventListener("click", () => {
+			settingsOpen.set(false)
+			settingsTrigger.focus()
+		})
+
+		// Font Size
+		{
+			const fontSettings = settingsContent.querySelector(".setting.fontSize")!
+			const reduceButton = fontSettings.querySelector(
+				"button.reduce",
+			) as HTMLButtonElement
+			const label = fontSettings.querySelector(".label")!
+			const increaseButton = fontSettings.querySelector(
+				"button.increase",
+			) as HTMLButtonElement
+
+			fontSize.subscribe(($fontSize) => {
+				const $fontSizeInteger = parseInt($fontSize)
+
+				label.innerHTML = $fontSize
+
+				if ($fontSizeInteger <= 14) {
+					reduceButton.disabled = true
+				} else {
+					reduceButton.disabled = false
+				}
+
+				if ($fontSizeInteger >= 20) {
+					increaseButton.disabled = true
+				} else {
+					increaseButton.disabled = false
+				}
+			})
+
+			reduceButton.addEventListener("click", () => {
+				fontSize.set(`${parseInt(fontSize.get()) - 1}px`)
+			})
+
+			increaseButton.addEventListener("click", () => {
+				fontSize.set(`${parseInt(fontSize.get()) + 1}px`)
+			})
+		}
+
+		// Alignment
+		{
+			const alignmentSettings =
+				settingsContent.querySelector(".setting.alignment")!
+			const leftButton = alignmentSettings.querySelector("button.left")!
+			const justifyButton = alignmentSettings.querySelector("button.justify")!
+			const rightButton = alignmentSettings.querySelector("button.right")!
+
+			alignment.subscribe(($alignment) => {
+				if ($alignment === "left") {
+					leftButton.classList.add("active")
+					justifyButton.classList.remove("active")
+					rightButton.classList.remove("active")
+				} else if ($alignment === "justify") {
+					leftButton.classList.remove("active")
+					justifyButton.classList.add("active")
+					rightButton.classList.remove("active")
+				} else {
+					leftButton.classList.remove("active")
+					justifyButton.classList.remove("active")
+					rightButton.classList.add("active")
+				}
+			})
+
+			leftButton.addEventListener("click", () => {
+				alignment.set("left")
+			})
+
+			justifyButton.addEventListener("click", () => {
+				alignment.set("justify")
+			})
+
+			rightButton.addEventListener("click", () => {
+				alignment.set("right")
+			})
+		}
+
+		// Theme
+		{
+			const themeSettings = settingsContent.querySelector(".setting.theme")!
+			const lightButton = themeSettings.querySelector("button.light")!
+			const automaticButton = themeSettings.querySelector("button.automatic")!
+			const darkButton = themeSettings.querySelector("button.dark")!
+
+			selectedTheme.subscribe(($theme) => {
+				if ($theme === "light") {
+					lightButton.classList.add("active")
+					automaticButton.classList.remove("active")
+					darkButton.classList.remove("active")
+				} else if ($theme === "automatic") {
+					lightButton.classList.remove("active")
+					automaticButton.classList.add("active")
+					darkButton.classList.remove("active")
+				} else {
+					lightButton.classList.remove("active")
+					automaticButton.classList.remove("active")
+					darkButton.classList.add("active")
+				}
+			})
+
+			lightButton.addEventListener("click", () => {
+				selectedTheme.set("light")
+			})
+
+			automaticButton.addEventListener("click", () => {
+				selectedTheme.set("automatic")
+			})
+
+			darkButton.addEventListener("click", () => {
+				selectedTheme.set("dark")
+			})
+		}
+
+		resolvedTheme.subscribe(($resolvedTheme) => {
+			const pageContainer = document.documentElement
+
+			pageContainer.classList.remove("light-theme")
+			pageContainer.classList.remove("dark-theme")
+			pageContainer.classList.add(`${$resolvedTheme}-theme`)
+
+			document
+				.querySelector("meta[name=theme-color]")!
+				.setAttribute(
+					"content",
+					getComputedStyle(pageContainer)
+						.getPropertyValue("--color-background-offset-close")
+						.trim(),
+				)
+		})
 	})
 </script>
 
