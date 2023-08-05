@@ -28,6 +28,37 @@ const {
 			<slot />
 		</section>
 	</article>
+
+	<script>
+		document.addEventListener("astro:load", () => {
+			let observer = new IntersectionObserver(
+				(entries, observer) => {
+					for (let entry of entries) {
+						if (entry.isIntersecting) {
+							if (entry.target.dataset.oldAstroTransitionScope) {
+								entry.target.dataset.astroTransitionScope =
+									entry.target.dataset.oldAstroTransitionScope
+							}
+						} else {
+							entry.target.dataset.oldAstroTransitionScope =
+								entry.target.dataset.astroTransitionScope
+							delete entry.target.dataset.astroTransitionScope
+						}
+					}
+				},
+				{
+					root: document.querySelector("main"),
+					threshold: 1.0,
+				},
+			)
+
+			for (let element of Array.from(
+				document.querySelectorAll("[data-astro-transition-scope]"),
+			)) {
+				observer.observe(element)
+			}
+		})
+	</script>
 </BaseLayout>
 
 <style lang="scss">
