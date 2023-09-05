@@ -20,13 +20,14 @@ const readingTimeDate = new Date(pubDate)
 				readingTimeDate,
 			)
 		}
-		<strong
-			>{
+
+		<strong>
+			{
 				new Intl.DateTimeFormat("en-GB", { year: "numeric" }).format(
 					readingTimeDate,
 				)
-			}</strong
-		>
+			}
+		</strong>
 	</time>
 </div>
 
@@ -45,6 +46,20 @@ const readingTimeDate = new Date(pubDate)
 
 		strong {
 			font-weight: 600;
+		}
+
+		.readingTime {
+			strong::after {
+				content: " "
+			}
+
+		}
+
+		time {
+			strong::before {
+				content: " "
+			}
+
 		}
 	}
 </style>
