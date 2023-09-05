@@ -34,15 +34,17 @@ const {
 			let observer = new IntersectionObserver(
 				(entries, observer) => {
 					for (let entry of entries) {
+						let targetDataset = entry.target.dataset
+
 						if (entry.isIntersecting) {
-							if (entry.target.dataset.oldAstroTransitionScope) {
-								entry.target.dataset.astroTransitionScope =
-									entry.target.dataset.oldAstroTransitionScope
+							if (targetDataset.oldAstroTransitionScope) {
+								targetDataset.astroTransitionScope =
+									targetDataset.oldAstroTransitionScope
 							}
 						} else {
-							entry.target.dataset.oldAstroTransitionScope =
-								entry.target.dataset.astroTransitionScope
-							delete entry.target.dataset.astroTransitionScope
+							targetDataset.oldAstroTransitionScope =
+								targetDataset.astroTransitionScope
+							delete targetDataset.astroTransitionScope
 						}
 					}
 				},
