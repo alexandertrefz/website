@@ -30,7 +30,7 @@ const {
 	</article>
 
 	<script>
-		document.addEventListener("astro:load", () => {
+		document.addEventListener("astro:page-load", () => {
 			let observer = new IntersectionObserver(
 				(entries, observer) => {
 					for (let entry of entries) {

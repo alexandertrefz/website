@@ -36,7 +36,34 @@
 
 	export const fontSize = persistentAtom<string>("fontSize", "16px")
 
-	document.addEventListener("astro:load", () => {
+	const setAlignmentGlobally = (alignment: string) => {
+		document.documentElement.style.setProperty("--alignment", alignment)
+	}
+
+	const setFontSizeGlobally = (fontSize: string) => {
+		document.documentElement.style.setProperty("--base-font-size", fontSize)
+	}
+
+	// Ensure everything is set correctly early, so that view transitions don't flicker
+	document.addEventListener("astro:after-swap", () => {
+		setAlignmentGlobally(alignment.get())
+		setFontSizeGlobally(fontSize.get())
+
+		const pageContainer = document.documentElement
+
+		pageContainer.classList.add(`${resolvedTheme.get()}-theme`)
+
+		document
+			.querySelector("meta[name=theme-color]")!
+			.setAttribute(
+				"content",
+				getComputedStyle(pageContainer)
+					.getPropertyValue("--color-background-offset-close")
+					.trim(),
+			)
+	})
+
+	document.addEventListener("astro:page-load", () => {
 		// Update Detected Theme
 		{
 			const query = window.matchMedia("(prefers-color-scheme: light)")
@@ -54,25 +81,15 @@
 			query.addEventListener("change", update)
 		}
 
-		alignment.subscribe(($selectedAlignment) => {
-			document.documentElement.style.setProperty(
-				"--alignment",
-				$selectedAlignment,
-			)
-		})
+		alignment.subscribe(setAlignmentGlobally)
 
-		fontSize.subscribe(($selectedFontSize) => {
-			document.documentElement.style.setProperty(
-				"--base-font-size",
-				$selectedFontSize,
-			)
-		})
+		fontSize.subscribe(setFontSizeGlobally)
+
+		const settingsFlyoutState = atom<"open" | "closed">("closed")
 
 		document.documentElement.addEventListener("click", (_event) => {
-			settingsOpen.set(false)
+			settingsFlyoutState.set("closed")
 		})
-
-		const settingsOpen = atom(false)
 
 		const settingsContainer = document.querySelector("#settingsContainer")!
 		const settingsTrigger = settingsContainer.querySelector(
@@ -86,8 +103,8 @@
 		) as HTMLButtonElement
 		const settingsContent = settingsContainer.querySelector(".content")!
 
-		settingsOpen.subscribe(($settingsOpen) => {
-			if ($settingsOpen) {
+		settingsFlyoutState.subscribe(($settingsFlyoutState) => {
+			if ($settingsFlyoutState === "open") {
 				settingsFlyout.removeAttribute("hidden")
 				requestAnimationFrame(() => {
 					settingsContainer.classList.add("open")
@@ -114,18 +131,18 @@
 					!settingsContainer.contains(relatedTarget as Node) ||
 					relatedTarget === settingsTrigger
 				) {
-					settingsOpen.set(false)
+					settingsFlyoutState.set("closed")
 				}
 			}
 		})
 
 		settingsTrigger.addEventListener("click", () => {
-			settingsOpen.set(true)
+			settingsFlyoutState.set("open")
 			closeButton.focus()
 		})
 
 		closeButton.addEventListener("click", () => {
-			settingsOpen.set(false)
+			settingsFlyoutState.set("closed")
 			settingsTrigger.focus()
 		})
 
@@ -291,7 +308,9 @@
 			background-color: var(--color-background);
 			border: 2px solid var(--color-background-offset-furthest);
 
-			transition: opacity linear 200ms, background-color linear 200ms,
+			transition:
+				opacity linear 200ms,
+				background-color linear 200ms,
 				border-color linear 200ms;
 
 			.header {
@@ -480,7 +499,9 @@
 
 			line-height: 16px;
 
-			transition: background-color linear 200ms, border-color linear 200ms;
+			transition:
+				background-color linear 200ms,
+				border-color linear 200ms;
 			background-color: var(--color-background-offset);
 			border: 1px solid transparent;
 		}
