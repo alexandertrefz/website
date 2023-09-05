@@ -1,27 +1,27 @@
 {
-  "name": "@alexandertrefz/website",
-  "type": "module",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "devDependencies": {
-    "@astrojs/mdx": "0.19.7",
-    "@astrojs/netlify": "2.5.2",
-    "@astrojs/rss": "2.4.3",
-    "@astrojs/sitemap": "2.0.1",
-    "astro": "2.10.1",
-    "astrojs-service-worker": "1.0.0",
-    "rollup": "3.27.2",
-    "sass": "1.64.2"
-  },
-  "dependencies": {
-    "@nanostores/persistent": "0.9.1",
-    "nanostores": "0.9.3"
-  }
+	"name": "@alexandertrefz/website",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"devDependencies": {
+		"@astrojs/mdx": "0.19.7",
+		"@astrojs/netlify": "2.5.2",
+		"@astrojs/rss": "2.4.3",
+		"@astrojs/sitemap": "2.0.1",
+		"astro": "2.10.1",
+		"astrojs-service-worker": "1.0.0",
+		"rollup": "3.27.2",
+		"sass": "1.64.2"
+	},
+	"dependencies": {
+		"@nanostores/persistent": "0.9.1",
+		"nanostores": "0.9.3"
+	}
 }

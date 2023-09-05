@@ -11,7 +11,7 @@ export interface Props {
 const { title, description } = Astro.props
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
@@ -70,7 +70,9 @@ const { title, description } = Astro.props
 				min-width: 320px;
 				width: 100%;
 
-				transition: background-color 200ms linear, box-shadow 200ms linear;
+				transition:
+					background-color 200ms linear,
+					box-shadow 200ms linear;
 
 				:global(header) {
 					grid-area: header;
@@ -91,7 +93,9 @@ const { title, description } = Astro.props
 				.content {
 					display: grid;
 					grid-auto-rows: max-content;
-					transition: padding 100ms linear, background-color 200ms linear;
+					transition:
+						padding 100ms linear,
+						background-color 200ms linear;
 				}
 			}
 
