@@ -13,15 +13,15 @@ export interface Props {
 }
 
 const {
-	content: { title, description, readingTime, pubDate },
+	content: { title, description, readingTime, pubDate, slug },
 } = Astro.props
 ---
 
 <BaseLayout title={title} description={description}>
 	<article>
 		<div class="title">
-			<h1 transition:name="article-name">{title}</h1>
-			<Metadata readingTime={readingTime} pubDate={pubDate} />
+			<h1 transition:name={`title-${slug}`}>{title}</h1>
+			<Metadata readingTime={readingTime} pubDate={pubDate} slug={slug} />
 		</div>
 
 		<section>

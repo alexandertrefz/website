@@ -2,14 +2,15 @@
 export interface Props {
 	readingTime: number
 	pubDate: string
+	slug: string
 }
 
-const { readingTime, pubDate } = Astro.props
+const { readingTime, pubDate, slug } = Astro.props
 
 const readingTimeDate = new Date(pubDate)
 ---
 
-<div class="metadata" transition:name="metadata">
+<div class="metadata" transition:name={`metadata-${slug}`}>
 	<span class="readingTime">
 		<strong>{readingTime}</strong>
 		Minute Read
