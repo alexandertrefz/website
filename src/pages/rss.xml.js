@@ -1,6 +1,6 @@
 import rss, { pagesGlobToRssItems } from "@astrojs/rss"
 
-export async function get(context) {
+export async function GET(context) {
 	return rss({
 		title: "Alexander Trefz",
 		description: "A blog full of opinions on all things software.",
