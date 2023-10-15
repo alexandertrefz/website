@@ -187,21 +187,29 @@ const { title, description } = Astro.props
 		transition: background-color linear 200ms;
 	}
 
+	html:after {
+		content: "";
+
+		position: fixed;
+
+		z-index: -1;
+
+		bottom: -25vh;
+		left: 0;
+		right: 0;
+
+		height: 50vh;
+	}
+
 	/* Ensure overscroll looks neat */
+	@media screen and (max-width: 1049px) {
+		html:after {
+			background: var(--color-background-offset-close);
+		}
+	}
+
 	@media screen and (min-width: 1050px) {
 		html:after {
-			content: "";
-
-			position: fixed;
-
-			z-index: -1;
-
-			bottom: 0;
-			left: 0;
-			right: 0;
-
-			height: 50vh;
-
 			background: var(--color-background);
 		}
 	}

@@ -44,6 +44,17 @@ const isntLegalPage = Astro.url.pathname !== "/legal/"
 		transition: padding linear 200ms, background-color 200ms linear,
 			border-color 200ms linear;
 
+		&::after {
+			content: "";
+			position: fixed;
+			bottom: -50px;
+			left: 0px;
+			right: 0px;
+			height: 50px;
+
+			background-color: inherit;
+		}
+
 		@media screen and (max-width: 399px) {
 			padding-left: 15px;
 			padding-right: 15px;
@@ -76,8 +87,14 @@ const isntLegalPage = Astro.url.pathname !== "/legal/"
 
 			transition: all linear 200ms;
 
-			@media (max-width: 1099px) {
+			@media (max-width: 1049px) {
 				span::after {
+					content: ". ";
+				}
+			}
+
+			@media (min-width: 1050px) {
+				span:last-child::after {
 					content: ".";
 				}
 			}
