@@ -11,21 +11,19 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/mdx": "1.1.0",
-    "@astrojs/netlify": "3.0.2",
+    "@astrojs/mdx": "1.1.5",
+    "@astrojs/netlify": "3.0.4",
     "@astrojs/rss": "3.0.0",
-    "@astrojs/sitemap": "3.0.0",
-    "@types/dom-view-transitions": "1.0.2",
-    "astro": "3.2.0",
+    "@astrojs/sitemap": "3.0.3",
+    "@types/dom-view-transitions": "1.0.4",
+    "astro": "3.6.0",
     "astrojs-service-worker": "1.1.0",
     "autoprefixer": "10.4.16",
-    "cssnano": "6.0.1",
-    "rollup": "3.29.4",
-    "sass": "1.68.0"
+    "bun-types": "1.0.14",
+    "cssnano": "6.0.1"
   },
   "dependencies": {
     "@nanostores/persistent": "0.9.1",
-    "nanostores": "0.9.3"
-  },
-  "packageManager": "yarn@3.6.3+sha256.08ead1821a257416e6f217e89365425bf4b6d2430c3279318bedcec1a245fff5"
+    "nanostores": "0.9.5"
+  }
 }

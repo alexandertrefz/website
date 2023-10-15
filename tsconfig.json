@@ -14,8 +14,9 @@
 			]
 		},
 		"types": [
+			"@types/dom-view-transitions",
 			"astro/client",
-			"@types/dom-view-transitions"
+			"bun-types"
 		]
 	}
 }
