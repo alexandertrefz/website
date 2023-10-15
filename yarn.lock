@@ -14,6 +14,7 @@ __metadata:
     "@astrojs/rss": 3.0.0
     "@astrojs/sitemap": 3.0.0
     "@nanostores/persistent": 0.9.1
+    "@types/dom-view-transitions": 1.0.2
     astro: 3.2.0
     astrojs-service-worker: 1.1.0
     autoprefixer: 10.4.16
@@ -2118,6 +2119,13 @@ __metadata:
   dependencies:
     "@types/ms": "*"
   checksum: e88ee8b19d106f33eb0d3bc58bacff9702e98d821fd1ebd1de8942e6b97419e19a1ccf39370f1764a1dc66f79fd4619f3412e1be6eeb9f0b76412f5ffe4ead93
+  languageName: node
+  linkType: hard
+
+"@types/dom-view-transitions@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@types/dom-view-transitions@npm:1.0.2"
+  checksum: 6dda4d4c7434032ab1deb6d25d8af8f95afa4ea03c16f1c3d26c2cfcc5bb10774323b13ce4f19ba968493acc957a513e71ba0ebe62f89d1bfc8b0272f2d4dc6a
   languageName: node
   linkType: hard
 

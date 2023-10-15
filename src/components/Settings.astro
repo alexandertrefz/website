@@ -44,23 +44,48 @@
 		document.documentElement.style.setProperty("--base-font-size", fontSize)
 	}
 
+	const updateDomForResolvedTheme = ($resolvedTheme: string) => {
+		const pageContainer = document.documentElement
+
+		pageContainer.classList.add("theme-change")
+
+		requestAnimationFrame(() => {
+			pageContainer.classList.remove("no-theme")
+			pageContainer.classList.remove("light-theme")
+			pageContainer.classList.remove("dark-theme")
+			pageContainer.classList.add(`${$resolvedTheme}-theme`)
+
+			// Set theme-color for Safari UI matching
+			requestAnimationFrame(() => {
+				document
+					.querySelector("meta[name=theme-color]")!
+					.setAttribute(
+						"content",
+						getComputedStyle(pageContainer)
+							.getPropertyValue("--color-background-offset-close")
+							.trim(),
+					)
+			})
+
+			pageContainer.addEventListener(
+				"transitionend",
+				() => {
+					pageContainer.classList.remove("theme-change")
+				},
+				true,
+			)
+		})
+	}
+
+	setAlignmentGlobally(alignment.get())
+	setFontSizeGlobally(fontSize.get())
+	updateDomForResolvedTheme(resolvedTheme.get())
+
 	// Ensure everything is set correctly early, so that view transitions don't flicker
 	document.addEventListener("astro:after-swap", () => {
 		setAlignmentGlobally(alignment.get())
 		setFontSizeGlobally(fontSize.get())
-
-		const pageContainer = document.documentElement
-
-		pageContainer.classList.add(`${resolvedTheme.get()}-theme`)
-
-		document
-			.querySelector("meta[name=theme-color]")!
-			.setAttribute(
-				"content",
-				getComputedStyle(pageContainer)
-					.getPropertyValue("--color-background-offset-close")
-					.trim(),
-			)
+		updateDomForResolvedTheme(resolvedTheme.get())
 	})
 
 	document.addEventListener("astro:page-load", () => {
@@ -258,20 +283,13 @@
 		}
 
 		resolvedTheme.subscribe(($resolvedTheme) => {
-			const pageContainer = document.documentElement
-
-			pageContainer.classList.remove("light-theme")
-			pageContainer.classList.remove("dark-theme")
-			pageContainer.classList.add(`${$resolvedTheme}-theme`)
-
-			document
-				.querySelector("meta[name=theme-color]")!
-				.setAttribute(
-					"content",
-					getComputedStyle(pageContainer)
-						.getPropertyValue("--color-background-offset-close")
-						.trim(),
-				)
+			if (document.startViewTransition) {
+				document.startViewTransition(() => {
+					updateDomForResolvedTheme($resolvedTheme)
+				})
+			} else {
+				updateDomForResolvedTheme($resolvedTheme)
+			}
 		})
 	})
 </script>

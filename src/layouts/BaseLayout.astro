@@ -12,7 +12,7 @@ const { title, description } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-theme">
 	<head>
 		<BaseHead title={title} description={description} />
 	</head>
@@ -30,12 +30,6 @@ const { title, description } = Astro.props
 				</main>
 			</div>
 		</div>
-
-		<style is:inline is:global>
-			body:not(.loaded) * {
-				transition-duration: 0ms !important;
-			}
-		</style>
 
 		<style lang="scss">
 			#page-container {
@@ -176,9 +170,34 @@ const { title, description } = Astro.props
 			}
 		</style>
 
+		<style is:inline is:global>
+			html.no-theme {
+				opacity: 0;
+			}
+
+			body:not(.loaded) * {
+				transition-property: all !important;
+				transition-duration: 0ms !important;
+				transition-timing-function: linear !important;
+				transition-delay: 0s !important;
+			}
+
+			.theme-change * {
+				transition-duration: 0ms !important;
+				transition-timing-function: linear !important;
+				transition-delay: 0ms !important;
+			}
+
+			.theme-change::view-transition-new(:root) {
+				transition-duration: 350ms;
+			}
+		</style>
+
 		<script>
-			document.addEventListener("astro:page-load", () => {
-				document.body.classList.add("loaded")
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					document.body.classList.add("loaded")
+				})
 			})
 		</script>
 	</body>
