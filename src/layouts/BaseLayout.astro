@@ -175,20 +175,18 @@ const { title, description } = Astro.props
 				opacity: 0;
 			}
 
-			body:not(.loaded) * {
-				transition-property: all !important;
+			html:not(.loaded) * {
+				animation-duration: 0ms !important;
 				transition-duration: 0ms !important;
-				transition-timing-function: linear !important;
-				transition-delay: 0s !important;
 			}
 
 			.theme-change * {
+				animation-duration: 0ms !important;
 				transition-duration: 0ms !important;
-				transition-timing-function: linear !important;
-				transition-delay: 0ms !important;
 			}
 
-			.theme-change::view-transition-new(:root) {
+			.theme-change::view-transition-new(root),
+			.theme-change::view-transition-old(root) {
 				transition-duration: 350ms;
 			}
 		</style>
@@ -196,7 +194,7 @@ const { title, description } = Astro.props
 		<script>
 			requestAnimationFrame(() => {
 				requestAnimationFrame(() => {
-					document.body.classList.add("loaded")
+					document.documentElement.classList.add("loaded")
 				})
 			})
 		</script>

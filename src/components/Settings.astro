@@ -7,10 +7,7 @@
 
 	type AlignmentOptions = "left" | "justify" | "right"
 
-	export const alignment = persistentAtom<AlignmentOptions>(
-		"alignment",
-		"justify",
-	)
+	export const alignment = persistentAtom<AlignmentOptions>("alignment", "left")
 
 	export const selectedTheme = persistentAtom<ThemeOptions>(
 		"selectedTheme",
@@ -36,12 +33,18 @@
 
 	export const fontSize = persistentAtom<string>("fontSize", "16px")
 
-	const setAlignmentGlobally = (alignment: string) => {
-		document.documentElement.style.setProperty("--alignment", alignment)
+	const setAlignmentGlobally = (
+		alignment: string,
+		documentElement = document.documentElement,
+	) => {
+		documentElement.style.setProperty("--alignment", alignment)
 	}
 
-	const setFontSizeGlobally = (fontSize: string) => {
-		document.documentElement.style.setProperty("--base-font-size", fontSize)
+	const setFontSizeGlobally = (
+		fontSize: string,
+		documentElement = document.documentElement,
+	) => {
+		documentElement.style.setProperty("--base-font-size", fontSize)
 	}
 
 	const updateDomForResolvedTheme = ($resolvedTheme: string) => {
@@ -67,13 +70,9 @@
 					)
 			})
 
-			pageContainer.addEventListener(
-				"transitionend",
-				() => {
-					pageContainer.classList.remove("theme-change")
-				},
-				true,
-			)
+			setTimeout(() => {
+				pageContainer.classList.remove("theme-change")
+			}, 375)
 		})
 	}
 
@@ -82,10 +81,17 @@
 	updateDomForResolvedTheme(resolvedTheme.get())
 
 	// Ensure everything is set correctly early, so that view transitions don't flicker
-	document.addEventListener("astro:after-swap", () => {
-		setAlignmentGlobally(alignment.get())
-		setFontSizeGlobally(fontSize.get())
-		updateDomForResolvedTheme(resolvedTheme.get())
+	document.addEventListener("astro:before-swap", (event) => {
+		let newDocumentElement = (event as any).newDocument.documentElement
+
+		setAlignmentGlobally(alignment.get(), newDocumentElement)
+		setFontSizeGlobally(fontSize.get(), newDocumentElement)
+
+		newDocumentElement.classList.remove("no-theme")
+		newDocumentElement.classList.remove("light-theme")
+		newDocumentElement.classList.remove("dark-theme")
+		newDocumentElement.classList.add(`${resolvedTheme.get()}-theme`)
+		newDocumentElement.classList.add("loaded")
 	})
 
 	document.addEventListener("astro:page-load", () => {
@@ -282,13 +288,16 @@
 			})
 		}
 
+		let isFirstThemeResolve = true
+
 		resolvedTheme.subscribe(($resolvedTheme) => {
-			if (document.startViewTransition) {
+			if (isFirstThemeResolve || !document.startViewTransition) {
+				isFirstThemeResolve = false
+				updateDomForResolvedTheme($resolvedTheme)
+			} else {
 				document.startViewTransition(() => {
 					updateDomForResolvedTheme($resolvedTheme)
 				})
-			} else {
-				updateDomForResolvedTheme($resolvedTheme)
 			}
 		})
 	})
