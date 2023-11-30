@@ -53,7 +53,6 @@
 		pageContainer.classList.add("theme-change")
 
 		requestAnimationFrame(() => {
-			pageContainer.classList.remove("no-theme")
 			pageContainer.classList.remove("light-theme")
 			pageContainer.classList.remove("dark-theme")
 			pageContainer.classList.add(`${$resolvedTheme}-theme`)
@@ -87,7 +86,6 @@
 		setAlignmentGlobally(alignment.get(), newDocumentElement)
 		setFontSizeGlobally(fontSize.get(), newDocumentElement)
 
-		newDocumentElement.classList.remove("no-theme")
 		newDocumentElement.classList.remove("light-theme")
 		newDocumentElement.classList.remove("dark-theme")
 		newDocumentElement.classList.add(`${resolvedTheme.get()}-theme`)
