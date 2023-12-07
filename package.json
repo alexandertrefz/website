@@ -11,15 +11,15 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/mdx": "1.1.5",
-    "@astrojs/netlify": "3.0.4",
-    "@astrojs/rss": "3.0.0",
+    "@astrojs/mdx": "2.0.0",
+    "@astrojs/netlify": "3.1.1",
+    "@astrojs/rss": "4.0.1",
     "@astrojs/sitemap": "3.0.3",
     "@types/dom-view-transitions": "1.0.4",
-    "astro": "3.6.0",
-    "astrojs-service-worker": "1.1.0",
+    "astro": "4.0.3",
+    "astrojs-service-worker": "2.0.0",
     "autoprefixer": "10.4.16",
-    "bun-types": "1.0.14",
+    "bun-types": "1.0.15",
     "cssnano": "6.0.1"
   },
   "dependencies": {
