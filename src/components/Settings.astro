@@ -110,9 +110,9 @@
 			query.addEventListener("change", update)
 		}
 
-		alignment.subscribe(setAlignmentGlobally)
+		alignment.subscribe((newAlignment) => setAlignmentGlobally(newAlignment))
 
-		fontSize.subscribe(setFontSizeGlobally)
+		fontSize.subscribe((newFontSize) => setFontSizeGlobally(newFontSize))
 
 		const settingsFlyoutState = atom<"open" | "closed">("closed")
 
