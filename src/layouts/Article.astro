@@ -32,19 +32,21 @@ const {
 	<script>
 		document.addEventListener("astro:page-load", () => {
 			let observer = new IntersectionObserver(
-				(entries, observer) => {
+				(entries, _observer) => {
 					for (let entry of entries) {
-						let targetDataset = entry.target.dataset
+						if (entry.target instanceof HTMLElement) {
+							let targetDataset = entry.target.dataset
 
-						if (entry.isIntersecting) {
-							if (targetDataset.oldAstroTransitionScope) {
-								targetDataset.astroTransitionScope =
-									targetDataset.oldAstroTransitionScope
+							if (entry.isIntersecting) {
+								if (targetDataset.oldAstroTransitionScope) {
+									targetDataset.astroTransitionScope =
+										targetDataset.oldAstroTransitionScope
+								}
+							} else {
+								targetDataset.oldAstroTransitionScope =
+									targetDataset.astroTransitionScope
+								delete targetDataset.astroTransitionScope
 							}
-						} else {
-							targetDataset.oldAstroTransitionScope =
-								targetDataset.astroTransitionScope
-							delete targetDataset.astroTransitionScope
 						}
 					}
 				},
