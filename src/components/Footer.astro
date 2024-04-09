@@ -1,11 +1,10 @@
 ---
-const today = new Date()
 const isntLegalPage = Astro.url.pathname !== "/legal/"
 ---
 
 <footer>
 	<div id="copyright">
-		<span>&copy; 2021 - {today.getFullYear()} Alexander Trefz</span>
+		<span>&copy; Alexander Trefz</span>
 		<span>All rights reserved</span>
 	</div>
 	{
@@ -41,7 +40,9 @@ const isntLegalPage = Astro.url.pathname !== "/legal/"
 		padding-bottom: 20px;
 		padding-top: 20px;
 
-		transition: padding linear 200ms, background-color 200ms linear,
+		transition:
+			padding linear 200ms,
+			background-color 200ms linear,
 			border-color 200ms linear;
 
 		&::after {
