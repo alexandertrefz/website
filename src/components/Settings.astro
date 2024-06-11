@@ -60,17 +60,22 @@
 			pageContainer.classList.remove("dark-theme")
 			pageContainer.classList.add(`${$resolvedTheme}-theme`)
 
+			// NOTE: Disabled as it causes a flicker when we the theme is forced.
 			// Set theme-color for Safari UI matching
-			requestAnimationFrame(() => {
-				document
-					.querySelector("meta[name=theme-color]")!
-					.setAttribute(
-						"content",
-						getComputedStyle(pageContainer)
-							.getPropertyValue("--color-background-offset-close")
-							.trim(),
-					)
-			})
+			// requestAnimationFrame(() => {
+			// 	document
+			// 		.querySelectorAll("meta[name=theme-color]")
+			// 		.forEach((meta) => {
+			// 			meta.setAttribute(
+			// 				"content",
+			// 				getComputedStyle(pageContainer)
+			// 					.getPropertyValue(
+			// 						"--color-background-offset-close",
+			// 					)
+			// 					.trim(),
+			// 			)
+			// 		})
+			// })
 
 			setTimeout(() => {
 				pageContainer.classList.remove("theme-change")
