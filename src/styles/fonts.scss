@@ -1,169 +1,189 @@
 @font-face {
-	font-family: "ff-meta-web-pro";
-	src:
-		url("https://use.typekit.net/af/062ba4/00000000000000007735999d/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n6&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/062ba4/00000000000000007735999d/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n6&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/062ba4/00000000000000007735999d/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n6&v=3")
-			format("opentype");
-	font-display: swap;
-	font-style: normal;
-	font-weight: 600;
-	font-stretch: normal;
+    font-family: 'Izoard';
+    src: url('/fonts/Izoard-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "ff-meta-web-pro";
-	src:
-		url("https://use.typekit.net/af/37c53a/0000000000000000773599c7/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i4&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/37c53a/0000000000000000773599c7/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i4&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/37c53a/0000000000000000773599c7/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i4&v=3")
-			format("opentype");
-	font-display: swap;
+    font-family: 'IBM Plex Serif';
+    src: url('/fonts/IBMPlexSerif-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+    font-family: 'IBM Plex Serif';
+    src: url('/fonts/IBMPlexSerif-ThinItalic.woff2') format('woff2');
+    font-weight: 100;
+    font-style: italic;
+	font-display: fallback;
+}
+
+@font-face {
+    font-family: 'IBM Plex Serif';
+    src: url('/fonts/IBMPlexSerif-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+    font-family: 'IBM Plex Serif';
+    src: url('/fonts/IBMPlexSerif-ExtraLightItalic.woff2') format('woff2');
+    font-weight: 200;
+    font-style: italic;
+	font-display: fallback;
+}
+
+@font-face {
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-Light.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-LightItalic.woff2') format('woff2');
+	font-weight: 300;
 	font-style: italic;
-	font-weight: 400;
-	font-stretch: normal;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "ff-meta-web-pro";
-	src:
-		url("https://use.typekit.net/af/52375b/0000000000000000773599ca/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/52375b/0000000000000000773599ca/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/52375b/0000000000000000773599ca/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3")
-			format("opentype");
-	font-display: swap;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-Regular.woff2') format('woff2');
+	font-weight: normal;
 	font-style: normal;
-	font-weight: 400;
-	font-stretch: normal;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "ff-meta-web-pro";
-	src:
-		url("https://use.typekit.net/af/26dd89/0000000000000000773599e1/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/26dd89/0000000000000000773599e1/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/26dd89/0000000000000000773599e1/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("opentype");
-	font-display: swap;
-	font-style: normal;
-	font-weight: 500;
-	font-stretch: normal;
-}
-
-@font-face {
-	font-family: "ff-meta-web-pro";
-	src:
-		url("https://use.typekit.net/af/6faf5b/0000000000000000773599df/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i6&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/6faf5b/0000000000000000773599df/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i6&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/6faf5b/0000000000000000773599df/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i6&v=3")
-			format("opentype");
-	font-display: swap;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-Italic.woff2') format('woff2');
+	font-weight: normal;
 	font-style: italic;
-	font-weight: 600;
-	font-stretch: normal;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "ff-meta-serif-web-pro";
-	src:
-		url("https://use.typekit.net/af/ccb3f3/000000000000000077359996/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i5&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/ccb3f3/000000000000000077359996/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i5&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/ccb3f3/000000000000000077359996/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=i5&v=3")
-			format("opentype");
-	font-display: swap;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-Text.woff2') format('woff2');
+	font-weight: 450;
+	font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-TextItalic.woff2') format('woff2');
+	font-weight: 450;
 	font-style: italic;
-	font-weight: 500;
-	font-stretch: normal;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "ff-meta-serif-web-pro";
-	src:
-		url("https://use.typekit.net/af/3058a4/0000000000000000773599a9/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/3058a4/0000000000000000773599a9/30/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/3058a4/0000000000000000773599a9/30/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("opentype");
-	font-display: swap;
-	font-style: normal;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-Medium.woff2') format('woff2');
 	font-weight: 500;
-	font-stretch: normal;
+	font-style: normal;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "futura-pt";
-	src:
-		url("https://use.typekit.net/af/2cd6bf/00000000000000000001008f/27/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/2cd6bf/00000000000000000001008f/27/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/2cd6bf/00000000000000000001008f/27/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3")
-			format("opentype");
-	font-display: swap;
-	font-style: normal;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-MediumItalic.woff2') format('woff2');
 	font-weight: 500;
-	font-stretch: normal;
+	font-style: italic;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "futura-pt";
-	src:
-		url("https://use.typekit.net/af/c4c302/000000000000000000012192/27/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n6&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/c4c302/000000000000000000012192/27/d?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n6&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/c4c302/000000000000000000012192/27/a?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n6&v=3")
-			format("opentype");
-	font-display: swap;
-	font-style: normal;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-SemiBold.woff2') format('woff2');
 	font-weight: 600;
-	font-stretch: normal;
+	font-style: normal;
+	font-display: fallback;
 }
 
 @font-face {
-	font-family: "fira-mono";
-	src:
-		url("https://use.typekit.net/af/46dcca/00000000000000007735a3a3/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
-			format("woff2"),
-		url("https://use.typekit.net/af/46dcca/00000000000000007735a3a3/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
-			format("woff"),
-		url("https://use.typekit.net/af/46dcca/00000000000000007735a3a3/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
-			format("opentype");
-	font-display: swap;
-	font-style: normal;
-	font-weight: 400;
-	font-stretch: normal;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-SemiBoldItalic.woff2') format('woff2');
+	font-weight: 600;
+	font-style: italic;
+	font-display: fallback;
 }
+
+@font-face {
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-BoldItalic.woff2') format('woff2');
+	font-weight: 700;
+	font-style: italic;
+	font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Supreme';
+    src: url('/fonts/Supreme-Variable.woff2') format('woff2');
+    font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Supreme';
+    src: url('/fonts/Supreme-VariableItalic.woff2') format('woff2');
+    font-style: italic;
+	font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Berkeley Mono';
+    src: url('/fonts/BerkeleyMono-Variable.woff2') format('woff2');
+    font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Berkeley Mono';
+    src: url('/fonts/BerkeleyMono-VariableItalic.woff2') format('woff2');
+    font-style: italic;
+	font-display: fallback;
+}
+
 
 /* FALLBACK FONTS */
 
 @font-face {
-	font-family: "ff-meta-web-pro-fallback";
-	size-adjust: 96.75%;
-	src: local("Arial");
+    font-family: "Izoard Fallback";
+    size-adjust: 101.50000000000003%;
+    src: local("Arial");
 }
 
 @font-face {
-	font-family: "ff-meta-serif-web-pro-fallback";
-	size-adjust: 107.5%;
-	src: local("Times New Roman");
+    font-family: "IBM Plex Serif Fallback";
+    size-adjust: 117.1%;
+    ascent-override: 86%;
+    src: local("Times New Roman");
 }
 
+
 @font-face {
-	font-family: "futura-pt-fallback";
-	size-adjust: 90%;
-	src: local("Arial");
+    font-family: "Supreme Fallback";
+    size-adjust: 99.9%;
+    src: local("Arial");
 }
+
+
+

@@ -14,19 +14,7 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap(),
-		serviceWorker({
-			workbox: {
-				runtimeCaching: [
-					{
-						urlPattern: /^https:\/\/use\.typekit\.net/,
-						handler: "CacheFirst",
-						options: {
-							cacheName: "fonts",
-						},
-					},
-				],
-			} as any,
-		}),
+		serviceWorker(),
 	],
 	vite: {
 		plugins: [],

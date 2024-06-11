@@ -18,33 +18,6 @@ const { title, description } = Astro.props
 <title>{title}</title>
 <meta name="description" content={description} />
 
-<!-- Futura, Medium -->
-<link
-	rel="preload"
-	href="https://use.typekit.net/af/2cd6bf/00000000000000000001008f/27/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3"
-	as="font"
-	type="font/woff2"
-	crossorigin
-/>
-
-<!-- Meta Serif Pro, Book -->
-<link
-	rel="preload"
-	href="https://use.typekit.net/af/3058a4/0000000000000000773599a9/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n5&v=3"
-	as="font"
-	type="font/woff2"
-	crossorigin
-/>
-
-<!-- Meta Pro, Regular -->
-<link
-	rel="preload"
-	href="https://use.typekit.net/af/52375b/0000000000000000773599ca/30/l?primer=388f68b35a7cbf1ee3543172445c23e26935269fadd3b392a13ac7b2903677eb&fvd=n4&v=3"
-	as="font"
-	type="font/woff2"
-	crossorigin
-/>
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -63,9 +36,10 @@ const { title, description } = Astro.props
 
 <style is:inline is:global>
 	:root {
-		--font-meta-serif: ff-meta-serif-web-pro, ff-meta-serif-web-pro-fallback;
-		--font-futura: futura-pt, futura-pt-fallback;
-		--font-meta-pro: ff-meta-web-pro, ff-meta-web-pro-fallback;
+		--font-izoard: Izoard, Izoard Fallback;
+		--font-plex-serif: IBM Plex Serif, IBM Plex Serif Fallback;
+		--font-supreme: Supreme, Supreme Fallback;
+		--font-berkeley-mono: Berkeley Mono, monospace;
 
 		--color-background: hsl(222deg, 15%, 95%);
 		--color-background-offset-close: hsl(222deg, 15%, 92.5%);
@@ -87,17 +61,17 @@ const { title, description } = Astro.props
 
 		--color-text-selection: hsl(222deg 100% 85%);
 
-		--font-text: var(--font-meta-pro);
-		--font-headline: var(--font-futura);
-		--font-description: var(--font-meta-serif);
-		--font-navigation: var(--font-futura);
-		--font-ui-label: var(--font-futura);
+		--font-text: var(--font-supreme);
+		--font-headline: var(--font-izoard);
+		--font-description: var(--font-plex-serif);
+		--font-navigation: var(--font-izoard);
+		--font-ui-label: var(--font-izoard);
 
-		--font-article-title: var(--font-meta-serif);
-		--font-article-metadata: var(--font-futura);
-		--font-article-text: var(--font-meta-pro);
+		--font-article-title: var(--font-plex-serif);
+		--font-article-metadata: var(--font-izoard);
+		--font-article-text: var(--font-supreme);
 
-		--font-settings: var(--font-futura);
+		--font-settings: var(--font-izoard);
 
 		--page-padding: 30px;
 		--content-width: 600px;
