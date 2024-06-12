@@ -307,6 +307,9 @@
 				isFirstThemeResolve = false
 				updateDomForResolvedTheme($resolvedTheme)
 			} else {
+				// Set class before we start View Transition,
+				// to prevent issues with other view transition elements
+				document.documentElement.classList.add("theme-change")
 				document.startViewTransition(() => {
 					updateDomForResolvedTheme($resolvedTheme)
 				})
