@@ -6,6 +6,10 @@
 	h1 {
 		font-family: var(--font-headline);
 		font-weight: 600;
+		font-feature-settings: "cpsp";
+
+		text-transform: uppercase;
+		text-align: center;
 
 		@media screen and (max-width: 399px) {
 			font-size: calc(var(--base-font-size) * 1.4);
@@ -18,11 +22,5 @@
 		@media screen and (min-width: 750px) {
 			font-size: calc(var(--base-font-size) * 1.7);
 		}
-
-		text-transform: uppercase;
-
-		font-feature-settings: "cpsp";
-
-		text-align: center;
 	}
 </style>
