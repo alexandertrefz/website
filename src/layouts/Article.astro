@@ -1,15 +1,11 @@
 ---
+import type { CollectionEntry } from "astro:content"
+
 import BaseLayout from "@layouts/BaseLayout.astro"
 import Metadata from "@components/Metadata.astro"
 
 export interface Props {
-	content: {
-		slug: string
-		title: string
-		description: string
-		readingTime: number
-		pubDate: string
-	}
+	content: CollectionEntry<"blog">["data"]
 }
 
 const {

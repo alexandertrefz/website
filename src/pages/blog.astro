@@ -1,19 +1,19 @@
 ---
+import { getCollection } from "astro:content"
+
 import BaseLayout from "@layouts/BaseLayout.astro"
 
 import Metadata from "@components/Metadata.astro"
 import Headline from "@components/Headline.astro"
 import Description from "@components/Description.astro"
 
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("./blog/*.{md,mdx}"))
+const posts = (await getCollection("blog"))
 	.sort((a, b) => {
 		return (
-			new Date(b.frontmatter.pubDate).valueOf() -
-			new Date(a.frontmatter.pubDate).valueOf()
+			new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 		)
 	})
-	.map((post) => post.frontmatter)
+	.map((post) => post.data)
 ---
 
 <BaseLayout
@@ -23,9 +23,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}"))
 	<article class="blog">
 		<div class="title">
 			<Headline>Thoughts & Insights</Headline>
-			<Description
-				>Sharing my opinions about all things software</Description
-			>
+			<Description>Sharing my opinions about all things software</Description>
 		</div>
 
 		<ul>
@@ -35,9 +33,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}"))
 						<li>
 							<a href={`/blog/${post.slug}/`}>
 								<article>
-									<h2 transition:name={`title-${post.slug}`}>
-										{post.title}
-									</h2>
+									<h2 transition:name={`title-${post.slug}`}>{post.title}</h2>
 									<Metadata
 										pubDate={post.pubDate}
 										readingTime={post.readingTime}
