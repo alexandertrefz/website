@@ -63,7 +63,6 @@ const navigationItems = [
 			</div>
 		</div>
 	</header>
-	<div id="blur" aria-hidden></div>
 </div>
 
 <style lang="scss">
@@ -195,26 +194,6 @@ const navigationItems = [
 				grid-area: settings;
 			}
 		}
-
-		#blur {
-			position: absolute;
-			top: 100%;
-			left: 20px;
-			z-index: 1;
-
-			// Give Space for Scrollbars
-			width: calc(100% - 40px);
-			height: 60px;
-
-			user-select: none;
-			pointer-events: none;
-			opacity: 95%;
-
-			backdrop-filter: blur(3px);
-			background-color: hsl(from var(--color-background) h s l / 90%);
-
-			mask-image: linear-gradient(to bottom, #000000 25%, transparent);
-		}
 	}
 
 	@media screen and (min-width: 500px) {
@@ -267,7 +246,7 @@ const navigationItems = [
 			.settings {
 				position: absolute;
 				right: 30px;
-				top: calc(100% + 60px);
+				top: calc(100% + 40px);
 			}
 		}
 	}
