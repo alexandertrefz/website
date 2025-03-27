@@ -24,6 +24,9 @@ const { title, description } = Astro.props
 
 				<main>
 					<div class="content">
+						<div id="stuck-top" aria-hidden>
+							<div id="blur"></div>
+						</div>
 						<slot />
 					</div>
 					<Footer />
@@ -74,6 +77,60 @@ const { title, description } = Astro.props
 
 				main {
 					grid-area: content;
+
+					#stuck-top {
+						container-type: scroll-state;
+						position: sticky;
+						top: 0px;
+						z-index: 1;
+
+						height: 20px;
+						overflow: visible;
+
+						width: 100%;
+						// Ensure the blur doesnt get cut off
+						max-width: calc(var(--content-width) + 40px);
+						justify-self: center;
+
+						> #blur {
+							position: relative;
+							width: 100%;
+
+							user-select: none;
+							pointer-events: none;
+
+							opacity: 0%;
+
+							&::before {
+								content: "";
+								position: absolute;
+								top: 0px;
+								width: 100%;
+								height: 40px;
+								background: var(--color-background);
+								mask-image: linear-gradient(to bottom, #000 10%, transparent);
+							}
+
+							&::after {
+								content: "";
+								position: absolute;
+								top: 0px;
+								width: 100%;
+								height: 80px;
+								background-color: hsl(from var(--color-background) h s l / 75%);
+
+								backdrop-filter: blur(5px);
+
+								mask-image: linear-gradient(to bottom, #000000, transparent);
+							}
+
+							transition: all 400ms ease;
+
+							@container scroll-state(stuck: top) {
+								opacity: 100%;
+							}
+						}
+					}
 				}
 			}
 
@@ -132,20 +189,20 @@ const { title, description } = Astro.props
 			@media screen and (max-width: 399px) {
 				main .content {
 					padding: 20px;
-					padding-top: 60px;
+					padding-top: 20px;
 				}
 			}
 
 			@media screen and (min-width: 400px) and (max-width: 649px) {
 				main .content {
 					padding: 20px;
-					padding-top: 60px;
+					padding-top: 20px;
 				}
 			}
 
 			@media screen and (min-width: 650px) and (max-width: 849px) {
 				main .content {
-					padding-top: 60px;
+					padding-top: 20px;
 					padding-left: 30px;
 					padding-right: 30px;
 					padding-bottom: 30px;
@@ -154,7 +211,7 @@ const { title, description } = Astro.props
 
 			@media screen and (min-width: 850px) {
 				main .content {
-					padding-top: 60px;
+					padding-top: 20px;
 					padding-left: 30px;
 					padding-right: 30px;
 					padding-bottom: 30px;
@@ -163,7 +220,7 @@ const { title, description } = Astro.props
 
 			@media screen and (min-width: 1100px) {
 				main .content {
-					padding-top: 60px;
+					padding-top: 20px;
 					padding-left: 30px;
 					padding-right: 30px;
 					padding-bottom: 30px;
