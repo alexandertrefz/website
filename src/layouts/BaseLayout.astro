@@ -24,7 +24,7 @@ const { title, description } = Astro.props
 
 				<main>
 					<div class="content">
-						<div id="stuck-top" aria-hidden>
+						<div id="stuck-top" aria-hidden="true">
 							<div id="blur"></div>
 						</div>
 						<slot />
@@ -108,7 +108,11 @@ const { title, description } = Astro.props
 								width: 100%;
 								height: 40px;
 								background: var(--color-background);
-								mask-image: linear-gradient(to bottom, #000 10%, transparent);
+								mask-image: linear-gradient(
+									to bottom,
+									#000 10%,
+									transparent
+								);
 							}
 
 							&::after {
@@ -117,11 +121,17 @@ const { title, description } = Astro.props
 								top: 0px;
 								width: 100%;
 								height: 80px;
-								background-color: hsl(from var(--color-background) h s l / 75%);
+								background-color: hsl(
+									from var(--color-background) h s l / 75%
+								);
 
 								backdrop-filter: blur(5px);
 
-								mask-image: linear-gradient(to bottom, #000000, transparent);
+								mask-image: linear-gradient(
+									to bottom,
+									#000000,
+									transparent
+								);
 							}
 
 							transition: all 400ms ease;
