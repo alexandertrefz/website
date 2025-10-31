@@ -49,7 +49,9 @@ const navigationItems = [
 						return (
 							<a
 								aria-label={item.name}
-								class:list={{ active: Astro.url.pathname === item.url }}
+								class:list={{
+									active: Astro.url.pathname === item.url,
+								}}
 								href={item.url}
 							>
 								{item.name}

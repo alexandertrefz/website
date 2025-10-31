@@ -1,40 +1,40 @@
 @font-face {
-    font-family: 'Izoard';
-    src: url('/fonts/Izoard-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Izoard';
+	src: url('/fonts/Izoard-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
 	font-display: fallback;
 }
 
 @font-face {
-    font-family: 'IBM Plex Serif';
-    src: url('/fonts/IBMPlexSerif-Thin.woff2') format('woff2');
-    font-weight: 100;
-    font-style: normal;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-Thin.woff2') format('woff2');
+	font-weight: 100;
+	font-style: normal;
 	font-display: fallback;
 }
 
 @font-face {
-    font-family: 'IBM Plex Serif';
-    src: url('/fonts/IBMPlexSerif-ThinItalic.woff2') format('woff2');
-    font-weight: 100;
-    font-style: italic;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-ThinItalic.woff2') format('woff2');
+	font-weight: 100;
+	font-style: italic;
 	font-display: fallback;
 }
 
 @font-face {
-    font-family: 'IBM Plex Serif';
-    src: url('/fonts/IBMPlexSerif-ExtraLight.woff2') format('woff2');
-    font-weight: 200;
-    font-style: normal;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-ExtraLight.woff2') format('woff2');
+	font-weight: 200;
+	font-style: normal;
 	font-display: fallback;
 }
 
 @font-face {
-    font-family: 'IBM Plex Serif';
-    src: url('/fonts/IBMPlexSerif-ExtraLightItalic.woff2') format('woff2');
-    font-weight: 200;
-    font-style: italic;
+	font-family: 'IBM Plex Serif';
+	src: url('/fonts/IBMPlexSerif-ExtraLightItalic.woff2') format('woff2');
+	font-weight: 200;
+	font-style: italic;
 	font-display: fallback;
 }
 
@@ -135,30 +135,30 @@
 }
 
 @font-face {
-    font-family: 'Supreme';
-    src: url('/fonts/Supreme-Variable.woff2') format('woff2');
-    font-style: normal;
+	font-family: 'Supreme';
+	src: url('/fonts/Supreme-Variable.woff2') format('woff2');
+	font-style: normal;
 	font-display: fallback;
 }
 
 @font-face {
-    font-family: 'Supreme';
-    src: url('/fonts/Supreme-VariableItalic.woff2') format('woff2');
-    font-style: italic;
+	font-family: 'Supreme';
+	src: url('/fonts/Supreme-VariableItalic.woff2') format('woff2');
+	font-style: italic;
 	font-display: fallback;
 }
 
 @font-face {
-    font-family: 'Berkeley Mono';
-    src: url('/fonts/BerkeleyMono-Variable.woff2') format('woff2');
-    font-style: normal;
+	font-family: 'Berkeley Mono';
+	src: url('/fonts/BerkeleyMono-Variable.woff2') format('woff2');
+	font-style: normal;
 	font-display: fallback;
 }
 
 @font-face {
-    font-family: 'Berkeley Mono';
-    src: url('/fonts/BerkeleyMono-VariableItalic.woff2') format('woff2');
-    font-style: italic;
+	font-family: 'Berkeley Mono';
+	src: url('/fonts/BerkeleyMono-VariableItalic.woff2') format('woff2');
+	font-style: italic;
 	font-display: fallback;
 }
 
@@ -166,24 +166,21 @@
 /* FALLBACK FONTS */
 
 @font-face {
-    font-family: "Izoard Fallback";
-    size-adjust: 101.50000000000003%;
-    src: local("Arial");
+	font-family: "Izoard Fallback";
+	size-adjust: 101.50000000000003%;
+	src: local("Arial");
 }
 
 @font-face {
-    font-family: "IBM Plex Serif Fallback";
-    size-adjust: 117.1%;
-    ascent-override: 86%;
-    src: local("Times New Roman");
+	font-family: "IBM Plex Serif Fallback";
+	size-adjust: 117.1%;
+	ascent-override: 86%;
+	src: local("Times New Roman");
 }
 
 
 @font-face {
-    font-family: "Supreme Fallback";
-    size-adjust: 99.9%;
-    src: local("Arial");
+	font-family: "Supreme Fallback";
+	size-adjust: 99.9%;
+	src: local("Arial");
 }
-
-
-

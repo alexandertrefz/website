@@ -7,7 +7,10 @@
 
 	type AlignmentOptions = "left" | "justify" | "right"
 
-	export const alignment = persistentAtom<AlignmentOptions>("alignment", "left")
+	export const alignment = persistentAtom<AlignmentOptions>(
+		"alignment",
+		"left",
+	)
 
 	export const selectedTheme = persistentAtom<ThemeOptions>(
 		"selectedTheme",
@@ -115,7 +118,9 @@
 			query.addEventListener("change", update)
 		}
 
-		alignment.subscribe((newAlignment) => setAlignmentGlobally(newAlignment))
+		alignment.subscribe((newAlignment) =>
+			setAlignmentGlobally(newAlignment),
+		)
 
 		fontSize.subscribe((newFontSize) => setFontSizeGlobally(newFontSize))
 
@@ -182,7 +187,8 @@
 
 		// Font Size
 		{
-			const fontSettings = settingsContent.querySelector(".setting.fontSize")!
+			const fontSettings =
+				settingsContent.querySelector(".setting.fontSize")!
 			const reduceButton = fontSettings.querySelector(
 				"button.reduce",
 			) as HTMLButtonElement
@@ -223,7 +229,8 @@
 			const alignmentSettings =
 				settingsContent.querySelector(".setting.alignment")!
 			const leftButton = alignmentSettings.querySelector("button.left")!
-			const justifyButton = alignmentSettings.querySelector("button.justify")!
+			const justifyButton =
+				alignmentSettings.querySelector("button.justify")!
 			const rightButton = alignmentSettings.querySelector("button.right")!
 
 			alignment.subscribe(($alignment) => {
@@ -257,9 +264,11 @@
 
 		// Theme
 		{
-			const themeSettings = settingsContent.querySelector(".setting.theme")!
+			const themeSettings =
+				settingsContent.querySelector(".setting.theme")!
 			const lightButton = themeSettings.querySelector("button.light")!
-			const automaticButton = themeSettings.querySelector("button.automatic")!
+			const automaticButton =
+				themeSettings.querySelector("button.automatic")!
 			const darkButton = themeSettings.querySelector("button.dark")!
 
 			selectedTheme.subscribe(($theme) => {
@@ -373,7 +382,9 @@
 					border: none;
 
 					&:hover {
-						background-color: var(--color-background-offset-further);
+						background-color: var(
+							--color-background-offset-further
+						);
 					}
 
 					svg {
@@ -428,7 +439,9 @@
 						}
 
 						&:hover {
-							background-color: var(--color-background-offset-further);
+							background-color: var(
+								--color-background-offset-further
+							);
 						}
 
 						&.active {
@@ -596,13 +609,21 @@
 				<div class="headline">Font Size</div>
 				<div class="controlGroup">
 					<button class="reduce" aria-label="Reduce font size">
-						<svg width="14" height="2" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="14"
+							height="2"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path d="M0 0h14v2H0z"></path>
 						</svg>
 					</button>
 					<div class="label"></div>
 					<button class="increase" aria-label="Increase font size">
-						<svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="14"
+							height="14"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path d="M6 6V0h2v6h6v2H8v6H6V8H0V6z"></path>
 						</svg>
 					</button>
@@ -612,21 +633,33 @@
 				<div class="headline">Alignment</div>
 				<div class="controlGroup buttonsOnly">
 					<button class="left" aria-label="Align text left">
-						<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="18"
+							height="17"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path
 								d="M0 0h18v2H0V0Zm0 15h14v2H0v-2Zm0-5h18v2H0v-2Zm0-5h14v2H0V5Z"
 							></path>
 						</svg>
 					</button>
 					<button class="justify" aria-label="Justify text">
-						<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="18"
+							height="17"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path
 								d="M0 0h18v2H0V0Zm0 15h18v2H0v-2Zm0-5h18v2H0v-2Zm0-5h18v2H0V5Z"
 							></path>
 						</svg>
 					</button>
 					<button class="right" aria-label="Right align text">
-						<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="18"
+							height="17"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path
 								d="M0 0h18v2H0V0Zm4 15h14v2H4v-2Zm-4-5h18v2H0v-2Zm4-5h14v2H4V5Z"
 							></path>
@@ -638,14 +671,22 @@
 				<div class="headline">Theme</div>
 				<div class="controlGroup buttonsOnly">
 					<button class="light" aria-label="Select light theme">
-						<svg width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="22"
+							height="22"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path
 								d="M11 17a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM10 0h2v3h-2V0Zm0 19h2v3h-2v-3ZM2.515 3.929l1.414-1.414L6.05 4.636 4.636 6.05 2.515 3.93v-.001ZM15.95 17.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121Zm2.121-14.85 1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121v-.001ZM4.636 15.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121ZM22 10v2h-3v-2h3ZM3 10v2H0v-2h3Z"
 							></path>
 						</svg>
 					</button>
 					<button class="automatic" aria-label="Select system theme">
-						<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="20"
+							height="20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<g transform="translate(1 1)" fill="none">
 								<circle
 									stroke-width="2"
@@ -653,12 +694,17 @@
 									cx="9"
 									cy="9"
 									r="9"></circle>
-								<path d="M9 18a9 9 0 0 1-9-9 9 9 0 0 1 9-9v18Z"></path>
+								<path d="M9 18a9 9 0 0 1-9-9 9 9 0 0 1 9-9v18Z"
+								></path>
 							</g>
 						</svg>
 					</button>
 					<button class="dark" aria-label="Select dark theme">
-						<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="20"
+							height="20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path
 								d="M8 5a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0h.1A6.979 6.979 0 0 0 8 5Zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 6.238 2.938 7.999 7.999 0 0 0 2 10Z"
 							></path>
