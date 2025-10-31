@@ -45,30 +45,79 @@ const { title, description } = Astro.props
 
 <style is:inline is:global>
 	:root {
+		color-scheme: light dark;
+
 		--font-izoard: Izoard, Izoard Fallback;
 		--font-plex-serif: IBM Plex Serif, IBM Plex Serif Fallback;
 		--font-supreme: Supreme, Supreme Fallback;
 		--font-berkeley-mono: Berkeley Mono, monospace;
 
-		--color-background: hsl(222deg, 15%, 95%);
-		--color-background-offset-close: hsl(222deg, 15%, 92.5%);
-		--color-background-offset: hsl(222deg, 15%, 90%);
-		--color-background-offset-far: hsl(222deg, 15%, 87.5%);
-		--color-background-offset-further: hsl(222deg, 15%, 85%);
-		--color-background-offset-furthest: hsl(222deg, 15%, 82.5%);
+		--color-page-background: light-dark(
+			hsl(222deg, 10%, 80%),
+			hsl(222deg, 10%, 15%)
+		);
 
-		--color-boxshadow: 0deg 0% 0%;
+		--color-background: light-dark(
+			hsl(222deg, 15%, 95%),
+			hsl(222deg, 10%, 10%)
+		);
+		--color-background-offset-close: light-dark(
+			hsl(222deg, 15%, 92.5%),
+			hsl(222deg, 10%, 12.5%)
+		);
+		--color-background-offset: light-dark(
+			hsl(222deg, 15%, 90%),
+			hsl(222deg, 10%, 15%)
+		);
+		--color-background-offset-far: light-dark(
+			hsl(222deg, 15%, 87.5%),
+			hsl(222deg, 10%, 17.5%)
+		);
+		--color-background-offset-further: light-dark(
+			hsl(222deg, 15%, 85%),
+			hsl(222deg, 10%, 20%)
+		);
+		--color-background-offset-furthest: light-dark(
+			hsl(222deg, 15%, 82.5%),
+			hsl(222deg, 10%, 22.5%)
+		);
 
-		--color-foreground: hsl(222deg, 15%, 10%);
-		--color-foreground-emphasis: hsl(0deg, 0%, 0%);
-		--color-foreground-medium: hsl(222deg, 15%, 40%);
-		--color-foreground-light: hsl(222deg, 15%, 55%);
+		--color-boxshadow: light-dark(0deg 0% 0%, 0deg 0% 0%);
 
-		--color-highlight-intense: hsl(222deg, 65%, 35%);
-		--color-highlight-medium: hsl(222deg, 65%, 35%);
-		--color-highlight-focus: hsla(222deg, 65%, 35%, 10%);
+		--color-foreground: light-dark(
+			hsl(222deg, 15%, 10%),
+			hsl(222deg, 10%, 90%)
+		);
+		--color-foreground-emphasis: light-dark(
+			hsl(0deg, 0%, 0%),
+			hsl(0deg, 0%, 100%)
+		);
+		--color-foreground-medium: light-dark(
+			hsl(222deg, 15%, 40%),
+			hsl(222deg, 5%, 65%)
+		);
+		--color-foreground-light: light-dark(
+			hsl(222deg, 15%, 55%),
+			hsl(222deg, 5%, 40%)
+		);
 
-		--color-text-selection: hsl(222deg 100% 85%);
+		--color-highlight-intense: light-dark(
+			hsl(222deg, 65%, 35%),
+			hsl(333deg, 100%, 60%)
+		);
+		--color-highlight-medium: light-dark(
+			hsl(222deg, 65%, 35%),
+			hsl(333deg, 90%, 50%)
+		);
+		--color-highlight-focus: light-dark(
+			hsla(222deg, 65%, 35%, 10%),
+			hsla(333deg, 100%, 60%, 10%)
+		);
+
+		--color-text-selection: light-dark(
+			hsl(222deg 100% 85%),
+			hsl(333deg, 90%, 40%)
+		);
 
 		--font-text: var(--font-supreme);
 		--font-headline: var(--font-izoard);
@@ -87,76 +136,12 @@ const { title, description } = Astro.props
 		--base-font-size: 16px;
 	}
 
-	.dark-theme {
-		--color-page-background: hsl(222deg, 10%, 15%);
-
-		--color-background: hsl(222deg, 10%, 10%);
-		--color-background-offset-close: hsl(222deg, 10%, 12.5%);
-		--color-background-offset: hsl(222deg, 10%, 15%);
-		--color-background-offset-far: hsl(222deg, 10%, 17.5%);
-		--color-background-offset-further: hsl(222deg, 10%, 20%);
-		--color-background-offset-furthest: hsl(222deg, 10%, 22.5%);
-
-		--color-boxshadow: 0deg 0% 0%;
-
-		--color-foreground: hsl(222deg, 10%, 90%);
-		--color-foreground-emphasis: hsl(0deg, 0%, 100%);
-		--color-foreground-medium: hsl(222deg, 5%, 65%);
-		--color-foreground-light: hsl(222deg, 5%, 40%);
-
-		--color-highlight-intense: hsl(333deg, 100%, 60%);
-		--color-highlight-medium: hsl(333deg, 90%, 50%);
-		--color-highlight-focus: hsla(333deg, 100%, 60%, 10%);
-
-		--color-text-selection: hsl(333deg, 90%, 40%);
+	.light-theme {
+		color-scheme: light;
 	}
 
-	@media (prefers-color-scheme: dark) {
-		:root {
-			--color-background: hsl(222deg, 10%, 10%);
-			--color-background-offset-close: hsl(222deg, 10%, 12.5%);
-			--color-background-offset: hsl(222deg, 10%, 15%);
-			--color-background-offset-far: hsl(222deg, 10%, 17.5%);
-			--color-background-offset-further: hsl(222deg, 10%, 20%);
-			--color-background-offset-furthest: hsl(222deg, 10%, 22.5%);
-
-			--color-boxshadow: 0deg 0% 0%;
-
-			--color-foreground: hsl(222deg, 10%, 90%);
-			--color-foreground-emphasis: hsl(0deg, 0%, 100%);
-			--color-foreground-medium: hsl(222deg, 5%, 65%);
-			--color-foreground-light: hsl(222deg, 5%, 40%);
-
-			--color-highlight-intense: hsl(333deg, 100%, 60%);
-			--color-highlight-medium: hsl(333deg, 90%, 50%);
-			--color-highlight-focus: hsla(333deg, 100%, 60%, 10%);
-
-			--color-text-selection: hsl(333deg, 90%, 40%);
-		}
-
-		.light-theme {
-			--color-page-background: hsl(222deg, 10%, 80%);
-
-			--color-background: hsl(222deg, 15%, 95%);
-			--color-background-offset-close: hsl(222deg, 15%, 92.5%);
-			--color-background-offset: hsl(222deg, 15%, 90%);
-			--color-background-offset-far: hsl(222deg, 15%, 87.5%);
-			--color-background-offset-further: hsl(222deg, 15%, 85%);
-			--color-background-offset-furthest: hsl(222deg, 15%, 82.5%);
-
-			--color-boxshadow: 0deg 0% 0%;
-
-			--color-foreground: hsl(222deg, 15%, 10%);
-			--color-foreground-emphasis: hsl(0deg, 0%, 0%);
-			--color-foreground-medium: hsl(222deg, 15%, 40%);
-			--color-foreground-light: hsl(222deg, 15%, 55%);
-
-			--color-highlight-intense: hsl(222deg, 65%, 35%);
-			--color-highlight-medium: hsl(222deg, 65%, 35%);
-			--color-highlight-focus: hsla(222deg, 65%, 35%, 10%);
-
-			--color-text-selection: hsl(222deg 100% 85%);
-		}
+	.dark-theme {
+		color-scheme: dark;
 	}
 
 	::selection {
