@@ -11,22 +11,22 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/mdx": "5.0.4",
-    "@astrojs/netlify": "7.0.8",
+    "@astrojs/mdx": "6.0.3",
+    "@astrojs/netlify": "7.0.13",
     "@astrojs/rss": "4.0.18",
-    "@astrojs/sitemap": "3.7.2",
-    "@types/bun": "1.3.13",
+    "@astrojs/sitemap": "3.7.3",
+    "@types/bun": "1.3.14",
     "@types/dom-view-transitions": "1.0.6",
-    "astro": "6.3.1",
+    "astro": "6.4.6",
     "astrojs-service-worker": "2.0.0",
     "autoprefixer": "10.5.0",
-    "cssnano": "8.0.0",
-    "sass": "1.99.0"
+    "cssnano": "8.0.2",
+    "sass": "1.101.0"
   },
   "dependencies": {
     "@nanostores/persistent": "1.3.4",
-    "baseline-browser-mapping": "^2.10.27",
-    "caniuse-lite": "1.0.30001792",
+    "baseline-browser-mapping": "2.10.37",
+    "caniuse-lite": "1.0.30001799",
     "nanostores": "1.3.0"
   },
   "trustedDependencies": [
