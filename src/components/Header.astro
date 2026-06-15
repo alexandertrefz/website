@@ -77,7 +77,10 @@ const navigationItems = [
 			position: relative;
 			z-index: 2;
 
-			background-color: var(--color-background-offset-close);
+			background-color: hsl(
+				from var(--color-background-offset-close) h s l / 50%
+			);
+			backdrop-filter: blur(10px) saturate(180%);
 			border-bottom: 1px solid var(--color-background-offset-far);
 
 			transition:

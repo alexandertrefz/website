@@ -55,9 +55,6 @@ const {
 		// only what the user is actually looking at participates in the morph
 		// when navigating back to the list.
 		function trackScopeVisibility() {
-			const main = document.querySelector("main")
-			if (!main) return
-
 			const observer = new IntersectionObserver(
 				(entries) => {
 					for (const entry of entries) {
@@ -75,7 +72,12 @@ const {
 						}
 					}
 				},
-				{ root: main, threshold: 0.2 },
+				// Observe against the viewport (the page scrolls on the
+				// window, not on `main`). Using `main` as the root would
+				// keep the title "intersecting" forever — it's always
+				// inside main's box — so the off-screen headline would
+				// still join the morph and fly in from the top.
+				{ root: null, threshold: 0.2 },
 			)
 
 			for (const el of document.querySelectorAll(
@@ -107,9 +109,7 @@ const {
 
 			const titleItems = isVT
 				? []
-				: Array.from(
-						article.querySelectorAll(":scope > .title > *"),
-					)
+				: Array.from(article.querySelectorAll(":scope > .title > *"))
 			const bodyItems = Array.from(
 				article.querySelectorAll(
 					":scope > section > p, :scope > section > h2",
@@ -242,7 +242,7 @@ const {
 		font-family: var(--font-text);
 		font-size: var(--base-font-size);
 
-		padding-block-end: 100px;
+		padding-block-end: 60px;
 	}
 
 	section :global(p) {
@@ -264,7 +264,9 @@ const {
 	// The title block is excluded when `.vt-nav` is set (i.e. this load
 	// was a view-transition navigation), because the title + metadata
 	// are handled by the VT in that case and shouldn't be hidden.
-	:global(html.loaded) article:not(.paragraphs-ready):not(.vt-nav) .title
+	:global(html.loaded)
+		article:not(.paragraphs-ready):not(.vt-nav)
+		.title
 		> :global(*),
 	:global(html.loaded) article:not(.paragraphs-ready) section :global(p),
 	:global(html.loaded) article:not(.paragraphs-ready) section :global(h2) {
