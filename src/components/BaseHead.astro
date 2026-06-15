@@ -18,6 +18,33 @@ const { title, description } = Astro.props
 <title>{title}</title>
 <meta name="description" content={description} />
 
+{/* Preload the fonts needed for above-the-fold first paint so the real
+   typefaces are ready within font-display: fallback's swap window, rather
+   than rendering in the fallback and swapping later. crossorigin is
+   required even same-origin — fonts are fetched in CORS mode, and without
+   it the preload wouldn't match the actual request (double download). */}
+<link
+	rel="preload"
+	as="font"
+	type="font/woff2"
+	href="/fonts/Izoard-Regular.woff2"
+	crossorigin
+/>
+<link
+	rel="preload"
+	as="font"
+	type="font/woff2"
+	href="/fonts/Supreme-Variable.woff2"
+	crossorigin
+/>
+<link
+	rel="preload"
+	as="font"
+	type="font/woff2"
+	href="/fonts/IBMPlexSerif-Regular.woff2"
+	crossorigin
+/>
+
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
