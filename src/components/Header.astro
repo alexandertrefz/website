@@ -77,8 +77,8 @@ const navigationItems = [
 			position: relative;
 			z-index: 2;
 
-			background-color: hsl(
-				from var(--color-background-offset-close) h s l / 50%
+			background-color: oklch(
+				from var(--color-background-offset-close) l c h / 50%
 			);
 			backdrop-filter: blur(10px) saturate(180%);
 			border-bottom: 1px solid var(--color-background-offset-far);
@@ -86,6 +86,36 @@ const navigationItems = [
 			transition:
 				background-color linear 200ms,
 				border-color linear 200ms;
+
+			// Shadow cast onto the content scrolling underneath. It is
+			// strongest directly below the centre of the header and fades
+			// out towards the left/right edges (and downwards), so the
+			// header reads as floating above the page rather than being
+			// boxed in by a hard, uniform line. Its strength is driven by
+			// --scroll-shadow-opacity, so it only appears once there is
+			// content tucked beneath the header.
+			&::after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				height: 28px;
+
+				pointer-events: none;
+
+				opacity: var(--scroll-shadow-opacity, 0);
+
+				background: radial-gradient(
+					80% 100% at 50% 0%,
+					var(--color-boxshadow) 0%,
+					color-mix(in oklab, var(--color-boxshadow), transparent 50%)
+						35%,
+					transparent 75%
+				);
+
+				transition: opacity linear 200ms;
+			}
 
 			.sizeContainer {
 				display: grid;

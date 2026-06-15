@@ -53,70 +53,73 @@ const { title, description } = Astro.props
 		--font-berkeley-mono: Berkeley Mono, monospace;
 
 		--color-page-background: light-dark(
-			hsl(222deg, 10%, 80%),
-			hsl(222deg, 10%, 15%)
+			oklch(0.82 0.008 264),
+			oklch(0.22 0.010 264)
 		);
 
 		--color-background: light-dark(
-			hsl(222deg, 15%, 95%),
-			hsl(222deg, 10%, 10%)
+			oklch(0.96 0.006 264),
+			oklch(0.17 0.009 264)
 		);
 		--color-background-offset-close: light-dark(
-			hsl(222deg, 15%, 92.5%),
-			hsl(222deg, 10%, 12.5%)
+			oklch(0.94 0.007 264),
+			oklch(0.20 0.009 264)
 		);
 		--color-background-offset: light-dark(
-			hsl(222deg, 15%, 90%),
-			hsl(222deg, 10%, 15%)
+			oklch(0.92 0.008 264),
+			oklch(0.22 0.010 264)
 		);
 		--color-background-offset-far: light-dark(
-			hsl(222deg, 15%, 87.5%),
-			hsl(222deg, 10%, 17.5%)
+			oklch(0.90 0.009 264),
+			oklch(0.25 0.010 264)
 		);
 		--color-background-offset-further: light-dark(
-			hsl(222deg, 15%, 85%),
-			hsl(222deg, 10%, 20%)
+			oklch(0.88 0.010 264),
+			oklch(0.28 0.010 264)
 		);
 		--color-background-offset-furthest: light-dark(
-			hsl(222deg, 15%, 82.5%),
-			hsl(222deg, 10%, 22.5%)
+			oklch(0.86 0.010 264),
+			oklch(0.31 0.010 264)
 		);
 
-		--color-boxshadow: light-dark(0deg 0% 0%, 0deg 0% 0%);
+		// Peak colour of the header drop shadow. Black reads fine over the
+		// light background, but on the dark background it needs a much
+		// higher alpha to stay perceptible.
+		--color-boxshadow: light-dark(oklch(0 0 0 / 0.22), oklch(0 0 0 / 0.6));
 
 		--color-foreground: light-dark(
-			hsl(222deg, 15%, 10%),
-			hsl(222deg, 10%, 90%)
+			oklch(0.17 0.012 264),
+			oklch(0.92 0.008 264)
 		);
 		--color-foreground-emphasis: light-dark(
-			hsl(0deg, 0%, 0%),
-			hsl(0deg, 0%, 100%)
+			oklch(0 0 0),
+			oklch(1 0 0)
 		);
 		--color-foreground-medium: light-dark(
-			hsl(222deg, 15%, 40%),
-			hsl(222deg, 5%, 65%)
+			oklch(0.47 0.026 264),
+			oklch(0.70 0.006 264)
 		);
 		--color-foreground-light: light-dark(
-			hsl(222deg, 15%, 55%),
-			hsl(222deg, 5%, 40%)
+			oklch(0.60 0.023 264),
+			oklch(0.46 0.007 264)
 		);
 
 		--color-highlight-intense: light-dark(
-			hsl(222deg, 65%, 35%),
-			hsl(333deg, 100%, 60%)
+			oklch(0.42 0.145 264),
+			oklch(0.67 0.241 354)
 		);
 		--color-highlight-medium: light-dark(
-			hsl(222deg, 65%, 35%),
-			hsl(333deg, 90%, 50%)
+			oklch(0.42 0.145 264),
+			oklch(0.59 0.228 354)
 		);
 		--color-highlight-focus: light-dark(
-			hsla(222deg, 65%, 35%, 10%),
-			hsla(333deg, 100%, 60%, 10%)
+			oklch(0.42 0.145 264 / 10%),
+			oklch(0.67 0.241 354 / 10%)
 		);
 
 		--color-text-selection: light-dark(
-			hsl(222deg 100% 85%),
-			hsl(333deg, 90%, 40%)
+			oklch(0.88 0.077 264),
+			oklch(0.51 0.208 354)
 		);
 
 		--font-text: var(--font-supreme);
