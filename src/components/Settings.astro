@@ -144,12 +144,14 @@
 
 		settingsFlyoutState.subscribe(($settingsFlyoutState) => {
 			if ($settingsFlyoutState === "open") {
+				settingsTrigger.setAttribute("aria-expanded", "true")
 				settingsFlyout.removeAttribute("hidden")
 				requestAnimationFrame(() => {
 					settingsContainer.classList.add("open")
 					settingsFlyout.classList.add("open")
 				})
 			} else {
+				settingsTrigger.setAttribute("aria-expanded", "false")
 				settingsContainer.classList.remove("open")
 				settingsFlyout.classList.remove("open")
 				setTimeout(() => {
@@ -183,6 +185,16 @@
 		closeButton.addEventListener("click", () => {
 			settingsFlyoutState.set("closed")
 			settingsTrigger.focus()
+		})
+
+		document.addEventListener("keydown", (event) => {
+			if (
+				event.key === "Escape" &&
+				settingsFlyoutState.get() === "open"
+			) {
+				settingsFlyoutState.set("closed")
+				settingsTrigger.focus()
+			}
 		})
 
 		// Font Size
@@ -233,19 +245,22 @@
 				alignmentSettings.querySelector("button.justify")!
 			const rightButton = alignmentSettings.querySelector("button.right")!
 
+			const alignmentButtons = {
+				left: leftButton,
+				justify: justifyButton,
+				right: rightButton,
+			}
+
 			alignment.subscribe(($alignment) => {
-				if ($alignment === "left") {
-					leftButton.classList.add("active")
-					justifyButton.classList.remove("active")
-					rightButton.classList.remove("active")
-				} else if ($alignment === "justify") {
-					leftButton.classList.remove("active")
-					justifyButton.classList.add("active")
-					rightButton.classList.remove("active")
-				} else {
-					leftButton.classList.remove("active")
-					justifyButton.classList.remove("active")
-					rightButton.classList.add("active")
+				for (const [value, button] of Object.entries(
+					alignmentButtons,
+				)) {
+					const isActive = value === $alignment
+					button.classList.toggle("active", isActive)
+					button.setAttribute(
+						"aria-pressed",
+						isActive ? "true" : "false",
+					)
 				}
 			})
 
@@ -271,19 +286,20 @@
 				themeSettings.querySelector("button.automatic")!
 			const darkButton = themeSettings.querySelector("button.dark")!
 
+			const themeButtons = {
+				light: lightButton,
+				automatic: automaticButton,
+				dark: darkButton,
+			}
+
 			selectedTheme.subscribe(($theme) => {
-				if ($theme === "light") {
-					lightButton.classList.add("active")
-					automaticButton.classList.remove("active")
-					darkButton.classList.remove("active")
-				} else if ($theme === "automatic") {
-					lightButton.classList.remove("active")
-					automaticButton.classList.add("active")
-					darkButton.classList.remove("active")
-				} else {
-					lightButton.classList.remove("active")
-					automaticButton.classList.remove("active")
-					darkButton.classList.add("active")
+				for (const [value, button] of Object.entries(themeButtons)) {
+					const isActive = value === $theme
+					button.classList.toggle("active", isActive)
+					button.setAttribute(
+						"aria-pressed",
+						isActive ? "true" : "false",
+					)
 				}
 			})
 
@@ -398,8 +414,7 @@
 					&:focus-visible {
 						outline: none;
 						box-shadow: none;
-						border: 1px solid var(--color-highlight-intense);
-						background: var(--color-highlight-focus);
+						border: 2px solid var(--color-highlight-intense);
 					}
 				}
 			}
@@ -465,8 +480,24 @@
 						&:focus-visible {
 							outline: none;
 							box-shadow: none;
-							border: 1px solid var(--color-highlight-intense);
-							background: var(--color-highlight-focus);
+							// Drive the focus ring from the highest-contrast
+							// foreground colour rather than the accent. The
+							// accent (--color-highlight-intense) matches the
+							// active button fill (--color-highlight-medium), so
+							// an accent ring would disappear against an adjacent
+							// active button in the tightly-packed control groups.
+							border: 2px solid var(--color-highlight-intense);
+
+							&.active {
+								background: var(--color-highlight-medium);
+								// The active fill is dark while the dialog around
+								// it is light (and vice-versa in dark theme), so
+								// the single-tone border can only contrast with
+								// one edge. Add an inner separator in the dialog
+								// background colour to keep the ring crisp
+								// against the fill as well.
+								box-shadow: inset 0 0 0 2px oklch(0.88 0.01 264);
+							}
 						}
 
 						svg {
@@ -524,8 +555,8 @@
 	<style is:inline is:global>
 		.trigger {
 			display: grid;
-			height: 38px;
-			min-width: 38px;
+			height: 40px;
+			min-width: 40px;
 
 			grid-auto-flow: column;
 			gap: 10px;
@@ -546,7 +577,7 @@
 				background-color linear 200ms,
 				border-color linear 200ms;
 			background-color: var(--color-background-offset);
-			border: 1px solid transparent;
+			border: 2px solid transparent;
 		}
 
 		.trigger:hover {
@@ -556,8 +587,7 @@
 		.trigger:focus-visible {
 			outline: none;
 			box-shadow: none;
-			border: 1px solid var(--color-highlight-intense);
-			background: var(--color-highlight-focus);
+			border: 2px solid var(--color-highlight-intense);
 		}
 
 		.trigger svg {
@@ -587,7 +617,12 @@
 			display: none;
 		}
 	</style>
-	<button class="trigger" aria-label="Open Settings">
+	<button
+		class="trigger"
+		aria-label="Open Settings"
+		aria-haspopup="dialog"
+		aria-expanded="false"
+	>
 		<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
 			<path
 				d="M2.33.204a3.5 3.5 0 0 1 4.254 4.963l10.709 10.71-1.414 1.414L5.169 6.58A3.502 3.502 0 0 1 .207 2.326l2.237 2.237a1.5 1.5 0 1 0 2.121-2.121L2.329.202l.001.002Zm10.367 1.884L15.879.32l1.414 1.414-1.768 3.182-1.768.354-2.12 2.12-1.415-1.413 2.121-2.121.354-1.768ZM5.979 10.22l1.414 1.414-5.303 5.303A1 1 0 0 1 .598 15.61l.078-.087 5.303-5.303Z"
@@ -596,7 +631,7 @@
 	</button>
 	<div class="settings" role="dialog" aria-label="Settings Dialog" hidden>
 		<div class="header" id="dialogHeader">
-			Settings <button class="close">
+			Settings <button class="close" aria-label="Close settings">
 				<svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
 					<path
 						d="m7 5.586 4.95-4.95 1.414 1.414L8.414 7l4.95 4.95-1.414 1.414L7 8.414l-4.95 4.95L.636 11.95 5.586 7 .636 2.05 2.05.636z"
@@ -630,9 +665,17 @@
 				</div>
 			</div>
 			<div class="setting alignment">
-				<div class="headline">Alignment</div>
-				<div class="controlGroup buttonsOnly">
-					<button class="left" aria-label="Align text left">
+				<div class="headline" id="alignmentHeadline">Alignment</div>
+				<div
+					class="controlGroup buttonsOnly"
+					role="group"
+					aria-labelledby="alignmentHeadline"
+				>
+					<button
+						class="left"
+						aria-label="Align text left"
+						aria-pressed="false"
+					>
 						<svg
 							width="18"
 							height="17"
@@ -643,7 +686,11 @@
 							></path>
 						</svg>
 					</button>
-					<button class="justify" aria-label="Justify text">
+					<button
+						class="justify"
+						aria-label="Justify text"
+						aria-pressed="false"
+					>
 						<svg
 							width="18"
 							height="17"
@@ -654,7 +701,11 @@
 							></path>
 						</svg>
 					</button>
-					<button class="right" aria-label="Right align text">
+					<button
+						class="right"
+						aria-label="Right align text"
+						aria-pressed="false"
+					>
 						<svg
 							width="18"
 							height="17"
@@ -668,9 +719,17 @@
 				</div>
 			</div>
 			<div class="setting theme">
-				<div class="headline">Theme</div>
-				<div class="controlGroup buttonsOnly">
-					<button class="light" aria-label="Select light theme">
+				<div class="headline" id="themeHeadline">Theme</div>
+				<div
+					class="controlGroup buttonsOnly"
+					role="group"
+					aria-labelledby="themeHeadline"
+				>
+					<button
+						class="light"
+						aria-label="Select light theme"
+						aria-pressed="false"
+					>
 						<svg
 							width="22"
 							height="22"
@@ -681,7 +740,11 @@
 							></path>
 						</svg>
 					</button>
-					<button class="automatic" aria-label="Select system theme">
+					<button
+						class="automatic"
+						aria-label="Select system theme"
+						aria-pressed="false"
+					>
 						<svg
 							width="20"
 							height="20"
@@ -699,7 +762,11 @@
 							</g>
 						</svg>
 					</button>
-					<button class="dark" aria-label="Select dark theme">
+					<button
+						class="dark"
+						aria-label="Select dark theme"
+						aria-pressed="false"
+					>
 						<svg
 							width="20"
 							height="20"

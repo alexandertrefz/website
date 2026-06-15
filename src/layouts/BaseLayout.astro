@@ -279,6 +279,17 @@ const { title, description } = Astro.props
 				animation: revert;
 				transition-duration: 350ms;
 			}
+
+			/* Honour reduced-motion for cross-page navigations: swap the
+			   old/new snapshots instantly instead of morphing or sliding
+			   them (this covers the named title/metadata morphs too). */
+			@media (prefers-reduced-motion: reduce) {
+				::view-transition-group(*),
+				::view-transition-old(*),
+				::view-transition-new(*) {
+					animation: none !important;
+				}
+			}
 		</style>
 
 		<script>
