@@ -26,37 +26,191 @@ const {
 	</article>
 
 	<script>
-		document.addEventListener("astro:page-load", () => {
-			let observer = new IntersectionObserver(
-				(entries, _observer) => {
-					for (let entry of entries) {
-						if (entry.target instanceof HTMLElement) {
-							let targetDataset = entry.target.dataset
+		const SCOPE_KEY = "astroTransitionScope"
+		const STASH_KEY = "stashedTransitionScope"
 
-							if (entry.isIntersecting) {
-								if (targetDataset.oldAstroTransitionScope) {
-									targetDataset.astroTransitionScope =
-										targetDataset.oldAstroTransitionScope
-								}
-							} else {
-								targetDataset.oldAstroTransitionScope =
-									targetDataset.astroTransitionScope
-								delete targetDataset.astroTransitionScope
+		// Read (and consume) the VT state recorded by BaseLayout's
+		// always-loaded script. We can't track it here because this
+		// script doesn't exist on the *source* page of a VT navigation,
+		// so the before-preparation event would already be gone by the
+		// time we'd attach a listener.
+		function consumeVTState() {
+			const state = (window as any).__articleVT as
+				| {
+						navigation: boolean
+						finished: Promise<unknown> | null
+				  }
+				| undefined
+			if (!state) return { isVT: false, finished: null }
+			const result = {
+				isVT: state.navigation,
+				finished: state.finished,
+			}
+			state.navigation = false
+			state.finished = null
+			return result
+		}
+
+		// Disable view-transition scopes on elements that are off-screen, so
+		// only what the user is actually looking at participates in the morph
+		// when navigating back to the list.
+		function trackScopeVisibility() {
+			const main = document.querySelector("main")
+			if (!main) return
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						const el = entry.target
+						if (!(el instanceof HTMLElement)) continue
+						const data = el.dataset
+
+						if (entry.isIntersecting) {
+							if (data[STASH_KEY]) {
+								data[SCOPE_KEY] = data[STASH_KEY]
 							}
+						} else if (data[SCOPE_KEY]) {
+							data[STASH_KEY] = data[SCOPE_KEY]
+							delete data[SCOPE_KEY]
 						}
 					}
 				},
-				{
-					root: document.querySelector("main"),
-					threshold: 0.2,
-				},
+				{ root: main, threshold: 0.2 },
 			)
 
-			for (let element of Array.from(
-				document.querySelectorAll("[data-astro-transition-scope]"),
+			for (const el of document.querySelectorAll(
+				"[data-astro-transition-scope]",
 			)) {
-				observer.observe(element)
+				observer.observe(el)
 			}
+		}
+
+		// Run the staggered fade-up via the Web Animations API. Using
+		// WAAPI (instead of CSS keyframes + class toggle) avoids restarts
+		// from style recomputation and side-steps the global
+		// `html:not(.loaded) *` rule that zeroes animation durations.
+		function staggerEntries(
+			isVT: boolean,
+			vtFinished: Promise<unknown> | null,
+		) {
+			const article = document.querySelector("article")
+			if (!article) return
+
+			const reduceMotion = window.matchMedia(
+				"(prefers-reduced-motion: reduce)",
+			).matches
+
+			if (reduceMotion) {
+				article.classList.add("paragraphs-ready")
+				return
+			}
+
+			const titleItems = isVT
+				? []
+				: Array.from(
+						article.querySelectorAll(":scope > .title > *"),
+					)
+			const bodyItems = Array.from(
+				article.querySelectorAll(
+					":scope > section > p, :scope > section > h2",
+				),
+			)
+			const items = [...titleItems, ...bodyItems]
+
+			// Promote the animating elements to their own layers right
+			// away. On the VT path this gives the compositor the entire
+			// view-transition duration to warm the layers, so the stagger
+			// doesn't stutter when it starts amid the VT teardown.
+			for (const el of items) {
+				if (el instanceof HTMLElement) {
+					el.style.willChange = "transform, opacity"
+				}
+			}
+
+			const STAGGER_CAP = 20
+			// Tighten the stagger on a VT navigation: the title morph has
+			// already eased the user in, so the body can reveal faster.
+			const STEP_MS = 35
+			// On a fresh load the title is item 0 of the stagger and
+			// needs a small lead-in. On a VT navigation the title is
+			// being morphed by the VT itself; we wait for that to
+			// finish before kicking off the body stagger, so a 0ms
+			// lead means the body starts the instant the title settles.
+			const LEAD_MS = isVT ? 0 : 250
+
+			const start = () => {
+				// Kick off WAAPI animations first so they own the
+				// initial frame, then lift the static hidden state.
+				// Split the move and the fade into two animations so
+				// the vertical motion can be punchier than the fade.
+				items.forEach((el, i) => {
+					if (!(el instanceof HTMLElement)) return
+					const delay = Math.min(i, STAGGER_CAP) * STEP_MS + LEAD_MS
+
+					el.animate(
+						[
+							{ transform: "translateY(20px)" },
+							{ transform: "translateY(0)" },
+						],
+						{
+							duration: 300,
+							delay,
+							easing: "ease",
+							fill: "backwards",
+						},
+					)
+					const fade = el.animate([{ opacity: 0 }, { opacity: 1 }], {
+						duration: 1000,
+						delay,
+						easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+						fill: "backwards",
+					})
+					fade.finished
+						.then(() => {
+							el.style.willChange = ""
+						})
+						.catch(() => {})
+				})
+				article.classList.add("paragraphs-ready")
+			}
+
+			const waitForLoaded = (extraFrame = false) => {
+				if (document.documentElement.classList.contains("loaded")) {
+					if (extraFrame) {
+						// Let the VT teardown recomposite (which happens on
+						// the frame the snapshots are removed) finish before
+						// we start, so the first item's transform doesn't
+						// stutter against it.
+						requestAnimationFrame(() =>
+							requestAnimationFrame(start),
+						)
+					} else {
+						requestAnimationFrame(start)
+					}
+				} else {
+					requestAnimationFrame(() => waitForLoaded(extraFrame))
+				}
+			}
+
+			if (isVT && vtFinished) {
+				// The live DOM only becomes visible exactly when the view
+				// transition finishes — starting any earlier runs the
+				// stagger invisibly behind the VT snapshots. So trigger
+				// off vt.finished and give it one extra frame to let the
+				// snapshot teardown settle.
+				vtFinished.then(
+					() => waitForLoaded(true),
+					() => waitForLoaded(true),
+				)
+			} else {
+				waitForLoaded()
+			}
+		}
+
+		document.addEventListener("astro:page-load", () => {
+			const { isVT, finished } = consumeVTState()
+			trackScopeVisibility()
+			staggerEntries(isVT, finished)
 		})
 	</script>
 </BaseLayout>
@@ -100,6 +254,23 @@ const {
 
 	section :global(p):last-child {
 		padding-bottom: 0px;
+	}
+
+	// Pre-hide entries when JS is available so WAAPI can drive their
+	// fade-up cleanly. The `.paragraphs-ready` class is added by the
+	// script before the animation starts, so this rule only applies in
+	// the brief window between DOM insertion and animation arming.
+	//
+	// The title block is excluded when `.vt-nav` is set (i.e. this load
+	// was a view-transition navigation), because the title + metadata
+	// are handled by the VT in that case and shouldn't be hidden.
+	:global(html.loaded) article:not(.paragraphs-ready):not(.vt-nav) .title
+		> :global(*),
+	:global(html.loaded) article:not(.paragraphs-ready) section :global(p),
+	:global(html.loaded) article:not(.paragraphs-ready) section :global(h2) {
+		opacity: 0;
+		transform: translateY(20px);
+		will-change: opacity, transform;
 	}
 
 	section :global(h2) {

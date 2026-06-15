@@ -244,6 +244,15 @@ const { title, description } = Astro.props
 				transition-duration: 0ms !important;
 			}
 
+			/* Kill the default root cross-fade so it doesn't visually
+			   compete with the per-element entrance animations on the
+			   new page. Named transitions (title, metadata) keep their
+			   own animations. */
+			::view-transition-old(root),
+			::view-transition-new(root) {
+				animation: none;
+			}
+
 			.theme-change * {
 				view-transition-name: none !important;
 				animation-duration: 0ms !important;
@@ -252,6 +261,7 @@ const { title, description } = Astro.props
 
 			.theme-change::view-transition-new(root),
 			.theme-change::view-transition-old(root) {
+				animation: revert;
 				transition-duration: 350ms;
 			}
 		</style>
@@ -261,6 +271,41 @@ const { title, description } = Astro.props
 				requestAnimationFrame(() => {
 					document.documentElement.classList.add("loaded")
 				})
+			})
+
+			// Track view-transition navigations globally so that per-page
+			// scripts (which are only attached *after* the swap and would
+			// miss the event for the very navigation that brought them
+			// in) can still know whether the current page-load came from
+			// a VT, and wait for that VT to finish.
+			const vtState: {
+				navigation: boolean
+				finished: Promise<unknown> | null
+			} = {
+				navigation: false,
+				finished: null,
+			}
+			;(window as any).__articleVT = vtState
+
+			document.addEventListener("astro:before-preparation", () => {
+				vtState.navigation = true
+				vtState.finished = null
+			})
+
+			// `viewTransition` is only exposed on the before-swap event,
+			// not before-preparation. We need its `.finished` promise to
+			// know when the VT pseudo-elements are gone so we can start
+			// the body stagger without running it invisibly during VT.
+			document.addEventListener("astro:before-swap", (event: any) => {
+				vtState.finished = event?.viewTransition?.finished ?? null
+			})
+
+			document.addEventListener("astro:after-swap", () => {
+				if (vtState.navigation) {
+					document
+						.querySelector("article")
+						?.classList.add("vt-nav")
+				}
 			})
 		</script>
 	</body>
