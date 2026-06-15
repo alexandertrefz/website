@@ -241,8 +241,6 @@ const {
 		font-variant-numeric: lining-nums;
 		font-family: var(--font-text);
 		font-size: var(--base-font-size);
-
-		padding-block-end: 60px;
 	}
 
 	section :global(p) {
@@ -273,6 +271,10 @@ const {
 		opacity: 0;
 		transform: translateY(20px);
 		will-change: opacity, transform;
+	}
+
+	:global(html.loaded) article:not(.paragraphs-ready) section::after {
+		opacity: 0;
 	}
 
 	section :global(h2) {
@@ -340,5 +342,50 @@ const {
 		font-family: var(--font-berkeley-mono);
 		font-weight: 400;
 		font-style: normal;
+	}
+
+	section::after {
+		content: "";
+		display: block;
+		width: 120px;
+		height: 19px;
+		margin: 50px auto;
+		background-color: var(--color-background-offset-furthest);
+		mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 14' fill='black'><path d='M4 7 L7 4 L10 7 L7 10 Z' opacity='0.7'/><path d='M21 7 L25 3 L29 7 L25 11 Z' opacity='0.85'/><path d='M40 7 L45 2 L50 7 L45 12 Z'/><path d='M61 7 L65 3 L69 7 L65 11 Z' opacity='0.85'/><path d='M80 7 L83 4 L86 7 L83 10 Z' opacity='0.7'/></svg>");
+		mask-repeat: no-repeat;
+		mask-position: center;
+		mask-size: contain;
+	}
+
+	// Fade the end mark in *after* the body stagger settles. The
+	// stagger's last item completes at
+	// STAGGER_CAP(6) * STEP_MS(50) + LEAD_MS + duration(1000)
+	// — 1550ms on a fresh load (LEAD_MS=250), 1300ms on a VT
+	// navigation (LEAD_MS=0). The delay is set a touch later so
+	// the mark reads as punctuation, not part of the cascade.
+	article.paragraphs-ready section::after {
+		animation: end-mark-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 800ms
+			backwards;
+	}
+
+	article.vt-nav.paragraphs-ready section::after {
+		animation-delay: 1000ms;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		article.paragraphs-ready section::after {
+			animation: none;
+		}
+	}
+
+	@keyframes end-mark-in {
+		from {
+			opacity: 0;
+			transform: translateY(4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 </style>
