@@ -55,7 +55,13 @@ const navigationItems = [
 										: undefined
 								}
 								class:list={{
-									active: Astro.url.pathname === item.url,
+									// Prefix match so section pages (e.g. an
+									// article under /blog/) keep their nav
+									// item highlighted; aria-current stays
+									// exact-match only.
+									active: Astro.url.pathname.startsWith(
+										item.url,
+									),
 								}}
 								href={item.url}
 							>
