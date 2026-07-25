@@ -1,6 +1,9 @@
 {
-	"name": "trefz.me",
-	"short_name": "trefz.me",
+	"name": "alexander.trefz.me",
+	"short_name": "alexander.trefz.me",
+	"description": "A blog full of opinions on all things software.",
+	"id": "/",
+	"scope": "/",
 	"icons": [
 		{
 			"src": "/android-chrome-192x192.png",
@@ -11,10 +14,16 @@
 			"src": "/android-chrome-512x512.png",
 			"sizes": "512x512",
 			"type": "image/png"
+		},
+		{
+			"src": "/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
 		}
 	],
-	"theme_color": "#c7cad1",
-	"background_color": "#c7cad1",
+	"theme_color": "#E9EBF0",
+	"background_color": "#F0F2F6",
 	"display": "standalone",
 	"start_url": "/blog/"
 }
