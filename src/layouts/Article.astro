@@ -179,8 +179,17 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 				article.classList.add("paragraphs-ready")
 			}
 
-			const waitForLoaded = (extraFrame = false) => {
-				if (document.documentElement.classList.contains("loaded")) {
+			// If `loaded` never shows up (e.g. the script that sets it
+			// died), give up waiting after ~5s of frames and reveal
+			// anyway rather than spinning a rAF loop forever over
+			// invisible content.
+			const MAX_WAIT_FRAMES = 300
+
+			const waitForLoaded = (extraFrame = false, frames = 0) => {
+				if (
+					document.documentElement.classList.contains("loaded") ||
+					frames > MAX_WAIT_FRAMES
+				) {
 					if (extraFrame) {
 						// Let the VT teardown recomposite (which happens on
 						// the frame the snapshots are removed) finish before
@@ -193,7 +202,9 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 						requestAnimationFrame(start)
 					}
 				} else {
-					requestAnimationFrame(() => waitForLoaded(extraFrame))
+					requestAnimationFrame(() =>
+						waitForLoaded(extraFrame, frames + 1),
+					)
 				}
 			}
 
@@ -212,10 +223,30 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 			}
 		}
 
-		document.addEventListener("astro:page-load", () => {
+		const reveal = () => {
 			const { isVT, finished } = consumeVTState()
 			trackScopeVisibility()
 			staggerEntries(isVT, finished)
+		}
+
+		// Reveal as soon as this module executes instead of waiting for
+		// astro:page-load — on a fresh load that event only fires at
+		// window `load`, so a single slow asset would keep the whole
+		// article invisible until it finished downloading.
+		reveal()
+
+		// The astro:page-load for the navigation that pulled this module
+		// in fires right after module execution; skip it so the reveal
+		// above isn't immediately re-run.
+		let skipNextPageLoad = true
+
+		document.addEventListener("astro:page-load", () => {
+			if (skipNextPageLoad) {
+				skipNextPageLoad = false
+				return
+			}
+
+			reveal()
 		})
 	</script>
 </BaseLayout>
@@ -276,10 +307,22 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 		opacity: 0;
 		transform: translateY(20px);
 		will-change: opacity, transform;
+		// Failsafe: if the reveal script never adds `.paragraphs-ready`
+		// (it threw, or its chunk failed to load), fade the content in
+		// after a grace period instead of leaving the article invisible.
+		animation: reveal-failsafe 300ms ease 3s forwards;
 	}
 
 	:global(html.loaded) article:not(.paragraphs-ready) section::after {
 		opacity: 0;
+		animation: reveal-failsafe 300ms ease 3s forwards;
+	}
+
+	@keyframes reveal-failsafe {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	section :global(h2) {
