@@ -337,8 +337,10 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 	}
 
 	section :global(a) {
+		// Deliberately not inline-block: that would stop long links from
+		// wrapping across lines, forcing them onto their own block at
+		// narrow viewports.
 		position: relative;
-		display: inline-block;
 		font-weight: 500;
 		color: var(--color-highlight-intense);
 		text-decoration-color: transparent;
