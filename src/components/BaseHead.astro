@@ -109,9 +109,9 @@ const { title, description } = Astro.props
 			oklch(0.31 0.010 264)
 		);
 
-		// Peak colour of the header drop shadow. Black reads fine over the
-		// light background, but on the dark background it needs a much
-		// higher alpha to stay perceptible.
+		/* Peak colour of the header drop shadow. Black reads fine over the
+		   light background, but on the dark background it needs a much
+		   higher alpha to stay perceptible. */
 		--color-boxshadow: light-dark(oklch(0 0 0 / 0.22), oklch(0 0 0 / 0.6));
 
 		--color-foreground: light-dark(
