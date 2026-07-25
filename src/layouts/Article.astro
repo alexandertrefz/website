@@ -9,8 +9,13 @@ export interface Props {
 }
 
 const {
-	content: { title, description, readingTime, pubDate, slug },
+	content: { title, description, readingTime, pubDate },
 } = Astro.props
+
+// Derive the slug from the URL rather than trusting a frontmatter field —
+// the transition names built from it must match the ones the blog listing
+// derives from the entry id, and both come from the filename.
+const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 ---
 
 <BaseLayout title={title} description={description} pubDate={pubDate}>

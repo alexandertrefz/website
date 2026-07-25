@@ -14,7 +14,10 @@ const posts = (await getCollection("blog"))
 			new Date(a.data.pubDate).valueOf()
 		)
 	})
-	.map((post) => post.data)
+	// The slug is derived from the entry id (the filename), which is what
+	// actually determines the route — a hand-maintained frontmatter slug
+	// could silently drift from it.
+	.map((post) => ({ ...post.data, slug: post.id }))
 ---
 
 <BaseLayout

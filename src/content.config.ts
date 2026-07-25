@@ -9,11 +9,17 @@ const blog = defineCollection({
 	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/pages/blog" }),
 	schema: z.object({
 		layout: z.string(),
-		slug: z.string(),
 		title: z.string(),
 		description: z.string(),
 		readingTime: z.number(),
-		pubDate: z.string(),
+		// Kept as a string (it flows into datetime attributes and
+		// Intl.DateTimeFormat as-is), but validated so a malformed date
+		// fails the build instead of silently rendering "Invalid Date".
+		pubDate: z
+			.string()
+			.refine((value) => !Number.isNaN(Date.parse(value)), {
+				message: "pubDate must be a parseable date",
+			}),
 	}),
 })
 
