@@ -17,17 +17,25 @@
 		"automatic",
 	)
 
-	export const detectedTheme = atom<Theme | undefined>(undefined)
+	// Seed synchronously so the first theme resolution honours the OS
+	// preference instead of defaulting to light until the media query is
+	// read later.
+	const prefersLightQuery = window.matchMedia("(prefers-color-scheme: light)")
+
+	const getDetectedTheme = (): Theme =>
+		prefersLightQuery.matches ? "light" : "dark"
+
+	export const detectedTheme = atom<Theme>(getDetectedTheme())
+
+	prefersLightQuery.addEventListener("change", () => {
+		detectedTheme.set(getDetectedTheme())
+	})
 
 	export const resolvedTheme = computed(
 		[selectedTheme, detectedTheme],
 		($selectedTheme, $detectedTheme) => {
 			if ($selectedTheme === "automatic") {
-				if ($detectedTheme !== undefined) {
-					return $detectedTheme
-				} else {
-					return "light"
-				}
+				return $detectedTheme
 			} else {
 				return $selectedTheme
 			}
