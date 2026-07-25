@@ -13,7 +13,7 @@ const {
 } = Astro.props
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} pubDate={pubDate}>
 	<article>
 		<div class="title">
 			<h1 transition:name={`title-${slug}`}>{title}</h1>

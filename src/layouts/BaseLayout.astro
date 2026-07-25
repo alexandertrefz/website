@@ -6,15 +6,16 @@ import Footer from "@components/Footer.astro"
 export interface Props {
 	title: string
 	description: string
+	pubDate?: string | undefined
 }
 
-const { title, description } = Astro.props
+const { title, description, pubDate } = Astro.props
 ---
 
 <!doctype html>
 <html lang="en" style="--alignment: left; --base-font-size: 16px;">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} pubDate={pubDate} />
 	</head>
 
 	<body>
