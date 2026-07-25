@@ -132,9 +132,11 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 				}
 			}
 
+			// Delay each item by STEP_MS more than the previous one, but
+			// cap the ramp at STAGGER_CAP items so a long article's tail
+			// doesn't trickle in forever — everything beyond the cap moves
+			// as one group.
 			const STAGGER_CAP = 20
-			// Tighten the stagger on a VT navigation: the title morph has
-			// already eased the user in, so the body can reveal faster.
 			const STEP_MS = 35
 			// On a fresh load the title is item 0 of the stagger and
 			// needs a small lead-in. On a VT navigation the title is
@@ -407,12 +409,13 @@ const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 		mask-size: contain;
 	}
 
-	// Fade the end mark in *after* the body stagger settles. The
-	// stagger's last item completes at
-	// STAGGER_CAP(6) * STEP_MS(50) + LEAD_MS + duration(1000)
-	// — 1550ms on a fresh load (LEAD_MS=250), 1300ms on a VT
-	// navigation (LEAD_MS=0). The delay is set a touch later so
-	// the mark reads as punctuation, not part of the cascade.
+	// Fade the end mark in during the tail of the body stagger. The
+	// stagger's last item settles at
+	// STAGGER_CAP(20) * STEP_MS(35) + LEAD_MS + fade duration(1000)
+	// — ~1950ms on a fresh load (LEAD_MS=250), ~1700ms on a VT
+	// navigation (LEAD_MS=0) — while this 700ms fade runs from 800ms
+	// (fresh) or 1000ms (VT), so the mark lands together with the
+	// cascade's final items rather than trailing after them.
 	article.paragraphs-ready section::after {
 		animation: end-mark-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 800ms
 			backwards;
