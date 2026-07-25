@@ -16,5 +16,5 @@
 	"theme_color": "#c7cad1",
 	"background_color": "#c7cad1",
 	"display": "standalone",
-	"start_url": "/"
+	"start_url": "/blog/"
 }

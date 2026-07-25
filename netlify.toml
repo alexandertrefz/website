@@ -1,3 +1,11 @@
 [build]
   command = "bun run build"
   publish = "dist"
+
+# Astro's static `redirects` config emits a meta-refresh stub at /index.html,
+# so `force` is required for the server-side redirect to win over that file.
+[[redirects]]
+  from = "/"
+  to = "/blog/"
+  status = 301
+  force = true
