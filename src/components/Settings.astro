@@ -91,9 +91,26 @@
 		})
 	}
 
-	setAlignmentGlobally(alignment.get())
-	setFontSizeGlobally(fontSize.get())
-	updateDomForResolvedTheme(resolvedTheme.get())
+	// Module-level subscriptions run exactly once per real page load; their
+	// immediate first call applies the persisted settings.
+	alignment.subscribe((newAlignment) => setAlignmentGlobally(newAlignment))
+	fontSize.subscribe((newFontSize) => setFontSizeGlobally(newFontSize))
+
+	let isFirstThemeResolve = true
+
+	resolvedTheme.subscribe(($resolvedTheme) => {
+		if (isFirstThemeResolve || !document.startViewTransition) {
+			isFirstThemeResolve = false
+			updateDomForResolvedTheme($resolvedTheme)
+		} else {
+			// Set class before we start View Transition,
+			// to prevent issues with other view transition elements
+			document.documentElement.classList.add("theme-change")
+			document.startViewTransition(() => {
+				updateDomForResolvedTheme($resolvedTheme)
+			})
+		}
+	})
 
 	// Ensure everything is set correctly early, so that view transitions don't flicker
 	document.addEventListener("astro:before-swap", (event) => {
@@ -108,40 +125,38 @@
 		newDocumentElement.classList.add("loaded")
 	})
 
-	document.addEventListener("astro:page-load", () => {
-		// Update Detected Theme
-		{
-			const query = window.matchMedia("(prefers-color-scheme: light)")
+	const settingsFlyoutState = atom<"open" | "closed">("closed")
 
-			const update = () => {
-				if (query.matches) {
-					detectedTheme.set("light")
-				} else {
-					detectedTheme.set("dark")
-				}
-			}
+	let settingsTrigger: HTMLButtonElement | undefined
 
-			update()
+	document.documentElement.addEventListener("click", (_event) => {
+		settingsFlyoutState.set("closed")
+	})
 
-			query.addEventListener("change", update)
-		}
-
-		alignment.subscribe((newAlignment) =>
-			setAlignmentGlobally(newAlignment),
-		)
-
-		fontSize.subscribe((newFontSize) => setFontSizeGlobally(newFontSize))
-
-		const settingsFlyoutState = atom<"open" | "closed">("closed")
-
-		document.documentElement.addEventListener("click", (_event) => {
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape" && settingsFlyoutState.get() === "open") {
 			settingsFlyoutState.set("closed")
-		})
+			settingsTrigger?.focus()
+		}
+	})
+
+	// The settings DOM is replaced on every ClientRouter navigation, so the
+	// bindings below are re-created per page — and the store subscriptions
+	// from the previous page must be released first, or they would
+	// accumulate on every navigation.
+	let releasePageBindings: Array<() => void> = []
+
+	document.addEventListener("astro:page-load", () => {
+		for (const release of releasePageBindings) release()
+		releasePageBindings = []
+
+		settingsFlyoutState.set("closed")
 
 		const settingsContainer = document.querySelector("#settingsContainer")!
-		const settingsTrigger = settingsContainer.querySelector(
+		const trigger = settingsContainer.querySelector(
 			".trigger",
 		) as HTMLButtonElement
+		settingsTrigger = trigger
 		const settingsFlyout = settingsContainer.querySelector(
 			".settings",
 		) as HTMLButtonElement
@@ -150,23 +165,25 @@
 		) as HTMLButtonElement
 		const settingsContent = settingsContainer.querySelector(".content")!
 
-		settingsFlyoutState.subscribe(($settingsFlyoutState) => {
-			if ($settingsFlyoutState === "open") {
-				settingsTrigger.setAttribute("aria-expanded", "true")
-				settingsFlyout.removeAttribute("hidden")
-				requestAnimationFrame(() => {
-					settingsContainer.classList.add("open")
-					settingsFlyout.classList.add("open")
-				})
-			} else {
-				settingsTrigger.setAttribute("aria-expanded", "false")
-				settingsContainer.classList.remove("open")
-				settingsFlyout.classList.remove("open")
-				setTimeout(() => {
-					settingsFlyout.setAttribute("hidden", "")
-				}, 200)
-			}
-		})
+		releasePageBindings.push(
+			settingsFlyoutState.subscribe(($settingsFlyoutState) => {
+				if ($settingsFlyoutState === "open") {
+					trigger.setAttribute("aria-expanded", "true")
+					settingsFlyout.removeAttribute("hidden")
+					requestAnimationFrame(() => {
+						settingsContainer.classList.add("open")
+						settingsFlyout.classList.add("open")
+					})
+				} else {
+					trigger.setAttribute("aria-expanded", "false")
+					settingsContainer.classList.remove("open")
+					settingsFlyout.classList.remove("open")
+					setTimeout(() => {
+						settingsFlyout.setAttribute("hidden", "")
+					}, 200)
+				}
+			}),
+		)
 
 		settingsContainer.addEventListener("click", (event) => {
 			event.stopPropagation()
@@ -178,31 +195,21 @@
 			if (relatedTarget) {
 				if (
 					!settingsContainer.contains(relatedTarget as Node) ||
-					relatedTarget === settingsTrigger
+					relatedTarget === trigger
 				) {
 					settingsFlyoutState.set("closed")
 				}
 			}
 		})
 
-		settingsTrigger.addEventListener("click", () => {
+		trigger.addEventListener("click", () => {
 			settingsFlyoutState.set("open")
 			closeButton.focus()
 		})
 
 		closeButton.addEventListener("click", () => {
 			settingsFlyoutState.set("closed")
-			settingsTrigger.focus()
-		})
-
-		document.addEventListener("keydown", (event) => {
-			if (
-				event.key === "Escape" &&
-				settingsFlyoutState.get() === "open"
-			) {
-				settingsFlyoutState.set("closed")
-				settingsTrigger.focus()
-			}
+			trigger.focus()
 		})
 
 		// Font Size
@@ -217,23 +224,25 @@
 				"button.increase",
 			) as HTMLButtonElement
 
-			fontSize.subscribe(($fontSize) => {
-				const $fontSizeInteger = parseInt($fontSize)
+			releasePageBindings.push(
+				fontSize.subscribe(($fontSize) => {
+					const $fontSizeInteger = parseInt($fontSize)
 
-				label.innerHTML = $fontSize
+					label.innerHTML = $fontSize
 
-				if ($fontSizeInteger <= 14) {
-					reduceButton.disabled = true
-				} else {
-					reduceButton.disabled = false
-				}
+					if ($fontSizeInteger <= 14) {
+						reduceButton.disabled = true
+					} else {
+						reduceButton.disabled = false
+					}
 
-				if ($fontSizeInteger >= 20) {
-					increaseButton.disabled = true
-				} else {
-					increaseButton.disabled = false
-				}
-			})
+					if ($fontSizeInteger >= 20) {
+						increaseButton.disabled = true
+					} else {
+						increaseButton.disabled = false
+					}
+				}),
+			)
 
 			reduceButton.addEventListener("click", () => {
 				fontSize.set(`${parseInt(fontSize.get()) - 1}px`)
@@ -259,18 +268,20 @@
 				right: rightButton,
 			}
 
-			alignment.subscribe(($alignment) => {
-				for (const [value, button] of Object.entries(
-					alignmentButtons,
-				)) {
-					const isActive = value === $alignment
-					button.classList.toggle("active", isActive)
-					button.setAttribute(
-						"aria-pressed",
-						isActive ? "true" : "false",
-					)
-				}
-			})
+			releasePageBindings.push(
+				alignment.subscribe(($alignment) => {
+					for (const [value, button] of Object.entries(
+						alignmentButtons,
+					)) {
+						const isActive = value === $alignment
+						button.classList.toggle("active", isActive)
+						button.setAttribute(
+							"aria-pressed",
+							isActive ? "true" : "false",
+						)
+					}
+				}),
+			)
 
 			leftButton.addEventListener("click", () => {
 				alignment.set("left")
@@ -300,16 +311,20 @@
 				dark: darkButton,
 			}
 
-			selectedTheme.subscribe(($theme) => {
-				for (const [value, button] of Object.entries(themeButtons)) {
-					const isActive = value === $theme
-					button.classList.toggle("active", isActive)
-					button.setAttribute(
-						"aria-pressed",
-						isActive ? "true" : "false",
-					)
-				}
-			})
+			releasePageBindings.push(
+				selectedTheme.subscribe(($theme) => {
+					for (const [value, button] of Object.entries(
+						themeButtons,
+					)) {
+						const isActive = value === $theme
+						button.classList.toggle("active", isActive)
+						button.setAttribute(
+							"aria-pressed",
+							isActive ? "true" : "false",
+						)
+					}
+				}),
+			)
 
 			lightButton.addEventListener("click", () => {
 				selectedTheme.set("light")
@@ -323,22 +338,6 @@
 				selectedTheme.set("dark")
 			})
 		}
-
-		let isFirstThemeResolve = true
-
-		resolvedTheme.subscribe(($resolvedTheme) => {
-			if (isFirstThemeResolve || !document.startViewTransition) {
-				isFirstThemeResolve = false
-				updateDomForResolvedTheme($resolvedTheme)
-			} else {
-				// Set class before we start View Transition,
-				// to prevent issues with other view transition elements
-				document.documentElement.classList.add("theme-change")
-				document.startViewTransition(() => {
-					updateDomForResolvedTheme($resolvedTheme)
-				})
-			}
-		})
 	})
 </script>
 
