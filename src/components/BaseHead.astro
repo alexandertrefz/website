@@ -65,6 +65,42 @@ const { title, description } = Astro.props
 />
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<script is:inline>
+	// Runs render-blocking before first paint: apply the settings persisted
+	// by the Settings module so a forced theme (or adjusted font size /
+	// alignment) doesn't flash its default until that module executes. This
+	// is the initial-load counterpart of the astro:before-swap handler in
+	// Settings.astro, which does the same for client-side navigations.
+	;(() => {
+		try {
+			const root = document.documentElement
+			const theme = localStorage.getItem("selectedTheme")
+
+			if (theme === "light" || theme === "dark") {
+				root.classList.add(theme + "-theme")
+			}
+
+			const alignment = localStorage.getItem("alignment")
+
+			if (
+				alignment === "left" ||
+				alignment === "justify" ||
+				alignment === "right"
+			) {
+				root.style.setProperty("--alignment", alignment)
+			}
+
+			const fontSize = localStorage.getItem("fontSize")
+
+			if (fontSize && /^\d+px$/.test(fontSize)) {
+				root.style.setProperty("--base-font-size", fontSize)
+			}
+		} catch (_error) {
+			// localStorage unavailable — the defaults apply.
+		}
+	})()
+</script>
 <meta
 	name="google-site-verification"
 	content="c-0_GIsBdbjMxa6c8zqKnVYWN9oOBo743cJEGG6fgp8"
