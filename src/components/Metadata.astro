@@ -7,7 +7,7 @@ export interface Props {
 
 const { readingTime, pubDate, slug } = Astro.props
 
-const readingTimeDate = new Date(pubDate)
+const publicationDate = new Date(pubDate)
 ---
 
 <div class="metadata" transition:name={`metadata-${slug}`}>
@@ -22,7 +22,7 @@ const readingTimeDate = new Date(pubDate)
 			new Intl.DateTimeFormat("en-GB", {
 				month: "long",
 				timeZone: "UTC",
-			}).format(readingTimeDate)
+			}).format(publicationDate)
 		}
 
 		<strong>
@@ -30,7 +30,7 @@ const readingTimeDate = new Date(pubDate)
 				new Intl.DateTimeFormat("en-GB", {
 					year: "numeric",
 					timeZone: "UTC",
-				}).format(readingTimeDate)
+				}).format(publicationDate)
 			}
 		</strong>
 	</time>

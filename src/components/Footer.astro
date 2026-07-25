@@ -1,5 +1,5 @@
 ---
-const isntLegalPage = Astro.url.pathname !== "/legal/"
+const isLegalPage = Astro.url.pathname === "/legal/"
 ---
 
 <footer>
@@ -8,11 +8,11 @@ const isntLegalPage = Astro.url.pathname !== "/legal/"
 		<span>All rights reserved</span>
 	</div>
 	{
-		isntLegalPage ? (
+		!isLegalPage && (
 			<a id="legal" href="/legal/">
 				Legal
 			</a>
-		) : null
+		)
 	}
 </footer>
 
