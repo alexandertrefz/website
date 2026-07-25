@@ -9,3 +9,26 @@
   to = "/blog/"
   status = 301
   force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Build assets under /_astro/ are content-hashed, so they can be cached
+# forever. The font files are not hashed, but they change so rarely (and
+# only ever alongside a filename change) that immutable is safe for them
+# too — without these rules Netlify serves everything with max-age=0.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
