@@ -44,6 +44,24 @@
 
 	export const fontSize = persistentAtom<string>("fontSize", "16px")
 
+	const FONT_SIZE_MIN = 14
+	const FONT_SIZE_MAX = 20
+
+	// The persisted value comes straight from localStorage, so it can be
+	// corrupted or stale — clamp it into the supported range instead of
+	// ending up with --base-font-size: NaNpx.
+	const sanitizeFontSize = (value: string): string => {
+		const parsed = parseInt(value)
+
+		if (Number.isNaN(parsed)) {
+			return "16px"
+		}
+
+		return `${Math.min(Math.max(parsed, FONT_SIZE_MIN), FONT_SIZE_MAX)}px`
+	}
+
+	fontSize.set(sanitizeFontSize(fontSize.get()))
+
 	const setAlignmentGlobally = (
 		alignment: string,
 		documentElement = document.documentElement,
@@ -94,7 +112,9 @@
 	// Module-level subscriptions run exactly once per real page load; their
 	// immediate first call applies the persisted settings.
 	alignment.subscribe((newAlignment) => setAlignmentGlobally(newAlignment))
-	fontSize.subscribe((newFontSize) => setFontSizeGlobally(newFontSize))
+	fontSize.subscribe((newFontSize) =>
+		setFontSizeGlobally(sanitizeFontSize(newFontSize)),
+	)
 
 	let isFirstThemeResolve = true
 
@@ -193,18 +213,21 @@
 			let relatedTarget = (event as FocusEvent).relatedTarget
 
 			if (relatedTarget) {
-				if (
-					!settingsContainer.contains(relatedTarget as Node) ||
-					relatedTarget === trigger
-				) {
+				if (!settingsContainer.contains(relatedTarget as Node)) {
 					settingsFlyoutState.set("closed")
 				}
 			}
 		})
 
+		// The trigger exposes aria-expanded, so it must behave as a
+		// toggle — clicking it while the flyout is open closes it again.
 		trigger.addEventListener("click", () => {
-			settingsFlyoutState.set("open")
-			closeButton.focus()
+			if (settingsFlyoutState.get() === "open") {
+				settingsFlyoutState.set("closed")
+			} else {
+				settingsFlyoutState.set("open")
+				closeButton.focus()
+			}
 		})
 
 		closeButton.addEventListener("click", () => {
@@ -226,17 +249,18 @@
 
 			releasePageBindings.push(
 				fontSize.subscribe(($fontSize) => {
-					const $fontSizeInteger = parseInt($fontSize)
+					const sanitized = sanitizeFontSize($fontSize)
+					const $fontSizeInteger = parseInt(sanitized)
 
-					label.innerHTML = $fontSize
+					label.textContent = sanitized
 
-					if ($fontSizeInteger <= 14) {
+					if ($fontSizeInteger <= FONT_SIZE_MIN) {
 						reduceButton.disabled = true
 					} else {
 						reduceButton.disabled = false
 					}
 
-					if ($fontSizeInteger >= 20) {
+					if ($fontSizeInteger >= FONT_SIZE_MAX) {
 						increaseButton.disabled = true
 					} else {
 						increaseButton.disabled = false
@@ -245,11 +269,19 @@
 			)
 
 			reduceButton.addEventListener("click", () => {
-				fontSize.set(`${parseInt(fontSize.get()) - 1}px`)
+				fontSize.set(
+					sanitizeFontSize(
+						`${parseInt(sanitizeFontSize(fontSize.get())) - 1}px`,
+					),
+				)
 			})
 
 			increaseButton.addEventListener("click", () => {
-				fontSize.set(`${parseInt(fontSize.get()) + 1}px`)
+				fontSize.set(
+					sanitizeFontSize(
+						`${parseInt(sanitizeFontSize(fontSize.get())) + 1}px`,
+					),
+				)
 			})
 		}
 
@@ -493,7 +525,7 @@
 							// active button fill (--color-highlight-medium), so
 							// an accent ring would disappear against an adjacent
 							// active button in the tightly-packed control groups.
-							border: 2px solid var(--color-highlight-intense);
+							border: 2px solid var(--color-foreground-emphasis);
 
 							&.active {
 								background: var(--color-highlight-medium);
@@ -648,8 +680,12 @@
 		</div>
 		<div class="content">
 			<div class="setting fontSize">
-				<div class="headline">Font Size</div>
-				<div class="controlGroup">
+				<div class="headline" id="fontSizeHeadline">Font Size</div>
+				<div
+					class="controlGroup"
+					role="group"
+					aria-labelledby="fontSizeHeadline"
+				>
 					<button class="reduce" aria-label="Reduce font size">
 						<svg
 							width="14"
@@ -659,7 +695,7 @@
 							<path d="M0 0h14v2H0z"></path>
 						</svg>
 					</button>
-					<div class="label"></div>
+					<div class="label" aria-live="polite"></div>
 					<button class="increase" aria-label="Increase font size">
 						<svg
 							width="14"
