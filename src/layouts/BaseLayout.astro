@@ -227,6 +227,23 @@ const { title, description, pubDate } = Astro.props
 				animation: none;
 			}
 
+			/* Named elements are only meant to animate when they exist on
+			   BOTH pages (the listing <-> article title/metadata morphs).
+			   An unpaired named element — e.g. the blog entries when
+			   arriving from About — is an :only-child in its image-pair
+			   and would otherwise run Astro's 180ms entry/exit fade while
+			   the root snaps in instantly, making it pop in visibly late.
+			   Unpaired elements appear and disappear with the page
+			   instead. */
+			::view-transition-new(*):only-child {
+				animation: none;
+			}
+
+			::view-transition-old(*):only-child {
+				animation: none;
+				opacity: 0;
+			}
+
 			.theme-change * {
 				view-transition-name: none !important;
 				animation-duration: 0ms !important;
