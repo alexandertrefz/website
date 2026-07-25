@@ -154,9 +154,13 @@ const isArticle = pubDate !== undefined
 	:root {
 		color-scheme: light dark;
 
-		--font-izoard: Izoard, Izoard Fallback;
-		--font-plex-serif: IBM Plex Serif, IBM Plex Serif Fallback;
-		--font-supreme: Supreme, Supreme Fallback;
+		/* The generic family at the end only takes effect when both the web
+		   font and the local() metric-adjusted fallback face are
+		   unavailable — it makes the last resort predictable instead of
+		   whatever the UA default happens to be. */
+		--font-izoard: Izoard, Izoard Fallback, sans-serif;
+		--font-plex-serif: IBM Plex Serif, IBM Plex Serif Fallback, serif;
+		--font-supreme: Supreme, Supreme Fallback, sans-serif;
 		--font-berkeley-mono: Berkeley Mono, monospace;
 
 		--color-page-background: light-dark(
@@ -252,6 +256,18 @@ const isArticle = pubDate !== undefined
 
 	.dark-theme {
 		color-scheme: dark;
+	}
+
+	/* Minimal readability fallback: in browsers without light-dark() every
+	   colour token above is invalid, which would leave transparent
+	   backgrounds and no set text colour. The palette intentionally
+	   targets modern baselines (see browserslist in package.json) — this
+	   just keeps older engines readable, in light-theme colours. */
+	@supports not (color: light-dark(#000, #fff)) {
+		html {
+			background-color: #f0f2f6;
+			color: #1d1f23;
+		}
 	}
 
 	::selection {
