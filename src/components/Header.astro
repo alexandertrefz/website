@@ -236,111 +236,106 @@ const navigationItems = [
 				grid-area: settings;
 			}
 		}
-	}
 
-	@media screen and (min-width: 500px) {
-		.sizeContainer {
-			grid-auto-flow: column;
-			justify-content: space-between;
-			padding: 30px 30px 25px;
-
-			grid-template-areas: "logo navigation settings";
-			grid-template-columns: 1fr max-content max-content;
-
-			nav {
-				display: grid;
+		// Responsive overrides are nested inside #headerContainer (with the
+		// same header .sizeContainer path) so they compile with the same
+		// specificity as the base rules above. As top-level rules they lost
+		// to the #id-prefixed base rules and never applied. Overlapping
+		// ranges are resolved by source order.
+		@media screen and (min-width: 500px) {
+			header .sizeContainer {
 				grid-auto-flow: column;
-				gap: 30px;
-				padding: 10px;
+				justify-content: space-between;
+				padding: 30px 30px 25px;
 
-				a {
-					font-size: 16px;
+				grid-template-areas: "logo navigation settings";
+				grid-template-columns: 1fr max-content max-content;
+
+				nav {
+					display: grid;
+					grid-auto-flow: column;
+					gap: 30px;
+					padding: 10px;
+
+					a {
+						font-size: 16px;
+					}
 				}
 			}
 		}
-	}
 
-	@media screen and (min-width: 800px) {
-		header {
-			nav {
-				a {
-					font-size: 17px;
+		@media screen and (min-width: 800px) {
+			header .sizeContainer nav a {
+				font-size: 17px;
+			}
+		}
+
+		@media screen and (min-width: 850px) {
+			header .sizeContainer nav a {
+				font-size: 18px;
+			}
+		}
+
+		@media screen and (min-width: 970px) {
+			header .sizeContainer {
+				grid-template-areas: "logo navigation";
+				grid-template-columns: 1fr max-content;
+
+				.settings {
+					position: absolute;
+					right: 30px;
+					top: calc(100% + 40px);
 				}
 			}
 		}
-	}
 
-	@media screen and (min-width: 850px) {
-		header {
-			nav {
-				a {
-					font-size: 18px;
-				}
-			}
-		}
-	}
-
-	@media screen and (min-width: 970px) {
-		.sizeContainer {
-			grid-template-areas: "logo navigation";
-			grid-template-columns: 1fr max-content;
-
-			.settings {
-				position: absolute;
-				right: 30px;
-				top: calc(100% + 40px);
-			}
-		}
-	}
-
-	@media screen and (min-width: 600px) and (max-width: 649px) {
-		.sizeContainer {
-			gap: 15px;
-
-			nav {
+		@media screen and (min-width: 600px) and (max-width: 649px) {
+			header .sizeContainer {
 				gap: 15px;
-				padding: 0px;
-				align-items: center;
 
-				a {
-					font-size: 16px;
+				nav {
+					gap: 15px;
+					padding: 0px;
+					align-items: center;
+
+					a {
+						font-size: 16px;
+					}
 				}
 			}
 		}
-	}
 
-	@media screen and (max-width: 599px) {
-		.sizeContainer {
-			padding: 20px;
+		@media screen and (max-width: 599px) {
+			header .sizeContainer {
+				padding: 20px;
 
-			grid-template-areas:
-				"logo       settings"
-				"navigation settings";
-			grid-template-columns: 1fr max-content;
-			grid-template-rows: max-content max-content;
-			gap: 20px;
-
-			nav {
-				display: grid;
-				grid-auto-flow: column;
+				grid-template-areas:
+					"logo       settings"
+					"navigation settings";
+				grid-template-columns: 1fr max-content;
+				grid-template-rows: max-content max-content;
 				gap: 20px;
-				padding: 0px;
-				justify-content: start;
+
+				nav {
+					display: grid;
+					grid-auto-flow: column;
+					gap: 20px;
+					padding: 0px;
+					justify-content: start;
+				}
 			}
 		}
-	}
 
-	@media screen and (max-width: 499px) {
-		.sizeContainer {
-			grid-template-areas:
-				"logo       settings"
-				"navigation navigation";
-			grid-template-columns: 1fr max-content;
-			grid-template-rows: max-content max-content;
-			gap: 20px;
+		@media screen and (max-width: 499px) {
+			header .sizeContainer {
+				grid-template-areas:
+					"logo       settings"
+					"navigation navigation";
+				grid-template-columns: 1fr max-content;
+				grid-template-rows: max-content max-content;
+				gap: 20px;
 
-			nav {
-				a {
+				nav a {
 					font-size: 14px;
 				}
 			}
