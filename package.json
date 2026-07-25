@@ -6,13 +6,21 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "check": "astro check",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
+  "browserslist": [
+    "chrome >= 123",
+    "edge >= 123",
+    "firefox >= 128",
+    "safari >= 17.5",
+    "ios_saf >= 17.5"
+  ],
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/mdx": "6.0.3",
-    "@astrojs/netlify": "7.0.13",
     "@astrojs/rss": "4.0.18",
     "@astrojs/sitemap": "3.7.3",
     "@types/bun": "1.3.14",
@@ -21,12 +29,11 @@
     "astrojs-service-worker": "2.0.0",
     "autoprefixer": "10.5.0",
     "cssnano": "8.0.2",
-    "sass": "1.101.0"
+    "sass": "1.101.0",
+    "typescript": "^6"
   },
   "dependencies": {
     "@nanostores/persistent": "1.3.4",
-    "baseline-browser-mapping": "2.10.37",
-    "caniuse-lite": "1.0.30001799",
     "nanostores": "1.3.0"
   },
   "trustedDependencies": [
