@@ -18,7 +18,11 @@ const {
 const slug = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
 ---
 
-<BaseLayout title={title} description={description} pubDate={pubDate}>
+<BaseLayout
+	title={`${title} – alexander.trefz.me`}
+	description={description}
+	pubDate={pubDate}
+>
 	<article>
 		<div class="title">
 			<h1 transition:name={`title-${slug}`}>{title}</h1>
