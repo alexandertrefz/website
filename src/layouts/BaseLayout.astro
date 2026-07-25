@@ -36,6 +36,8 @@ const { title, description, pubDate } = Astro.props
 		</div>
 
 		<style lang="scss">
+			@use "../styles/mixins" as *;
+
 			#page-container {
 				display: grid;
 
@@ -184,43 +186,15 @@ const { title, description, pubDate } = Astro.props
 				text-decoration-color: transparent;
 
 				transition: text-decoration-color 200ms linear;
-			}
 
-			main :global(a):hover {
-				text-decoration-color: var(--color-highlight-intense);
-			}
+				@include focus-ring(-3px -6px, 3px);
 
-			main :global(a)::before {
-				content: "";
-				opacity: 0;
-				pointer-events: none;
-				position: absolute;
-				inset: -3px -6px;
-				border-radius: 3px;
-				border: 1px solid var(--color-highlight-intense);
-				background: var(--color-highlight-focus);
-				transition: opacity linear 200ms;
-			}
-
-			main :global(a):focus-visible {
-				position: relative;
-				outline: none;
-				box-shadow: none;
-			}
-
-			main :global(a):focus-visible::before {
-				opacity: 1;
-			}
-
-			@media screen and (max-width: 399px) {
-				main .content {
-					padding: 20px;
-					padding-top: 30px;
-					padding-bottom: 0px;
+				&:hover {
+					text-decoration-color: var(--color-highlight-intense);
 				}
 			}
 
-			@media screen and (min-width: 400px) and (max-width: 649px) {
+			@media screen and (max-width: 649px) {
 				main .content {
 					padding: 20px;
 					padding-top: 30px;

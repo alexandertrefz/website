@@ -58,6 +58,8 @@ const posts = (await getCollection("blog"))
 </BaseLayout>
 
 <style lang="scss">
+	@use "../styles/mixins" as *;
+
 	.blog {
 		display: grid;
 		gap: 50px;
@@ -87,27 +89,7 @@ const posts = (await getCollection("blog"))
 					text-decoration-color: var(--color-highlight-medium);
 				}
 
-				&::before {
-					opacity: 0;
-					pointer-events: none;
-					content: "";
-					position: absolute;
-					inset: -12px;
-					border-radius: 5px;
-					border: 1px solid var(--color-highlight-intense);
-					background: var(--color-highlight-focus);
-
-					transition: opacity linear 200ms;
-				}
-
-				&:focus-visible {
-					outline: none;
-					box-shadow: none;
-
-					&::before {
-						opacity: 1;
-					}
-				}
+				@include focus-ring(-12px);
 
 				article {
 					display: grid;
@@ -123,7 +105,7 @@ const posts = (await getCollection("blog"))
 
 						text-decoration: underline;
 						text-decoration-color: transparent;
-						transition: text-decoration-color ease-in-out 250ms;
+						transition: text-decoration-color 200ms linear;
 					}
 				}
 			}
