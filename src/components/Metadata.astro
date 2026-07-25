@@ -15,18 +15,22 @@ const readingTimeDate = new Date(pubDate)
 		<strong>{readingTime}</strong>
 		Minute Read
 	</span>
+	{/* Date-only strings parse as UTC midnight, so format in UTC too —
+	    otherwise a build machine west of UTC renders the previous month. */}
 	<time datetime={pubDate}>
 		{
-			new Intl.DateTimeFormat("en-GB", { month: "long" }).format(
-				readingTimeDate,
-			)
+			new Intl.DateTimeFormat("en-GB", {
+				month: "long",
+				timeZone: "UTC",
+			}).format(readingTimeDate)
 		}
 
 		<strong>
 			{
-				new Intl.DateTimeFormat("en-GB", { year: "numeric" }).format(
-					readingTimeDate,
-				)
+				new Intl.DateTimeFormat("en-GB", {
+					year: "numeric",
+					timeZone: "UTC",
+				}).format(readingTimeDate)
 			}
 		</strong>
 	</time>
