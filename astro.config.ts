@@ -64,7 +64,4 @@ export default defineConfig({
 			workbox: workboxConfig as GenerateSWOptions,
 		}),
 	],
-	vite: {
-		plugins: [],
-	},
 })
