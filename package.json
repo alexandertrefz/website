@@ -20,21 +20,21 @@
   ],
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/mdx": "6.0.3",
-    "@astrojs/rss": "4.0.18",
+    "@astrojs/mdx": "7.0.3",
+    "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.3",
     "@types/bun": "1.3.14",
     "@types/dom-view-transitions": "1.0.6",
-    "astro": "6.4.6",
-    "astrojs-service-worker": "2.0.0",
-    "autoprefixer": "10.5.0",
+    "astro": "7.1.3",
+    "astrojs-service-worker": "2.0.2",
+    "autoprefixer": "10.5.4",
     "cssnano": "8.0.2",
-    "sass": "1.101.0",
+    "sass": "1.102.0",
     "typescript": "^6"
   },
   "dependencies": {
-    "@nanostores/persistent": "1.3.4",
-    "nanostores": "1.3.0"
+    "@nanostores/persistent": "1.3.5",
+    "nanostores": "1.4.1"
   },
   "trustedDependencies": [
     "@parcel/watcher",
